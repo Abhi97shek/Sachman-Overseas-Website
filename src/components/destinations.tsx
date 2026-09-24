@@ -4,38 +4,32 @@ const destinations = [
   {
     name: "Canada",
     focus: "Colleges & university pathways",
-    image:
-      "https://images.unsplash.com/photo-1519834785164-512767fcb595?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/canada.jpg",
   },
   {
     name: "United Kingdom",
     focus: "Undergraduate & postgraduate study",
-    image:
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/uk.jpg",
   },
   {
     name: "Australia",
     focus: "Courses with strong career outcomes",
-    image:
-      "https://images.unsplash.com/photo-1523482580741-ffc2c6d0d4a6?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/australia.jpg",
   },
   {
     name: "Germany",
     focus: "Affordable public university options",
-    image:
-      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/germany.jpg",
   },
   {
     name: "New Zealand",
     focus: "Quality education in a safe setting",
-    image:
-      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/nz.jpg",
   },
   {
     name: "United States",
     focus: "Universities across every major city",
-    image:
-      "https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/usa.jpg",
   },
 ];
 

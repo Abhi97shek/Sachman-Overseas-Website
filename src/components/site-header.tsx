@@ -16,12 +16,12 @@ export function SiteHeader() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 md:px-8">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8 md:py-6">
         <a href="#top" className="group flex items-baseline gap-1.5">
-          <span className="font-display text-xl font-semibold tracking-tight text-white md:text-2xl">
+          <span className="font-display text-lg font-semibold tracking-tight text-white md:text-xl">
             Sachman
           </span>
-          <span className="font-display text-xl font-light tracking-wide text-ember md:text-2xl">
+          <span className="font-display text-lg font-light tracking-wide text-ember md:text-xl">
             Overseas
           </span>
         </a>
