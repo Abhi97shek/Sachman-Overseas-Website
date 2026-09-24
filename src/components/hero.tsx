@@ -19,14 +19,14 @@ const stats = [
 export function Hero() {
   return (
     <section id="top" className="relative px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
-      <div className="relative mx-auto flex min-h-[calc(100svh-1.5rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[calc(100svh-2rem)] sm:rounded-[2rem] md:rounded-[2.5rem] lg:rounded-[3rem]">
+      <div className="relative mx-auto flex min-h-[min(72svh,34rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[min(85svh,46rem)] sm:rounded-[2rem] md:min-h-[calc(100svh-2.5rem)] md:rounded-[2.5rem] lg:rounded-[3rem]">
         <div className="absolute inset-0">
           <Image
             src="/images/hero-campus.jpg"
             alt="Graduates celebrating abroad against a bright city skyline"
             fill
             priority
-            className="animate-slow-pan object-cover object-[center_35%]"
+            className="animate-slow-pan object-cover object-center"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/50 via-white/20 to-black/30" />
