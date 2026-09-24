@@ -72,10 +72,10 @@ function cover(distance: number, mobile: boolean) {
   ]);
   const wash = sample(ad, [
     [0, 0],
-    [0.2, 0],
-    [1, 0.38],
-    [1.7, 0.66],
-    [2.5, 0.82],
+    [0.35, 0],
+    [1, 0.18],
+    [1.75, 0.62],
+    [2.55, 0.82],
   ]);
   const opacity = mobile
     ? sample(ad, [
@@ -203,7 +203,7 @@ export function Destinations() {
             aria-label="Previous country"
             disabled={active === 0}
             onClick={() => scrollToIndex(active - 1)}
-            className="absolute top-1/2 left-2 z-40 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_rgba(18,22,28,0.08)] transition hover:bg-white disabled:opacity-35 sm:left-3 sm:size-10 md:left-3 lg:left-5"
+            className="absolute top-1/2 left-3 z-40 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_rgba(18,22,28,0.08)] transition hover:bg-fog disabled:opacity-35 md:inline-flex lg:left-5"
           >
             <ChevronLeft className="size-5" aria-hidden />
           </button>
@@ -212,7 +212,7 @@ export function Destinations() {
             aria-label="Next country"
             disabled={active === destinations.length - 1}
             onClick={() => scrollToIndex(active + 1)}
-            className="absolute top-1/2 right-2 z-40 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_rgba(18,22,28,0.08)] transition hover:bg-white disabled:opacity-35 sm:right-3 sm:size-10 md:right-3 lg:right-5"
+            className="absolute top-1/2 right-3 z-40 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_rgba(18,22,28,0.08)] transition hover:bg-fog disabled:opacity-35 md:inline-flex lg:right-5"
           >
             <ChevronRight className="size-5" aria-hidden />
           </button>
@@ -237,7 +237,7 @@ export function Destinations() {
                 scrollToIndex(Math.max(0, activeRef.current - 1));
               }
             }}
-            className="isolate flex h-[22rem] cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain pl-[calc(50%-var(--pitch)/2)] pr-[calc(50%-var(--pitch)/2)] [--pitch:7.5rem] [--card-w:14.75rem] [--card-h:18.25rem] [scrollbar-width:none] active:cursor-grabbing sm:h-[24rem] md:h-[26.5rem] md:[--pitch:11.5rem] md:[--card-w:17.25rem] md:[--card-h:21.25rem] [&::-webkit-scrollbar]:hidden"
+            className="isolate flex h-[22rem] cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain pl-[calc(50%-var(--pitch)/2)] pr-[calc(50%-var(--pitch)/2)] [--pitch:9.25rem] [--card-w:13.75rem] [--card-h:17.5rem] [scrollbar-width:none] active:cursor-grabbing sm:h-[24rem] md:h-[26.5rem] md:[--pitch:14rem] md:[--card-w:16.25rem] md:[--card-h:20.5rem] [&::-webkit-scrollbar]:hidden"
           >
             {destinations.map((place, index) => {
               const { scale, wash, opacity, z } = cover(index - START_INDEX, false);
@@ -311,7 +311,7 @@ export function Destinations() {
                               draggable={false}
                             />
                           </span>
-                          <p className="truncate text-[0.95rem] font-semibold tracking-tight text-white md:text-base">
+                          <p className="truncate text-[0.95rem] font-semibold tracking-tight whitespace-nowrap text-white md:text-base">
                             {place.name}
                           </p>
                         </div>
@@ -345,7 +345,7 @@ export function Destinations() {
               <button
                 key={place.name}
                 type="button"
-                aria-label={`Show ${place.name}`}
+                aria-label={`Go to ${place.name}`}
                 aria-current={index === active ? "true" : undefined}
                 onClick={() => scrollToIndex(index)}
                 className={cn(
