@@ -171,16 +171,27 @@
 }
 
 .delay-150 {
-  animation-delay: 150ms;
+  animation-delay: 80ms;
 }
 .delay-300 {
-  animation-delay: 300ms;
+  animation-delay: 140ms;
 }
 .delay-450 {
-  animation-delay: 450ms;
+  animation-delay: 200ms;
 }
 .delay-600 {
-  animation-delay: 600ms;
+  animation-delay: 260ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-slow-pan,
+  .animate-rise-line {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .bg-skywash {
