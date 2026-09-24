@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
@@ -8,7 +9,6 @@ export function Hero() {
       id="top"
       className="relative flex min-h-[100svh] items-end overflow-hidden"
     >
-      {/* Full-bleed photography */}
       <div className="absolute inset-0">
         <Image
           src="/images/hero-campus.jpg"
@@ -18,11 +18,8 @@ export function Hero() {
           className="animate-ken-burns object-cover object-[center_30%]"
           sizes="100vw"
         />
-        {/* Soft top veil for nav readability — keeps the photo visible */}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-transparent to-transparent opacity-90" />
-        {/* Cinematic bottom fade for copy — primary readability layer */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 to-transparent" />
-        {/* Subtle left wash so type sits cleanly without flattening the scene */}
         <div className="absolute inset-0 bg-gradient-to-r from-ink/45 via-ink/10 to-transparent md:from-ink/40 md:via-transparent" />
       </div>
 
@@ -47,20 +44,25 @@ export function Hero() {
           </p>
 
           <div className="animate-fade-up delay-500 mt-9 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center">
-            <Button
-              render={<a href="#contact" />}
-              className="h-12 gap-2 rounded-md bg-ember px-7 text-[0.95rem] font-semibold tracking-wide text-white shadow-[0_10px_30px_-12px_rgba(201,123,58,0.7)] transition-[background-color,transform] hover:bg-ember-deep active:translate-y-px"
+            <a
+              href="#contact"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "h-12 gap-2 rounded-md bg-ember px-7 text-[0.95rem] font-semibold tracking-wide text-white shadow-[0_10px_30px_-12px_rgba(201,123,58,0.7)] transition-[background-color,transform] hover:bg-ember-deep hover:text-white active:translate-y-px"
+              )}
             >
               Book a free consult
               <ArrowRight className="size-4 opacity-90" />
-            </Button>
-            <Button
-              render={<a href="#services" />}
-              variant="outline"
-              className="h-12 rounded-md border-white/40 bg-white/5 px-7 text-[0.95rem] font-medium text-white backdrop-blur-[2px] transition-colors hover:border-white/60 hover:bg-white/12 hover:text-white"
+            </a>
+            <a
+              href="#services"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "h-12 rounded-md border-white/40 bg-white/5 px-7 text-[0.95rem] font-medium text-white backdrop-blur-[2px] transition-colors hover:border-white/60 hover:bg-white/12 hover:text-white"
+              )}
             >
               Explore services
-            </Button>
+            </a>
           </div>
         </div>
       </div>

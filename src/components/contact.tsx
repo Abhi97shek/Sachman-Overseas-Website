@@ -7,8 +7,17 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
+const interests = [
+  { value: "ielts", label: "IELTS Coaching" },
+  { value: "pte", label: "PTE Academic" },
+  { value: "spoken", label: "Spoken English" },
+  { value: "visa", label: "Study Visa" },
+  { value: "counselling", label: "General counselling" },
+];
+
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [interest, setInterest] = useState("ielts");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -72,7 +81,11 @@ export function Contact() {
 
         <div className="border border-border/80 bg-white/80 p-6 shadow-sm backdrop-blur-sm md:p-8">
           {submitted ? (
-            <div className="flex min-h-[320px] flex-col items-center justify-center text-center">
+            <div
+              role="status"
+              aria-live="polite"
+              className="flex min-h-[320px] flex-col items-center justify-center text-center"
+            >
               <CheckCircle2 className="size-12 text-ember" strokeWidth={1.5} />
               <h3 className="mt-4 font-display text-2xl font-semibold text-ink">
                 Message received
@@ -91,7 +104,7 @@ export function Contact() {
               </Button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
               <div className="space-y-2">
                 <Label htmlFor="name">Full name</Label>
                 <Input
@@ -102,38 +115,45 @@ export function Contact() {
                   className="h-11"
                 />
               </div>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    placeholder="+91 …"
-                    className="h-11"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="interest">I am interested in</Label>
-                  <select
-                    id="interest"
-                    name="interest"
-                    required
-                    defaultValue=""
-                    className="border-input bg-background h-11 w-full rounded-lg border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
-                  >
-                    <option value="" disabled>
-                      Select an option
-                    </option>
-                    <option value="ielts">IELTS Coaching</option>
-                    <option value="pte">PTE Academic</option>
-                    <option value="spoken">Spoken English</option>
-                    <option value="visa">Study Visa</option>
-                    <option value="counselling">General counselling</option>
-                  </select>
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  placeholder="+91 …"
+                  className="h-11"
+                />
               </div>
+              <fieldset className="space-y-3">
+                <legend className="text-sm font-medium">I am interested in</legend>
+                <div className="flex flex-wrap gap-2">
+                  {interests.map((item) => {
+                    const selected = interest === item.value;
+                    return (
+                      <label
+                        key={item.value}
+                        className={`cursor-pointer rounded-md border px-3 py-2 text-sm transition-colors ${
+                          selected
+                            ? "border-ember bg-ember/10 text-ink"
+                            : "border-border bg-white text-muted-foreground hover:border-ink/30"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="interest"
+                          value={item.value}
+                          checked={selected}
+                          onChange={() => setInterest(item.value)}
+                          className="sr-only"
+                        />
+                        {item.label}
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
                 <Textarea
@@ -144,12 +164,12 @@ export function Contact() {
                   className="min-h-28 resize-y"
                 />
               </div>
-              <Button
+              <button
                 type="submit"
-                className="h-12 w-full rounded-md bg-ember text-base font-semibold text-white hover:bg-ember-deep"
+                className="inline-flex h-12 w-full items-center justify-center rounded-md bg-ember text-base font-semibold text-white transition-colors hover:bg-ember-deep"
               >
                 Request free consultation
-              </Button>
+              </button>
               <p className="text-center text-xs text-muted-foreground">
                 Mock form — submissions stay on this page for demo purposes.
               </p>

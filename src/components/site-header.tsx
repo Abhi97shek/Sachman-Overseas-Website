@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const links = [
   { href: "#services", label: "Services" },
@@ -36,18 +37,23 @@ export function SiteHeader() {
               {link.label}
             </a>
           ))}
-          <Button
-            render={<a href="tel:+919888454140" />}
-            className="h-10 gap-2 rounded-md bg-ember px-4 text-sm font-semibold text-white hover:bg-ember-deep"
+          <a
+            href="tel:+919888454140"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "h-10 gap-2 rounded-md bg-ember px-4 text-sm font-semibold text-white hover:bg-ember-deep hover:text-white"
+            )}
           >
             <Phone className="size-4" />
             Call us
-          </Button>
+          </a>
         </nav>
 
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center text-white md:hidden"
+          className="relative z-[60] inline-flex size-10 items-center justify-center text-white md:hidden"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
@@ -55,8 +61,11 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {open && (
-        <div className="border-t border-white/15 bg-ink/95 px-5 py-6 backdrop-blur-md md:hidden">
+      {open ? (
+        <div
+          id="mobile-nav"
+          className="relative z-[60] border-t border-white/15 bg-ink/95 px-6 py-6 backdrop-blur-md md:hidden"
+        >
           <nav className="flex flex-col gap-4">
             {links.map((link) => (
               <a
@@ -78,7 +87,7 @@ export function SiteHeader() {
             </a>
           </nav>
         </div>
-      )}
+      ) : null}
     </header>
   );
 }
