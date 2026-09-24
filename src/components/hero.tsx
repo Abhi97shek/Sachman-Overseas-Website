@@ -1,69 +1,50 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section
-      id="top"
-      className="relative flex min-h-[100svh] items-end overflow-hidden"
-    >
+    <section id="top" className="relative min-h-[100svh] overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-campus.jpg"
-          alt="Graduates celebrating on a university campus abroad"
+          src="/images/hero-journey.jpg"
+          alt="Airplane wing above clouds on the way to study abroad"
           fill
           priority
-          className="animate-ken-burns object-cover object-[center_30%]"
+          className="animate-slow-pan object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/55 via-transparent to-transparent opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/65 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/45 via-ink/10 to-transparent md:from-ink/40 md:via-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/50 via-transparent to-transparent" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-20 pt-36 sm:px-8 md:pb-28 md:pt-40">
-        <div className="max-w-2xl">
-          <p className="animate-fade-up font-display text-[2.75rem] font-semibold leading-[0.92] tracking-[-0.02em] text-white sm:text-6xl md:text-7xl lg:text-[5.25rem]">
-            Sachman
-            <span className="mt-1 block font-light tracking-[-0.01em] text-ember sm:mt-1.5">
-              Overseas
-            </span>
-          </p>
+      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-6xl flex-col justify-end px-6 pb-16 pt-28 md:px-8 md:pb-24">
+        <p className="animate-fade-up font-display text-[clamp(3.25rem,12vw,7.5rem)] font-extrabold leading-[0.9] tracking-[-0.04em] text-white">
+          Sachman
+          <span className="mt-1 block text-tide">Overseas</span>
+        </p>
 
-          <div className="mt-7 h-px w-16 bg-ember animate-draw-line sm:mt-8 sm:w-20" />
+        <div className="mt-8 h-px w-20 bg-tide animate-rise-line" />
 
-          <h1 className="animate-fade-up delay-200 mt-7 max-w-lg font-display text-[1.35rem] font-medium leading-[1.35] tracking-tight text-white sm:mt-8 sm:text-3xl md:text-[2rem]">
-            Your path from Pathankot to the world.
-          </h1>
+        <h1 className="animate-fade-up delay-300 mt-7 max-w-xl font-display text-2xl font-semibold leading-snug tracking-tight text-white md:text-3xl">
+          Study abroad, prepared with care.
+        </h1>
 
-          <p className="animate-fade-up delay-300 mt-4 max-w-md text-[0.95rem] leading-relaxed text-white/78 sm:text-lg">
-            IELTS &amp; PTE coaching with study-visa guidance for Canada, UK,
-            Australia, Germany, and beyond.
-          </p>
+        <p className="animate-fade-up delay-450 mt-4 max-w-md text-base leading-relaxed text-white/75 md:text-lg">
+          IELTS, PTE, and study-visa guidance for students from Pathankot.
+        </p>
 
-          <div className="animate-fade-up delay-500 mt-9 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center">
-            <a
-              href="#contact"
-              className={cn(
-                buttonVariants({ variant: "default" }),
-                "h-12 gap-2 rounded-md bg-ember px-7 text-[0.95rem] font-semibold tracking-wide text-white shadow-[0_10px_30px_-12px_rgba(201,123,58,0.7)] transition-[background-color,transform] hover:bg-ember-deep hover:text-white active:translate-y-px"
-              )}
-            >
-              Book a free consult
-              <ArrowRight className="size-4 opacity-90" />
-            </a>
-            <a
-              href="#services"
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "h-12 rounded-md border-white/40 bg-white/5 px-7 text-[0.95rem] font-medium text-white backdrop-blur-[2px] transition-colors hover:border-white/60 hover:bg-white/12 hover:text-white"
-              )}
-            >
-              Explore services
-            </a>
-          </div>
+        <div className="animate-fade-up delay-600 mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a
+            href="#contact"
+            className="inline-flex h-12 items-center justify-center bg-tide px-7 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-tide-deep"
+          >
+            Book a free consult
+          </a>
+          <a
+            href="#services"
+            className="inline-flex h-12 items-center justify-center border border-white/35 px-7 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
+          >
+            View services
+          </a>
         </div>
       </div>
     </section>

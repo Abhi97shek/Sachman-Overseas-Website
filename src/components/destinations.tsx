@@ -35,43 +35,51 @@ const destinations = [
 
 export function Destinations() {
   return (
-    <section id="destinations" className="bg-ink py-20 text-white md:py-28">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-[0.18em] text-ember uppercase">
-            Study destinations
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
-            Where your next chapter begins.
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-white/70">
-            We guide student, tourist, and visitor visas for leading study
-            destinations — matched to your scores, budget, and goals.
-          </p>
-        </div>
+    <section id="destinations" className="bg-ink text-white">
+      <div className="mx-auto max-w-6xl px-6 py-24 md:px-8 md:py-28">
+        <p className="text-[0.7rem] font-semibold tracking-[0.22em] text-tide uppercase">
+          Study destinations
+        </p>
+        <h2 className="mt-4 max-w-xl font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+          Where your next chapter begins.
+        </h2>
+        <p className="mt-4 max-w-lg text-base leading-relaxed text-white/65 md:text-lg">
+          Student, tourist, and visitor visas for leading destinations — matched
+          to your scores, budget, and goals.
+        </p>
+      </div>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {destinations.map((place, i) => (
-            <article
-              key={place.name}
-              className="group relative aspect-[4/5] overflow-hidden sm:aspect-[3/4]"
-            >
-              <Image
-                src={place.image}
-                alt={`${place.name} skyline`}
-                fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                priority={i < 2}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                <h3 className="font-display text-2xl font-semibold">{place.name}</h3>
-                <p className="mt-1 text-sm text-white/70">{place.focus}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+      <div className="flex flex-col">
+        {destinations.map((place, i) => (
+          <article
+            key={place.name}
+            className="group relative min-h-[52vh] overflow-hidden md:min-h-[58vh]"
+          >
+            <Image
+              src={place.image}
+              alt={`${place.name} skyline`}
+              fill
+              className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
+              sizes="100vw"
+              priority={i < 2}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/45 to-ink/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+
+            <div className="relative z-10 mx-auto flex h-full min-h-[52vh] max-w-6xl flex-col justify-end px-6 py-14 md:min-h-[58vh] md:px-8 md:py-20">
+              <span className="font-display text-xs font-semibold tracking-[0.2em] text-white/45">
+                {String(i + 1).padStart(2, "0")} / {String(destinations.length).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 font-display text-[clamp(2.5rem,8vw,5.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em]">
+                {place.name}
+              </h3>
+              <div className="mt-5 h-px w-16 origin-left scale-x-100 bg-tide transition-transform duration-500 group-hover:scale-x-150" />
+              <p className="mt-5 max-w-sm text-base text-white/70 md:text-lg">
+                {place.focus}
+              </p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
