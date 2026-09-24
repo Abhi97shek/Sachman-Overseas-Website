@@ -111,8 +111,8 @@ export function Destinations() {
   function paint() {
     const scroller = scrollerRef.current;
     if (!scroller) return;
-    const pitch =
-      parseFloat(getComputedStyle(scroller).getPropertyValue("--pitch")) || 148;
+    // Slot width is var(--pitch); read pixels — parseFloat("15.5rem") is 15.5, not 248.
+    const pitch = slotRefs.current.find(Boolean)?.offsetWidth || 148;
     const center = scroller.scrollLeft + scroller.clientWidth / 2;
     const mobile = scroller.clientWidth < 768;
     let nearest = 0;
