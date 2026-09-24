@@ -13,14 +13,6 @@ const links = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -32,31 +24,49 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open ? "bg-ink/85 backdrop-blur-md" : "bg-transparent"
+        "absolute inset-x-0 top-0 z-50",
+        open && "bg-ink/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none"
       )}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 md:px-8">
-        <a href="#top" className="font-display text-lg font-bold tracking-tight text-white md:text-xl">
-          Sachman <span className="font-medium text-white/70">Overseas</span>
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-5 sm:px-8 md:px-10 lg:px-12">
+        <a
+          href="#top"
+          className="font-display text-[1.05rem] font-bold tracking-tight text-ink md:text-lg"
+        >
+          Sachman Overseas
         </a>
 
-        <nav className="hidden items-center gap-9 md:flex">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-[0.8rem] font-medium tracking-[0.14em] text-white/75 uppercase transition-colors hover:text-white"
+              className="text-[0.85rem] font-medium tracking-wide text-ink/70 transition-colors hover:text-ink"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
+        <div className="hidden items-center gap-4 md:flex">
+          <a
+            href="tel:+919888454140"
+            className="text-[0.85rem] font-medium tracking-wide text-ink/75 transition-colors hover:text-ink"
+          >
+            Call us
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex h-10 items-center justify-center rounded-full bg-ink px-5 text-[0.8rem] font-semibold text-white transition-colors hover:bg-ink-soft"
+          >
+            Book a consult
+          </a>
+        </div>
+
         <button
           type="button"
           data-testid="mobile-menu-toggle"
-          className="inline-flex size-10 items-center justify-center text-white md:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-full text-ink md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -83,6 +93,20 @@ export function SiteHeader() {
                 {link.label}
               </a>
             ))}
+            <a
+              href="tel:+919888454140"
+              className="mt-2 text-base font-medium text-white/70"
+              onClick={() => setOpen(false)}
+            >
+              Call us · +91 98884 54140
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-white text-sm font-semibold text-ink"
+              onClick={() => setOpen(false)}
+            >
+              Book a consult
+            </a>
           </nav>
         </div>
       ) : null}

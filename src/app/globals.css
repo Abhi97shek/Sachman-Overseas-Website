@@ -62,9 +62,9 @@
   --tide: #0b7a7a;
   --tide-deep: #086060;
   --fog: #d7e2ea;
-  --paper: #f2f5f7;
+  --paper: #eef2f5;
   --sand: #f7f1e8;
-  --background: #f2f5f7;
+  --background: #e8eef2;
   --foreground: #12161c;
   --card: #ffffff;
   --card-foreground: #12161c;
@@ -87,8 +87,8 @@
   --chart-3: #5a6573;
   --chart-4: #d7e2ea;
   --chart-5: #f7f1e8;
-  --radius: 0.35rem;
-  --sidebar: #f2f5f7;
+  --radius: 1rem;
+  --sidebar: #eef2f5;
   --sidebar-foreground: #12161c;
   --sidebar-primary: #12161c;
   --sidebar-primary-foreground: #f2f5f7;
@@ -103,7 +103,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background:
+      radial-gradient(ellipse 80% 40% at 50% -5%, rgba(255, 255, 255, 0.7), transparent 55%),
+      linear-gradient(180deg, #e8eef2 0%, #e4eaef 100%);
   }
   html {
     @apply font-sans scroll-smooth;
@@ -182,7 +185,7 @@
 
 .bg-skywash {
   background:
-    radial-gradient(ellipse 90% 55% at 85% -10%, rgba(11, 122, 122, 0.12), transparent 50%),
-    radial-gradient(ellipse 70% 45% at 0% 100%, rgba(215, 226, 234, 0.9), transparent 55%),
-    linear-gradient(180deg, #eef3f6 0%, #f2f5f7 45%, #e8eef2 100%);
+    radial-gradient(ellipse 90% 55% at 85% -10%, rgba(11, 122, 122, 0.1), transparent 50%),
+    radial-gradient(ellipse 70% 45% at 0% 100%, rgba(215, 226, 234, 0.85), transparent 55%),
+    linear-gradient(180deg, #e8eef2 0%, #eef3f6 45%, #e4eaef 100%);
 }
