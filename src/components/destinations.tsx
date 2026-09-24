@@ -1,219 +1,368 @@
 "use client";
 
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const destinations = [
   {
     name: "Canada",
+    flag: "/images/flags/ca.svg",
     image: "/images/canada.jpg",
-    focus: "Colleges and university pathways with room to stay and work after study.",
-    facts: [
-      { label: "Route", value: "Diploma & degree" },
-      { label: "Test", value: "IELTS / PTE" },
-      { label: "Visa", value: "Study permit" },
-    ],
+    blurb:
+      "Colleges and university pathways, with room to build a career after graduation. We match the intake to your scores, budget, and goals.",
   },
   {
     name: "United Kingdom",
+    flag: "/images/flags/gb.svg",
     image: "/images/uk.jpg",
-    focus: "Undergraduate and postgraduate study at universities across the UK.",
-    facts: [
-      { label: "Route", value: "UG & PG" },
-      { label: "Test", value: "IELTS / PTE" },
-      { label: "Visa", value: "Student visa" },
-    ],
+    blurb:
+      "Undergraduate and postgraduate study across the UK. Shortlists, personal statements, and the student visa file — handled with you.",
   },
   {
     name: "Australia",
+    flag: "/images/flags/au.svg",
     image: "/images/australia.jpg",
-    focus: "Courses built around strong career outcomes and post-study options.",
-    facts: [
-      { label: "Route", value: "VET & degrees" },
-      { label: "Test", value: "IELTS / PTE" },
-      { label: "Visa", value: "Subclass 500" },
-    ],
+    blurb:
+      "Courses with strong career outcomes and a clear study pathway. From the offer letter to the visa, the plan stays practical.",
   },
   {
     name: "Germany",
+    flag: "/images/flags/de.svg",
     image: "/images/germany.jpg",
-    focus: "Public universities with low tuition and clear academic pathways.",
-    facts: [
-      { label: "Route", value: "Public unis" },
-      { label: "Test", value: "IELTS / German" },
-      { label: "Visa", value: "Student visa" },
-    ],
+    blurb:
+      "Affordable public universities and English-taught programmes. We map admissions, proof of funds, and each visa step.",
   },
   {
     name: "New Zealand",
+    flag: "/images/flags/nz.svg",
     image: "/images/nz.jpg",
-    focus: "Quality education in a safe setting, with practical course options.",
-    facts: [
-      { label: "Route", value: "Diplomas & degrees" },
-      { label: "Test", value: "IELTS / PTE" },
-      { label: "Visa", value: "Fee-paying student" },
-    ],
+    blurb:
+      "Quality education in a safe, welcoming setting. A strong fit if you want a smaller campus and a manageable student life.",
   },
   {
     name: "United States",
+    flag: "/images/flags/us.svg",
     image: "/images/usa.jpg",
-    focus: "Universities across major cities, matched to your scores and budget.",
-    facts: [
-      { label: "Route", value: "UG & PG" },
-      { label: "Test", value: "IELTS / PTE" },
-      { label: "Visa", value: "F-1 student" },
-    ],
+    blurb:
+      "Universities across every major city, from community college to graduate school. We align the campus to your profile.",
   },
 ];
 
+const START_INDEX = 2;
+
+function sample(value: number, stops: Array<[number, number]>) {
+  if (value <= stops[0][0]) return stops[0][1];
+  for (let i = 1; i < stops.length; i++) {
+    const [x0, y0] = stops[i - 1];
+    const [x1, y1] = stops[i];
+    if (value <= x1) return y0 + ((y1 - y0) * (value - x0)) / (x1 - x0);
+  }
+  return stops[stops.length - 1][1];
+}
+
+function cover(distance: number, mobile: boolean) {
+  const ad = Math.abs(distance);
+  const scale = sample(ad, [
+    [0, 1],
+    [1, 0.8],
+    [1.65, 0.64],
+    [2.6, 0.56],
+  ]);
+  const wash = sample(ad, [
+    [0, 0],
+    [0.2, 0],
+    [1, 0.38],
+    [1.7, 0.66],
+    [2.5, 0.82],
+  ]);
+  const opacity = mobile
+    ? sample(ad, [
+        [0, 1],
+        [1, 1],
+        [1.85, 0.45],
+        [2.4, 0],
+      ])
+    : sample(ad, [
+        [0, 1],
+        [1.35, 1],
+        [2.15, 0.28],
+        [2.7, 0],
+      ]);
+  return {
+    scale,
+    wash,
+    opacity,
+    z: Math.round(90 - ad * 28),
+  };
+}
+
 export function Destinations() {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const slotRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const veilRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const activeRef = useRef(START_INDEX);
+  const dragged = useRef(false);
+  const scrollAtPointerDown = useRef(0);
+  const [active, setActive] = useState(START_INDEX);
 
-  useEffect(() => {
+  function paint() {
     const scroller = scrollerRef.current;
     if (!scroller) return;
+    const pitch =
+      parseFloat(getComputedStyle(scroller).getPropertyValue("--pitch")) || 148;
+    const center = scroller.scrollLeft + scroller.clientWidth / 2;
+    const mobile = scroller.clientWidth < 768;
+    let nearest = 0;
+    let nearestDist = Number.POSITIVE_INFINITY;
 
-    const cards = () =>
-      [...scroller.querySelectorAll<HTMLElement>("[data-country]")];
+    slotRefs.current.forEach((slot, index) => {
+      if (!slot) return;
+      const slotCenter = slot.offsetLeft + slot.offsetWidth / 2;
+      const distance = (slotCenter - center) / pitch;
+      const { scale, wash, opacity, z } = cover(distance, mobile);
+      slot.style.zIndex = String(z);
+      const card = cardRefs.current[index];
+      if (card) {
+        card.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        card.style.opacity = String(opacity);
+        card.style.pointerEvents = opacity < 0.2 ? "none" : "auto";
+      }
+      const veil = veilRefs.current[index];
+      if (veil) veil.style.opacity = String(wash);
+      const dist = Math.abs(slotCenter - center);
+      if (dist < nearestDist) {
+        nearestDist = dist;
+        nearest = index;
+      }
+    });
 
-    const markSnapped = () => {
-      const box = scroller.getBoundingClientRect();
-      const mid = box.left + box.width / 2;
-      let best: HTMLElement | null = null;
-      let bestDist = Infinity;
-      for (const card of cards()) {
-        const rect = card.getBoundingClientRect();
-        const dist = Math.abs(rect.left + rect.width / 2 - mid);
-        if (dist < bestDist) {
-          best = card;
-          bestDist = dist;
-        }
-      }
-      for (const card of cards()) {
-        card.classList.toggle("is-snapped", card === best);
-      }
-    };
+    if (nearest !== activeRef.current) {
+      activeRef.current = nearest;
+      setActive(nearest);
+    }
+  }
+
+  function scrollToIndex(index: number, behavior?: ScrollBehavior) {
+    const scroller = scrollerRef.current;
+    const slot = slotRefs.current[index];
+    if (!scroller || !slot) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const left = slot.offsetLeft - scroller.clientWidth / 2 + slot.offsetWidth / 2;
+    scroller.scrollTo({
+      left,
+      behavior: behavior ?? (reduce ? "auto" : "smooth"),
+    });
+  }
+
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+    const slot = slotRefs.current[START_INDEX];
+    if (slot) {
+      scroller.scrollLeft =
+        slot.offsetLeft - scroller.clientWidth / 2 + slot.offsetWidth / 2;
+    }
+    paint();
 
     let frame = 0;
     const onScroll = () => {
+      if (Math.abs(scroller.scrollLeft - scrollAtPointerDown.current) > 6) {
+        dragged.current = true;
+      }
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(markSnapped);
+      frame = requestAnimationFrame(paint);
     };
-
-    let dragging = false;
-    let startX = 0;
-    let startScroll = 0;
-    let moved = false;
-
-    const onPointerDown = (event: PointerEvent) => {
-      if (event.pointerType === "touch" || event.button !== 0) return;
-      dragging = true;
-      moved = false;
-      startX = event.clientX;
-      startScroll = scroller.scrollLeft;
-      scroller.classList.add("is-dragging");
-    };
-
-    const onPointerMove = (event: PointerEvent) => {
-      if (!dragging) return;
-      const delta = event.clientX - startX;
-      if (Math.abs(delta) > 6) moved = true;
-      scroller.scrollLeft = startScroll - delta;
-    };
-
-    const onPointerUp = () => {
-      if (!dragging) return;
-      dragging = false;
-      scroller.classList.remove("is-dragging");
-    };
-
-    const onClickCapture = (event: MouseEvent) => {
-      if (!moved) return;
-      event.preventDefault();
-      event.stopPropagation();
-      moved = false;
-    };
-
     scroller.addEventListener("scroll", onScroll, { passive: true });
-    scroller.addEventListener("pointerdown", onPointerDown);
-    window.addEventListener("pointermove", onPointerMove);
-    window.addEventListener("pointerup", onPointerUp);
-    scroller.addEventListener("click", onClickCapture, true);
-    markSnapped();
-
+    const observer = new ResizeObserver(onScroll);
+    observer.observe(scroller);
     return () => {
       cancelAnimationFrame(frame);
       scroller.removeEventListener("scroll", onScroll);
-      scroller.removeEventListener("pointerdown", onPointerDown);
-      window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerUp);
-      scroller.removeEventListener("click", onClickCapture, true);
+      observer.disconnect();
     };
   }, []);
 
   return (
-    <section id="destinations" className="overflow-hidden bg-skywash py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">
-          Countries
-        </p>
-        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="max-w-xl font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
-            Snap through the places you can study.
+    <section id="destinations" className="px-3 py-6 sm:px-4 md:px-5 md:py-8">
+      <div className="mx-auto overflow-hidden rounded-[1.75rem] border border-white/80 bg-[#f5f6f8] shadow-[0_24px_70px_rgba(18,22,28,0.05)] sm:rounded-[2rem] md:rounded-[2.5rem]">
+        <div className="px-5 pt-12 pb-2 text-center sm:px-8 sm:pt-16 md:pt-20">
+          <h2 className="mx-auto max-w-3xl font-display text-[1.7rem] leading-[1.15] font-bold tracking-[-0.03em] text-ink sm:text-4xl md:text-[2.6rem]">
+            Popular study <span className="text-tide">Countries</span> for 2026
           </h2>
-          <p className="max-w-xs text-sm text-muted-foreground sm:text-right">
-            Drag or swipe. The country in the centre opens.
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
+            Browse the destinations we prepare student, tourist, and visitor visas for.
           </p>
         </div>
-      </div>
 
-      <div
-        ref={scrollerRef}
-        className="country-scroller mt-10 flex gap-4 overflow-x-auto pb-2"
-        aria-label="Study destinations"
-      >
-        {destinations.map((place, index) => (
-          <article
-            key={place.name}
-            data-country={place.name}
-            className={`country-snap ${index === 0 ? "is-snapped" : ""}`}
+        <div className="relative">
+          <button
+            type="button"
+            aria-label="Previous country"
+            disabled={active === 0}
+            onClick={() => scrollToIndex(active - 1)}
+            className="absolute top-1/2 left-2 z-40 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_rgba(18,22,28,0.08)] transition hover:bg-white disabled:opacity-35 sm:left-3 sm:size-10 md:left-3 lg:left-5"
           >
-            <div className="country-card relative overflow-hidden rounded-[1.6rem] bg-ink text-white shadow-[0_18px_50px_-28px_rgba(18,22,28,0.7)]">
-              <Image
-                src={place.image}
-                alt={`${place.name}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 82vw, 36rem"
-                priority={index < 2}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-ink/10" />
-              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
-                <p className="text-[0.68rem] font-semibold tracking-[0.18em] text-white/55 uppercase">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-1 font-display text-3xl font-bold tracking-tight">
-                  {place.name}
-                </h3>
-                <div className="country-meta">
-                  <p className="max-w-md text-sm leading-relaxed text-white/80">
-                    {place.focus}
-                  </p>
-                  <dl className="mt-4 grid grid-cols-3 gap-3 border-t border-white/15 pt-4">
-                    {place.facts.map((fact) => (
-                      <div key={fact.label}>
-                        <dt className="text-[0.65rem] tracking-[0.14em] text-white/45 uppercase">
-                          {fact.label}
-                        </dt>
-                        <dd className="mt-1 text-sm font-medium">{fact.value}</dd>
+            <ChevronLeft className="size-5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            aria-label="Next country"
+            disabled={active === destinations.length - 1}
+            onClick={() => scrollToIndex(active + 1)}
+            className="absolute top-1/2 right-2 z-40 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-ink/10 bg-white text-ink shadow-[0_8px_24px_rgba(18,22,28,0.08)] transition hover:bg-white disabled:opacity-35 sm:right-3 sm:size-10 md:right-3 lg:right-5"
+          >
+            <ChevronRight className="size-5" aria-hidden />
+          </button>
+
+          <div
+            ref={scrollerRef}
+            tabIndex={0}
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Study countries"
+            onPointerDown={() => {
+              const scroller = scrollerRef.current;
+              dragged.current = false;
+              scrollAtPointerDown.current = scroller?.scrollLeft ?? 0;
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowRight") {
+                event.preventDefault();
+                scrollToIndex(Math.min(destinations.length - 1, activeRef.current + 1));
+              } else if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                scrollToIndex(Math.max(0, activeRef.current - 1));
+              }
+            }}
+            className="isolate flex h-[22rem] cursor-grab snap-x snap-mandatory overflow-x-auto overscroll-x-contain pl-[calc(50%-var(--pitch)/2)] pr-[calc(50%-var(--pitch)/2)] [--pitch:7.5rem] [--card-w:14.75rem] [--card-h:18.25rem] [scrollbar-width:none] active:cursor-grabbing sm:h-[24rem] md:h-[26.5rem] md:[--pitch:11.5rem] md:[--card-w:17.25rem] md:[--card-h:21.25rem] [&::-webkit-scrollbar]:hidden"
+          >
+            {destinations.map((place, index) => {
+              const { scale, wash, opacity, z } = cover(index - START_INDEX, false);
+              return (
+                <div
+                  key={place.name}
+                  ref={(node) => {
+                    slotRefs.current[index] = node;
+                  }}
+                  data-index={index}
+                  className="relative h-full shrink-0 snap-center"
+                  style={{ width: "var(--pitch)", zIndex: z }}
+                >
+                  <div
+                    ref={(node) => {
+                      cardRefs.current[index] = node;
+                    }}
+                    className="absolute top-1/2 left-1/2 h-[var(--card-h)] w-[var(--card-w)] will-change-transform"
+                    style={{
+                      transform: `translate(-50%, -50%) scale(${scale})`,
+                      opacity,
+                    }}
+                  >
+                    <a
+                      href="#contact"
+                      draggable={false}
+                      aria-label={
+                        index === active
+                          ? `${place.name} — learn more`
+                          : `Show ${place.name}`
+                      }
+                      aria-current={index === active ? "true" : undefined}
+                      onClick={(event) => {
+                        if (dragged.current) {
+                          event.preventDefault();
+                          dragged.current = false;
+                          return;
+                        }
+                        if (index !== activeRef.current) {
+                          event.preventDefault();
+                          scrollToIndex(index);
+                        }
+                      }}
+                      className="relative block h-full w-full overflow-hidden rounded-[1.25rem] bg-ink text-left shadow-[0_16px_40px_rgba(18,22,28,0.16)] outline-none focus-visible:ring-2 focus-visible:ring-tide focus-visible:ring-offset-2"
+                    >
+                      <Image
+                        src={place.image}
+                        alt=""
+                        fill
+                        draggable={false}
+                        sizes="280px"
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-black/80" />
+                      <div
+                        ref={(node) => {
+                          veilRefs.current[index] = node;
+                        }}
+                        className="pointer-events-none absolute inset-0 z-10 bg-white"
+                        style={{ opacity: wash }}
+                      />
+                      <div className="pointer-events-none absolute inset-0 z-10 rounded-[1.25rem] shadow-[inset_0_0_0_1.5px_rgba(255,255,255,0.22)]" />
+                      <div className="absolute inset-x-0 bottom-0 z-20 px-3.5 pb-3.5 md:px-4 md:pb-4">
+                        <div className="flex items-center gap-2">
+                          <span className="relative block size-5 shrink-0 overflow-hidden rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.45)] md:size-6">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={place.flag}
+                              alt=""
+                              className="h-full w-full object-cover"
+                              draggable={false}
+                            />
+                          </span>
+                          <p className="truncate text-[0.95rem] font-semibold tracking-tight text-white md:text-base">
+                            {place.name}
+                          </p>
+                        </div>
+                        <p className="mt-0.5 pl-7 text-[0.72rem] text-white/80 md:pl-8 md:text-[0.78rem]">
+                          Click to learn more
+                        </p>
                       </div>
-                    ))}
-                  </dl>
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </article>
-        ))}
+              );
+            })}
+          </div>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){var s=document.currentScript&&document.currentScript.previousElementSibling;if(!s||!s.querySelector)return;var item=s.querySelector('[data-index="${START_INDEX}"]');if(!item)return;s.scrollLeft=item.offsetLeft-s.clientWidth/2+item.offsetWidth/2;})();`,
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col items-center gap-4 px-6 pt-2 pb-10 md:pb-12">
+          <p
+            key={destinations[active].name}
+            aria-live="polite"
+            className="animate-in fade-in slide-in-from-bottom-1 mx-auto min-h-[4.5rem] max-w-md text-center text-sm leading-relaxed text-muted-foreground duration-300 md:text-[0.95rem]"
+          >
+            {destinations[active].blurb}
+          </p>
+          <div className="inline-flex items-center gap-1 rounded-full bg-ink/[0.05] px-2 py-1.5">
+            {destinations.map((place, index) => (
+              <button
+                key={place.name}
+                type="button"
+                aria-label={`Show ${place.name}`}
+                aria-current={index === active ? "true" : undefined}
+                onClick={() => scrollToIndex(index)}
+                className={cn(
+                  "grid h-4 place-items-center",
+                  index === active ? "w-6" : "w-3.5"
+                )}
+              >
+                <span
+                  className={cn(
+                    "rounded-full transition-all duration-200",
+                    index === active ? "h-1.5 w-4 bg-tide" : "size-1.5 bg-ink/25"
+                  )}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
