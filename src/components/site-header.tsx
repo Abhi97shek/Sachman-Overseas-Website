@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -14,10 +14,32 @@ const links = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8 md:py-6">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300",
+        scrolled || open
+          ? "border-b border-white/10 bg-ink/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-8 md:py-5">
         <a href="#top" className="group flex items-baseline gap-1.5">
           <span className="font-display text-lg font-semibold tracking-tight text-white md:text-xl">
             Sachman
@@ -51,6 +73,7 @@ export function SiteHeader() {
 
         <button
           type="button"
+          data-testid="mobile-menu-toggle"
           className="relative z-[60] inline-flex size-10 items-center justify-center text-white md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -64,7 +87,8 @@ export function SiteHeader() {
       {open ? (
         <div
           id="mobile-nav"
-          className="relative z-[60] border-t border-white/15 bg-ink/95 px-6 py-6 backdrop-blur-md md:hidden"
+          data-testid="mobile-nav"
+          className="border-t border-white/15 bg-ink/95 px-6 py-6 backdrop-blur-md md:hidden"
         >
           <nav className="flex flex-col gap-4">
             {links.map((link) => (

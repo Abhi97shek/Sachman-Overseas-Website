@@ -3,8 +3,6 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, MapPin, Mail, Phone, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
 const interests = [
@@ -14,6 +12,9 @@ const interests = [
   { value: "visa", label: "Study Visa" },
   { value: "counselling", label: "General counselling" },
 ];
+
+const fieldClass =
+  "border-input bg-background h-11 w-full rounded-lg border px-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -82,6 +83,7 @@ export function Contact() {
         <div className="border border-border/80 bg-white/80 p-6 shadow-sm backdrop-blur-sm md:p-8">
           {submitted ? (
             <div
+              id="form-success"
               role="status"
               aria-live="polite"
               className="flex min-h-[320px] flex-col items-center justify-center text-center"
@@ -104,26 +106,26 @@ export function Contact() {
               </Button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
+            <form id="consult-form" onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="name">Full name</Label>
-                <Input
+                <input
                   id="name"
                   name="name"
                   required
                   placeholder="Your name"
-                  className="h-11"
+                  className={fieldClass}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone</Label>
-                <Input
+                <input
                   id="phone"
                   name="phone"
                   type="tel"
                   required
                   placeholder="+91 …"
-                  className="h-11"
+                  className={fieldClass}
                 />
               </div>
               <fieldset className="space-y-3">
@@ -156,12 +158,12 @@ export function Contact() {
               </fieldset>
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
-                <Textarea
+                <textarea
                   id="message"
                   name="message"
                   rows={4}
                   placeholder="Tell us your target country, exam, or timeline…"
-                  className="min-h-28 resize-y"
+                  className={`${fieldClass} min-h-28 resize-y py-2`}
                 />
               </div>
               <button
