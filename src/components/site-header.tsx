@@ -16,8 +16,9 @@ const links = [
 
 export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "solid" }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const solid = variant === "solid";
+  const solid = variant === "solid" || scrolled;
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -30,14 +31,22 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <header
       className={cn(
-        "z-50",
+        "fixed inset-x-0 top-0 z-50",
         solid
-          ? "sticky top-0 border-b border-ink/8 bg-[#e8eef2]/90 backdrop-blur-md"
-          : "absolute inset-x-0 top-0",
-        !solid && open && "bg-ink/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none"
+          ? "border-b border-ink/8 bg-[#e8eef2]/92 backdrop-blur-md"
+          : open
+            ? "bg-ink/95 backdrop-blur-md"
+            : "pt-3 sm:pt-4 md:pt-5"
       )}
     >
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8 md:px-10 lg:px-12">

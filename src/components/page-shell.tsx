@@ -5,7 +5,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <SiteHeader variant="solid" />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-20">{children}</main>
       <SiteFooter />
     </>
   );
