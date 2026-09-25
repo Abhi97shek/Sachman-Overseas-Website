@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { CheckCircle2, MapPin, Mail, Phone, Clock } from "lucide-react";
+import { CheckCircle2, ChevronDown, MapPin, Mail, Phone, Clock } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
 const interests = [
@@ -17,7 +17,7 @@ const fieldClass =
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
-  const [interest, setInterest] = useState("ielts");
+  const [interest, setInterest] = useState("");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -106,7 +106,7 @@ export function Contact() {
               <form
                 id="consult-form"
                 onSubmit={handleSubmit}
-                className="space-y-3 rounded-[1.25rem] bg-paper/70 p-4 sm:p-5"
+                className="space-y-4 rounded-[1.25rem] bg-paper/70 p-5 sm:p-6"
               >
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="space-y-1.5">
@@ -141,36 +141,39 @@ export function Contact() {
                     />
                   </div>
                 </div>
-                <fieldset className="space-y-2">
-                  <legend className="text-xs font-medium tracking-[0.12em] text-muted-foreground uppercase">
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="interest"
+                    className="text-xs tracking-[0.12em] text-muted-foreground uppercase"
+                  >
                     I am interested in
-                  </legend>
-                  <div className="flex flex-wrap gap-2">
-                    {interests.map((item) => {
-                      const selected = interest === item.value;
-                      return (
-                        <label
-                          key={item.value}
-                          className={`cursor-pointer rounded-full border px-3 py-1.5 text-sm transition-colors ${
-                            selected
-                              ? "border-tide/40 bg-white font-semibold text-ink"
-                              : "border-transparent bg-white/70 text-muted-foreground hover:border-ink/10 hover:text-ink"
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="interest"
-                            value={item.value}
-                            checked={selected}
-                            onChange={() => setInterest(item.value)}
-                            className="sr-only"
-                          />
+                  </Label>
+                  <div className="relative">
+                    <select
+                      id="interest"
+                      name="interest"
+                      required
+                      value={interest}
+                      onChange={(event) => setInterest(event.target.value)}
+                      className={`${fieldClass} h-10 appearance-none pr-10 ${
+                        interest ? "text-ink" : "text-muted-foreground"
+                      }`}
+                    >
+                      <option value="" disabled>
+                        Select a course
+                      </option>
+                      {interests.map((item) => (
+                        <option key={item.value} value={item.value}>
                           {item.label}
-                        </label>
-                      );
-                    })}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground"
+                      aria-hidden
+                    />
                   </div>
-                </fieldset>
+                </div>
                 <div className="space-y-1.5">
                   <Label
                     htmlFor="message"
@@ -183,7 +186,7 @@ export function Contact() {
                     name="message"
                     rows={2}
                     placeholder="Target country, exam, or timeline"
-                    className={`${fieldClass} h-16 min-h-16 resize-none py-2.5`}
+                    className={`${fieldClass} h-20 min-h-20 resize-none py-2.5`}
                   />
                 </div>
                 <button
