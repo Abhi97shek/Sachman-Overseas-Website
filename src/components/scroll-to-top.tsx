@@ -16,6 +16,7 @@ export function ScrollToTop() {
   return (
     <button
       type="button"
+      data-press
       aria-label="Back to top"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       className={`fixed right-5 bottom-5 z-40 inline-flex size-12 items-center justify-center rounded-full bg-ink text-white shadow-[0_12px_30px_rgba(18,22,28,0.28)] transition-all hover:bg-ink-soft ${

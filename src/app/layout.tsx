@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Geist_Mono } from "next/font/google";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { SiteMotion } from "@/components/site-motion";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -27,7 +28,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${manrope.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('gsap')",
+          }}
+        />
         {children}
+        <SiteMotion />
         <ScrollToTop />
       </body>
     </html>

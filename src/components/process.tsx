@@ -23,7 +23,7 @@ export function Process() {
   return (
     <section id="process" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="mx-auto max-w-xl text-center">
+        <div data-reveal className="mx-auto max-w-xl text-center">
           <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">
             How it works
           </p>
@@ -32,7 +32,7 @@ export function Process() {
           </h2>
         </div>
 
-        <ol className="mt-16 grid gap-4 md:grid-cols-3">
+        <ol data-stagger className="mt-16 grid gap-4 md:grid-cols-3">
           {steps.map((item) => (
             <li
               key={item.step}

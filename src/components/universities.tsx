@@ -26,7 +26,7 @@ export function Universities() {
   return (
     <section id="universities" className="px-4 py-20 sm:px-6 md:px-8 md:py-28 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center">
+        <div data-reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">
             Partner campuses
           </p>
@@ -48,6 +48,7 @@ export function Universities() {
                 type="button"
                 onClick={() => setCountry(name)}
                 aria-pressed={selected}
+                data-press
                 className={`inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                   selected ? "bg-ink text-white" : "bg-white text-ink hover:bg-white/80"
                 }`}
@@ -62,10 +63,11 @@ export function Universities() {
           })}
         </div>
 
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul key={country} data-reveal className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((campus) => (
             <li
               key={campus.name}
+              data-lift
               className="flex items-center gap-3 rounded-2xl border border-ink/8 bg-white px-4 py-4"
             >
               <span

@@ -102,6 +102,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           </a>
           <Link
             href="/contact"
+            data-press
             className={cn(
               "inline-flex h-10 items-center justify-center rounded-full px-5 text-[0.8rem] font-semibold transition-colors",
               solid

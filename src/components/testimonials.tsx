@@ -1,8 +1,12 @@
 "use client";
 
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useRef, useState } from "react";
+
+gsap.registerPlugin(useGSAP);
 
 function Stars() {
   return (
@@ -69,7 +73,17 @@ export function Testimonials() {
   const [active, setActive] = useState(0);
   const scroller = useRef<HTMLDivElement>(null);
   const cards = useRef<Array<HTMLButtonElement | null>>([]);
+  const quoteRef = useRef<HTMLDivElement>(null);
   const current = reviews[active];
+
+  useGSAP(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      quoteRef.current,
+      { y: 16, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.45, ease: "power2.out" },
+    );
+  }, [active]);
   const overflows = reviews.length > 4;
 
   function reveal(index: number) {
@@ -100,7 +114,7 @@ export function Testimonials() {
   return (
     <section id="stories" className="px-3 pt-6 pb-8 sm:px-4 md:px-5 md:pt-10 md:pb-12">
       <div className="mx-auto max-w-7xl">
-        <div className="relative min-h-[46rem] overflow-hidden rounded-[1.75rem] sm:min-h-[42rem] sm:rounded-[2rem] md:min-h-[44rem]">
+        <div data-reveal className="relative min-h-[46rem] overflow-hidden rounded-[1.75rem] sm:min-h-[42rem] sm:rounded-[2rem] md:min-h-[44rem]">
           {reviews.map((review, index) => (
             <Image
               key={review.country}
@@ -127,7 +141,7 @@ export function Testimonials() {
                 Approved, then they flew.
               </h2>
             </div>
-            <div className="mt-auto">
+            <div ref={quoteRef} className="mt-auto">
             <Stars />
             <p className="mt-3 text-[0.72rem] font-semibold tracking-[0.16em] text-white/80 uppercase">
               {current.country} study visa approved

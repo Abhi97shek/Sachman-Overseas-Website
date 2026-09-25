@@ -26,7 +26,7 @@ export function Contact() {
 
   return (
     <section id="contact" className="px-3 pb-6 sm:px-4 md:px-5">
-      <div className="mx-auto overflow-hidden rounded-[1.75rem] border border-ink/6 bg-white/80 shadow-[0_20px_60px_rgba(18,22,28,0.05)] sm:rounded-[2rem] md:rounded-[2.5rem]">
+      <div data-reveal className="mx-auto overflow-hidden rounded-[1.75rem] border border-ink/6 bg-white/80 shadow-[0_20px_60px_rgba(18,22,28,0.05)] sm:rounded-[2rem] md:rounded-[2.5rem]">
         <div className="relative mx-auto grid max-w-6xl gap-14 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-24 lg:px-12">
           <div>
             <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">

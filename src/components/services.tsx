@@ -68,7 +68,7 @@ export function Services() {
   return (
     <section id="services" className="relative overflow-hidden py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <div data-reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">
             What we offer
           </p>
@@ -81,13 +81,14 @@ export function Services() {
           </p>
         </div>
 
-        <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ul data-stagger className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service) => {
             const Icon = service.icon;
             return (
               <li
                 key={service.title}
-                className={`group relative overflow-hidden rounded-[1.75rem] ${service.wash} p-6 shadow-[0_12px_40px_rgba(18,22,28,0.06)] transition-transform hover:-translate-y-0.5 lg:p-5 xl:p-6`}
+                data-lift
+                className={`group relative overflow-hidden rounded-[1.75rem] ${service.wash} p-6 shadow-[0_12px_40px_rgba(18,22,28,0.06)] lg:p-5 xl:p-6`}
               >
                 <Icon
                   aria-hidden

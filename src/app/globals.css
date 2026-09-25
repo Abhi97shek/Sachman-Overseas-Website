@@ -185,6 +185,20 @@
   animation-delay: 260ms;
 }
 
+.gsap [data-hero-title],
+.gsap [data-hero-copy],
+.gsap [data-hero-cta] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gsap [data-hero-title],
+  .gsap [data-hero-copy],
+  .gsap [data-hero-cta] {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-in,
