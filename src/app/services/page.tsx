@@ -48,8 +48,8 @@ export default function ServicesPage() {
   return (
     <PageShell>
       <Services />
-      <section className="section-shell">
-        <div className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="px-6 pb-24 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {details.map((item) => {
             const service = services.find((entry) => entry.title === item.title);
             const Icon = service?.icon;

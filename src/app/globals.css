@@ -114,36 +114,6 @@
   }
 }
 
-/* One inset for every section: the same left and right margin, and the same gap between blocks. */
-.section-shell {
-  --gutter: 1rem;
-  margin-top: var(--gutter);
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-}
-
-@media (min-width: 640px) {
-  .section-shell {
-    --gutter: 1.25rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .section-shell {
-    --gutter: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-shell {
-    --gutter: 2rem;
-  }
-}
-
-footer.section-shell {
-  margin-bottom: var(--gutter);
-}
-
 @keyframes fade-up {
   from {
     opacity: 0;

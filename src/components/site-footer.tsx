@@ -10,7 +10,7 @@ const links = [
 
 export function SiteFooter() {
   return (
-    <footer className="section-shell">
+    <footer className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-5 md:pb-5">
       <div className="mx-auto overflow-hidden rounded-[1.75rem] bg-ink text-white sm:rounded-[2rem] md:rounded-[2.5rem]">
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-14 md:flex-row md:items-end md:justify-between md:px-10 md:py-16 lg:px-12">
           <div>

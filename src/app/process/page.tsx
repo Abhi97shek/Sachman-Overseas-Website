@@ -28,8 +28,8 @@ export default function ProcessPage() {
   return (
     <PageShell>
       <Process />
-      <section className="section-shell">
-        <div className="grid w-full gap-4">
+      <section className="px-6 pb-24 md:px-8">
+        <div className="mx-auto grid max-w-6xl gap-4">
           {more.map((item) => (
             <article
               key={item.title}

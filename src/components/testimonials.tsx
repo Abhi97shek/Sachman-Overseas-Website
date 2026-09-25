@@ -112,8 +112,8 @@ export function Testimonials() {
   }
 
   return (
-    <section id="stories" className="section-shell">
-      <div className="w-full">
+    <section id="stories" className="px-3 pt-6 pb-8 sm:px-4 md:px-5 md:pt-10 md:pb-12">
+      <div className="mx-auto max-w-7xl">
         <div data-reveal className="relative min-h-[46rem] overflow-hidden rounded-[1.75rem] sm:min-h-[42rem] sm:rounded-[2rem] md:min-h-[44rem]">
           {reviews.map((review, index) => (
             <Image
