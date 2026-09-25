@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Star } from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useRef, useState } from "react";
 
 function Stars() {
   return (
@@ -47,11 +47,55 @@ const reviews = [
     quote:
       "I wanted a public university. They timed the blocked account and the visa appointment so I made the semester.",
   },
+  {
+    name: "Sana Gill",
+    country: "New Zealand",
+    flag: "/images/flags/nz.svg",
+    image: "/images/students/student-nz.jpg",
+    quote:
+      "A smaller campus was the brief. The offer, the fees, and the visa form stayed in one order, and Christchurch followed.",
+  },
+  {
+    name: "Dev Arora",
+    country: "United States",
+    flag: "/images/flags/us.svg",
+    image: "/images/students/student-usa.jpg",
+    quote:
+      "We cut the campus list before paying application fees. The I-20 matched the interview, and the F-1 was granted.",
+  },
 ];
 
 export function Testimonials() {
   const [active, setActive] = useState(0);
+  const scroller = useRef<HTMLDivElement>(null);
+  const cards = useRef<Array<HTMLButtonElement | null>>([]);
   const current = reviews[active];
+  const overflows = reviews.length > 4;
+
+  function reveal(index: number) {
+    const row = scroller.current;
+    const card = cards.current[index];
+    if (!row || !card) return;
+    const rowBox = row.getBoundingClientRect();
+    const cardBox = card.getBoundingClientRect();
+    if (cardBox.left >= rowBox.left && cardBox.right <= rowBox.right) return;
+    row.scrollTo({
+      left: card.offsetLeft - row.offsetLeft - 4,
+      behavior: "smooth",
+    });
+  }
+
+  function select(index: number) {
+    setActive(index);
+    reveal(index);
+  }
+
+  function scrollRow(direction: -1 | 1) {
+    const row = scroller.current;
+    const card = cards.current[0];
+    if (!row || !card) return;
+    row.scrollBy({ left: direction * (card.offsetWidth + 12), behavior: "smooth" });
+  }
 
   return (
     <section id="stories" className="px-3 py-8 sm:px-4 md:px-5 md:py-10">
@@ -92,16 +136,47 @@ export function Testimonials() {
             </blockquote>
             <p className="mt-4 text-sm font-semibold text-white">{current.name}</p>
 
-            <div className="mt-8 flex gap-3 overflow-x-auto pb-1 lg:grid lg:grid-cols-4 lg:overflow-visible">
+            <div className="relative mt-8">
+              {overflows ? (
+                <div className="mb-3 flex justify-end gap-2">
+                  <button
+                    type="button"
+                    aria-label="Previous reviews"
+                    onClick={() => scrollRow(-1)}
+                    className="inline-flex size-9 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-white/30"
+                  >
+                    <ChevronLeft className="size-4" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Next reviews"
+                    onClick={() => scrollRow(1)}
+                    className="inline-flex size-9 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md hover:bg-white/30"
+                  >
+                    <ChevronRight className="size-4" />
+                  </button>
+                </div>
+              ) : null}
+              <div
+                ref={scroller}
+                className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
               {reviews.map((review, index) => {
                 const selected = index === active;
                 return (
                   <button
-                    key={review.country}
+                    key={review.name}
+                    ref={(node) => {
+                      cards.current[index] = node;
+                    }}
                     type="button"
-                    onClick={() => setActive(index)}
+                    onClick={() => select(index)}
                     aria-pressed={selected}
-                    className={`w-[16.5rem] shrink-0 rounded-2xl p-4 text-left transition-all lg:w-auto ${
+                    className={`shrink-0 rounded-2xl p-4 text-left transition-all ${
+                      overflows
+                        ? "w-[16.5rem] lg:w-[calc((100%-2.25rem)/4)]"
+                        : "w-[16.5rem] lg:w-auto lg:flex-1"
+                    } ${
                       selected
                         ? "bg-white text-ink shadow-[0_16px_40px_rgba(0,0,0,0.22)]"
                         : "bg-white/18 text-white backdrop-blur-md hover:bg-white/28"
@@ -124,6 +199,7 @@ export function Testimonials() {
                   </button>
                 );
               })}
+              </div>
             </div>
           </div>
         </div>
