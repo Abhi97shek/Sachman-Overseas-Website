@@ -55,8 +55,8 @@ export default async function CountryPage({
   if (!country && destination) {
     return (
       <PageShell>
-        <article className="px-4 py-8 sm:px-6 md:px-8 md:py-12">
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-[1.75rem] bg-white">
+        <article className="section-shell">
+          <div className="w-full overflow-hidden rounded-[1.75rem] bg-white">
             <div className="relative aspect-[4/3] bg-ink">
               <Image
                 src={`/images/landmarks/${destination.slug}.jpg`}
@@ -100,7 +100,7 @@ export default async function CountryPage({
 
   return (
     <PageShell>
-      <article className="px-4 py-6 sm:px-6 md:px-8 md:py-8 lg:px-10">
+      <article className="section-shell">
         <div className="overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white sm:rounded-[2rem]">
           <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-4 sm:p-3 md:gap-3">
             <div className="relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-ink sm:col-span-2 sm:row-span-2 sm:aspect-auto sm:min-h-[22rem]">

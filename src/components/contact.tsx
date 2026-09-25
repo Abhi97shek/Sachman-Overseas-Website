@@ -25,10 +25,10 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="px-4 pb-8 sm:px-6 md:px-8 md:pb-10 lg:px-10">
+    <section id="contact" className="section-shell">
       <div
         data-reveal
-        className="mx-auto grid max-w-6xl overflow-hidden rounded-[1.75rem] bg-white shadow-[0_18px_50px_rgba(18,22,28,0.06)] sm:rounded-[2rem] md:grid-cols-2"
+        className="grid w-full overflow-hidden rounded-[1.75rem] bg-white shadow-[0_18px_50px_rgba(18,22,28,0.06)] sm:rounded-[2rem] md:grid-cols-2"
       >
         <div className="flex flex-col justify-center px-6 py-8 sm:px-8 md:px-10 md:py-10">
           <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">

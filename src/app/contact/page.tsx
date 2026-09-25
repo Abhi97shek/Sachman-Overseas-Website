@@ -12,8 +12,8 @@ export default function ContactPage() {
   return (
     <PageShell>
       <Contact />
-      <section className="px-6 pb-24 md:px-8">
-        <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-3">
+      <section className="section-shell">
+        <div className="grid w-full gap-4 md:grid-cols-3">
           {[
             {
               title: "Call or visit",

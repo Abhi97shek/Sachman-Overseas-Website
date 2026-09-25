@@ -46,10 +46,10 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           ? "border-b border-ink/8 bg-[#e8eef2]/92 backdrop-blur-md"
           : open
             ? "bg-ink/95 backdrop-blur-md"
-            : "pt-3 sm:pt-4 md:pt-5"
+            : "pt-4 sm:pt-5 md:pt-6 lg:pt-8"
       )}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8 md:px-10 lg:px-12">
+      <div className="mx-auto flex items-center justify-between gap-4 px-4 py-3 sm:px-5 md:px-6 lg:px-8">
         <Link
           href="/"
           className={cn(
@@ -134,7 +134,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
         <div
           id="mobile-nav"
           data-testid="mobile-nav"
-          className="border-t border-white/10 bg-ink px-6 py-8 md:hidden"
+          className="border-t border-white/10 bg-ink px-4 py-8 sm:px-5 md:hidden md:px-6 lg:px-8"
         >
           <nav className="flex flex-col gap-5">
             {links.map((link) => (

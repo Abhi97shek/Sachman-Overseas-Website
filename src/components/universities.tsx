@@ -4,8 +4,8 @@ export function Universities() {
   const rows = [partnerUniversities, partnerUniversities];
 
   return (
-    <section aria-label="Partner universities" className="bg-white py-5 sm:py-6">
-      <div className="overflow-hidden">
+    <section aria-label="Partner universities" className="section-shell">
+      <div className="overflow-hidden rounded-[1.75rem] bg-white py-5 sm:rounded-[2rem] sm:py-6">
         <div className="logo-marquee flex w-max items-center">
           {rows.map((row, copy) => (
             <ul

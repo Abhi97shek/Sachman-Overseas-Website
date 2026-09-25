@@ -5,8 +5,8 @@ import { SiteHeader } from "@/components/site-header";
 
 export function Hero() {
   return (
-    <section id="top" className="relative px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
-      <div className="relative mx-auto flex min-h-[min(78svh,40rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[min(88svh,48rem)] sm:rounded-[2rem] md:min-h-[calc(100svh-2.5rem)] md:rounded-[2.75rem]">
+    <section id="top" className="section-shell relative">
+      <div className="relative mx-auto flex min-h-[min(78svh,40rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[min(88svh,48rem)] sm:rounded-[2rem] md:min-h-[calc(100svh-4rem)] md:rounded-[2.75rem]">
         <div data-hero-photo className="absolute inset-0">
           <Image
             src="/images/hero-campus-walk.png"
