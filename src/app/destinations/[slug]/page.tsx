@@ -43,8 +43,8 @@ export default async function CountryPage({
 
   return (
     <PageShell>
-      <article className="w-full py-6 md:py-8">
-        <div className="w-full overflow-hidden bg-white">
+      <article className="px-4 py-6 sm:px-6 md:px-8 md:py-8 lg:px-10">
+        <div className="overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white sm:rounded-[2rem]">
           <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-4 sm:p-3 md:gap-3">
             <div className="relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-ink sm:col-span-2 sm:row-span-2 sm:aspect-auto sm:min-h-[22rem]">
               <Image
