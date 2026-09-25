@@ -149,14 +149,23 @@ export function SiteFooter() {
             </div>
           </div>
         </div>
-        <div className="mt-3 overflow-hidden rounded-[1.35rem] sm:mt-4 sm:rounded-[1.5rem]">
+        <div
+          className="relative -mx-1 mt-2 overflow-hidden rounded-[1.35rem] sm:-mx-1.5 sm:mt-3 sm:rounded-[1.5rem]"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 14%, #000 34%, #000 100%)",
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.45) 14%, #000 34%, #000 100%)",
+          }}
+        >
           <Image
             src="/images/footer-airport.jpg"
             alt="Parents seeing their daughter off at the airport"
             width={1280}
             height={720}
-            className="h-[240px] w-full object-cover object-[center_58%] sm:h-[320px] md:h-[420px]"
+            className="h-[280px] w-full object-cover object-[center_64%] sm:h-[360px] md:h-[460px]"
           />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#7ec4ee] to-transparent sm:h-36" />
         </div>
       </div>
     </footer>
