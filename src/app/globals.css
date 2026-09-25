@@ -209,7 +209,7 @@
 }
 
 .logo-marquee {
-  animation: logo-marquee 58s linear infinite;
+  animation: logo-marquee 42s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

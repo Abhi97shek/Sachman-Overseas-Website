@@ -15,12 +15,12 @@ export function Universities() {
               className="flex items-center"
             >
               {row.map((campus) => (
-                <li key={`${copy}-${campus.name}`} className="flex h-16 w-48 items-center justify-center px-5">
+                <li key={`${copy}-${campus.name}`} className="flex h-14 shrink-0 items-center pr-16">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={campus.logo}
                     alt={copy === 0 ? campus.name : ""}
-                    className="max-h-10 w-auto max-w-[10.5rem] object-contain sm:max-h-11"
+                    className="h-9 w-auto sm:h-10"
                     draggable={false}
                   />
                 </li>
