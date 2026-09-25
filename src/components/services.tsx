@@ -66,7 +66,10 @@ export const services: ServiceOffer[] = [
 
 export function Services() {
   return (
-    <section id="services" className="relative overflow-hidden py-24 md:py-32">
+    <section
+      id="services"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(232,238,242,0)_0%,#e7f3f1_16%,#e8eef4_50%,#e7eef3_84%,rgba(232,238,242,0)_100%)] py-24 md:py-32"
+    >
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div data-reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">

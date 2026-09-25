@@ -18,6 +18,8 @@ export function Hero() {
           />
         </div>
 
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-28 bg-gradient-to-b from-transparent to-[#e8eef2]" />
+
         <SiteHeader />
 
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-16 pt-24 text-center sm:px-8 sm:pt-28">

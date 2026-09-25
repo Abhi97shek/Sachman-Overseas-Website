@@ -106,8 +106,8 @@
   body {
     @apply text-foreground;
     background:
-      radial-gradient(ellipse 80% 40% at 50% -5%, rgba(255, 255, 255, 0.7), transparent 55%),
-      linear-gradient(180deg, #e8eef2 0%, #e4eaef 100%);
+      radial-gradient(ellipse 80% 40% at 50% -5%, rgba(255, 255, 255, 0.55), transparent 55%),
+      linear-gradient(180deg, #e8eef2 0%, #e7f1f0 32%, #e8eef2 58%, #e6edf1 100%);
   }
   html {
     @apply font-sans scroll-smooth;

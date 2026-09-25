@@ -199,7 +199,7 @@ export function Destinations() {
 
   return (
     <section id="destinations" className="px-4 py-6 sm:px-6 md:px-8 md:py-8 lg:px-10">
-      <div className="overflow-hidden rounded-[1.75rem] bg-[#f5f6f8] sm:rounded-[2rem]">
+      <div className="overflow-hidden rounded-[1.75rem] bg-[linear-gradient(180deg,#e8eef2_0%,#f5f7f9_12%,#f7f8fa_88%,#e8eef2_100%)] sm:rounded-[2rem]">
         <div data-reveal className="px-5 pt-12 pb-2 text-center sm:px-8 sm:pt-16 md:pt-20">
           <h2 className="mx-auto max-w-3xl font-display text-[1.7rem] leading-[1.15] font-bold tracking-[-0.03em] text-ink sm:text-4xl md:text-[2.6rem]">
             Popular study <span className="text-tide">Countries</span> for 2026
