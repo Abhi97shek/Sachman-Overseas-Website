@@ -9,8 +9,8 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[min(78svh,40rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[min(88svh,48rem)] sm:rounded-[2rem] md:min-h-[calc(100svh-2.5rem)] md:rounded-[2.75rem]">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-illustrated.jpg"
-            alt="Painted snowy town under a bright blue sky"
+            src="/images/hero-overseas.jpg"
+            alt="Students leaving for a painted university campus abroad"
             fill
             priority
             className="object-cover object-[center_42%]"
