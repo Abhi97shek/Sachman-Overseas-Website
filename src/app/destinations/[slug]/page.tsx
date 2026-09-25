@@ -4,11 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/page-shell";
 import { countries, getCountry } from "@/lib/countries";
+import { getStudyDestination, studyDestinations } from "@/lib/study-destinations";
 
 type Params = { slug: string };
 
 export function generateStaticParams() {
-  return countries.map((country) => ({ slug: country.slug }));
+  const slugs = new Set([
+    ...countries.map((country) => country.slug),
+    ...studyDestinations.map((country) => country.slug),
+  ]);
+  return [...slugs].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -18,7 +23,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const country = getCountry(slug);
-  if (!country) return { title: "Country | Sachman Overseas" };
+  const destination = getStudyDestination(slug);
+  if (!country && !destination) return { title: "Country | Sachman Overseas" };
+  if (!country && destination) {
+    return {
+      title: `${destination.name} | Sachman Overseas`,
+      description: `Study routes and visa guidance for ${destination.name} from Sachman Overseas in Pathankot.`,
+    };
+  }
   return {
     title: `${country.name} | Sachman Overseas`,
     description: country.overview,
@@ -39,6 +51,39 @@ export default async function CountryPage({
 }) {
   const { slug } = await params;
   const country = getCountry(slug);
+  const destination = getStudyDestination(slug);
+  if (!country && destination) {
+    return (
+      <PageShell>
+        <article className="px-4 py-8 sm:px-6 md:px-8 md:py-12">
+          <div className="mx-auto max-w-3xl rounded-[1.75rem] bg-white px-6 py-10 sm:px-10 sm:py-12">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/images/flags/${destination.code}.svg`}
+              alt=""
+              className="size-14 rounded-full object-cover shadow-[0_6px_16px_rgba(18,22,28,0.12)]"
+            />
+            <p className="mt-6 text-[0.72rem] font-semibold tracking-[0.16em] text-tide uppercase">
+              Study route · {destination.region}
+            </p>
+            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-ink">
+              {destination.name}
+            </h1>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              We shortlist courses in {destination.name} against your marks, budget, and
+              English score, then prepare the offer and the visa file in one sequence.
+            </p>
+            <Link
+              href={`/contact?country=${destination.slug}`}
+              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-ink px-6 text-sm font-semibold text-white"
+            >
+              Plan this route
+            </Link>
+          </div>
+        </article>
+      </PageShell>
+    );
+  }
   if (!country) notFound();
 
   return (

@@ -5,7 +5,7 @@ Website mockup for **Sachman Overseas** — an IELTS, PTE, Spoken English, and s
 ## What's included
 
 - One-page home, plus menu pages with more detail for Services, Countries, Process, and Contact
-- Sideways study-country carousel
+- Sideways study-country carousel, plus a directory of every study destination the consultancy prepares files for
 - Contact / free consultation form (client-side mock)
 - Responsive layout for mobile and desktop
 
