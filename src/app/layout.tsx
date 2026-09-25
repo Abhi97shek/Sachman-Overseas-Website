@@ -25,14 +25,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${geistMono.variable} gsap h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('gsap')",
-          }}
-        />
         {children}
         <SiteMotion />
         <ScrollToTop />
