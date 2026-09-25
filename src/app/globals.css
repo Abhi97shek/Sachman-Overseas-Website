@@ -9,8 +9,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-syne);
-  --font-heading: var(--font-syne);
+  --font-display: var(--apple-display);
+  --font-heading: var(--apple-display);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-tide: var(--tide);
@@ -57,6 +57,7 @@
 }
 
 :root {
+  --apple-display: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   --ink: #12161c;
   --ink-soft: #2a313c;
   --tide: #0b7a7a;
