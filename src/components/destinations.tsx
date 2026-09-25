@@ -6,50 +6,7 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const destinations = [
-  {
-    name: "Canada",
-    flag: "/images/flags/ca.svg",
-    image: "/images/landmarks/canada.jpg",
-    blurb:
-      "Colleges and university pathways, with room to build a career after graduation. We match the intake to your scores, budget, and goals.",
-  },
-  {
-    name: "United Kingdom",
-    flag: "/images/flags/gb.svg",
-    image: "/images/landmarks/uk.jpg",
-    blurb:
-      "Undergraduate and postgraduate study across the UK. Shortlists, personal statements, and the student visa file — handled with you.",
-  },
-  {
-    name: "Australia",
-    flag: "/images/flags/au.svg",
-    image: "/images/landmarks/australia.jpg",
-    blurb:
-      "Courses with strong career outcomes and a clear study pathway. From the offer letter to the visa, the plan stays practical.",
-  },
-  {
-    name: "Germany",
-    flag: "/images/flags/de.svg",
-    image: "/images/landmarks/germany.jpg",
-    blurb:
-      "Affordable public universities and English-taught programmes. We map admissions, proof of funds, and each visa step.",
-  },
-  {
-    name: "New Zealand",
-    flag: "/images/flags/nz.svg",
-    image: "/images/landmarks/nz.jpg",
-    blurb:
-      "Quality education in a safe, welcoming setting. A strong fit if you want a smaller campus and a manageable student life.",
-  },
-  {
-    name: "United States",
-    flag: "/images/flags/us.svg",
-    image: "/images/landmarks/usa.jpg",
-    blurb:
-      "Universities across every major city, from community college to graduate school. We align the campus to your profile.",
-  },
-];
+import { countries as destinations } from "@/lib/countries";
 
 const START_INDEX = 2;
 
@@ -263,7 +220,7 @@ export function Destinations() {
                     }}
                   >
                     <Link
-                      href="/contact"
+                      href={`/destinations/${place.slug}`}
                       draggable={false}
                       aria-label={
                         index === active
