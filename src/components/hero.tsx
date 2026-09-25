@@ -27,14 +27,14 @@ export function Hero() {
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-16 pt-24 text-center sm:px-8 sm:pt-28">
           <h1
             data-hero-title
-            className="max-w-4xl font-display text-[clamp(2.5rem,6.4vw,4.8rem)] leading-[0.98] font-extrabold tracking-[-0.04em] text-white [text-shadow:0_2px_24px_rgba(4,14,32,0.55)]"
+            className="max-w-4xl font-sans text-[clamp(2.45rem,5.6vw,4.35rem)] leading-[1.05] font-bold tracking-[-0.03em] text-white [text-shadow:0_2px_24px_rgba(4,14,32,0.55)]"
           >
             IELTS, PTE, and study visas
-            <span className="mt-2 block text-[0.46em] font-semibold tracking-[-0.03em]">from Pathankot.</span>
+            <span className="mt-2 block text-[0.55em] font-semibold tracking-[-0.02em]">from Pathankot.</span>
           </h1>
           <p
             data-hero-copy
-            className="mt-5 max-w-lg text-base leading-relaxed text-white sm:text-lg [text-shadow:0_1px_12px_rgba(4,14,32,0.7)]"
+            className="mt-5 max-w-lg font-sans text-base leading-relaxed font-medium text-white sm:text-lg [text-shadow:0_1px_12px_rgba(4,14,32,0.7)]"
           >
             Spoken English, weekly mocks, and the visa file, from the centre on Dalhousie Road.
           </p>
