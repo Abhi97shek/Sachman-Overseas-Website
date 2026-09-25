@@ -9,11 +9,11 @@ export function Hero() {
       <div className="relative mx-auto flex min-h-[min(78svh,40rem)] flex-col overflow-hidden rounded-[1.75rem] sm:min-h-[min(88svh,48rem)] sm:rounded-[2rem] md:min-h-[calc(100svh-2.5rem)] md:rounded-[2.75rem]">
         <div data-hero-photo className="absolute inset-0">
           <Image
-            src="/images/hero-overseas-crisp.jpg"
-            alt="Students with luggage in front of a clear university campus abroad"
+            src="/images/hero-campus-walk.png"
+            alt="Students with backpacks walking toward a university campus under a bright blue sky"
             fill
             priority
-            className="object-cover object-[center_42%]"
+            className="object-cover object-center"
             sizes="100vw"
           />
         </div>
