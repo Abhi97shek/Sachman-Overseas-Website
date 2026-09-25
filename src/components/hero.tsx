@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Inter } from "next/font/google";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
+
+const interItalic = Inter({
+  subsets: ["latin"],
+  style: "italic",
+  weight: ["600", "700"],
+});
 
 export function Hero() {
   return (
@@ -18,8 +25,6 @@ export function Hero() {
           />
         </div>
 
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,22,48,0.72)_0%,rgba(6,22,48,0.42)_34%,rgba(6,22,48,0.12)_62%,transparent_76%)]" />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#07182e]/55 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-28 bg-gradient-to-b from-transparent to-[#e8eef2]" />
 
         <SiteHeader />
@@ -27,14 +32,14 @@ export function Hero() {
         <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-16 pt-24 text-center sm:px-8 sm:pt-28">
           <h1
             data-hero-title
-            className="max-w-4xl font-sans text-[clamp(2.45rem,5.6vw,4.35rem)] leading-[1.05] font-bold tracking-[-0.03em] text-white [text-shadow:0_2px_24px_rgba(4,14,32,0.55)]"
+            className={`${interItalic.className} max-w-4xl text-[clamp(2.45rem,5.6vw,4.35rem)] leading-[1.05] font-bold tracking-[-0.03em] text-[#12161c] italic`}
           >
             IELTS, PTE, and study visas
             <span className="mt-2 block text-[0.55em] font-semibold tracking-[-0.02em]">from Pathankot.</span>
           </h1>
           <p
             data-hero-copy
-            className="mt-5 max-w-lg font-sans text-base leading-relaxed font-medium text-white sm:text-lg [text-shadow:0_1px_12px_rgba(4,14,32,0.7)]"
+            className="mt-5 max-w-lg font-sans text-base leading-relaxed font-medium text-[#1c2836] sm:text-lg"
           >
             Spoken English, weekly mocks, and the visa file, from the centre on Dalhousie Road.
           </p>

@@ -54,7 +54,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           href="/"
           className={cn(
             "font-display text-[1.05rem] font-bold tracking-tight md:text-lg",
-            solid ? "text-ink" : "text-white drop-shadow-sm"
+            "text-ink"
           )}
         >
           Sachman Overseas
@@ -63,7 +63,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
         <nav
           className={cn(
             "absolute left-1/2 hidden -translate-x-1/2 items-center md:flex",
-            solid ? "gap-8" : "gap-1 rounded-full bg-white/25 px-2 py-1.5 backdrop-blur-md"
+            solid ? "gap-8" : "gap-1 rounded-full bg-white/75 px-2 py-1.5 shadow-sm backdrop-blur-md"
           )}
         >
           {links.map((link) => {
@@ -80,8 +80,8 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                       ? "text-ink"
                       : "text-ink/70 hover:text-ink"
                     : active
-                      ? "rounded-full bg-white/70 px-3 py-1.5 text-ink"
-                      : "rounded-full px-3 py-1.5 text-white/90 hover:bg-white/30 hover:text-white"
+                      ? "rounded-full bg-white px-3 py-1.5 text-ink"
+                      : "rounded-full px-3 py-1.5 text-ink/80 hover:bg-white hover:text-ink"
                 )}
               >
                 {link.label}
@@ -95,7 +95,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
             href="tel:+919888454140"
             className={cn(
               "text-[0.85rem] font-medium tracking-wide transition-colors",
-              solid ? "text-ink/75 hover:text-ink" : "text-white/85 hover:text-white"
+              "text-ink/80 hover:text-ink"
             )}
           >
             Call us
@@ -119,7 +119,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           data-testid="mobile-menu-toggle"
           className={cn(
             "inline-flex size-10 items-center justify-center rounded-full md:hidden",
-            solid ? "text-ink" : "bg-white/25 text-white backdrop-blur-md"
+            solid ? "text-ink" : "bg-white/80 text-ink shadow-sm backdrop-blur-md"
           )}
           aria-expanded={open}
           aria-controls="mobile-nav"
