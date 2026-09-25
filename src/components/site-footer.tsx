@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { directionsUrl } from "@/lib/institute";
 
@@ -147,6 +148,15 @@ export function SiteFooter() {
               </Link>
             </div>
           </div>
+        </div>
+        <div className="mt-3 overflow-hidden rounded-[1.35rem] sm:mt-4 sm:rounded-[1.5rem]">
+          <Image
+            src="/images/footer-campus.jpg"
+            alt="Students walking toward a university campus"
+            width={1280}
+            height={720}
+            className="h-[220px] w-full object-cover object-[center_62%] sm:h-[300px] md:h-[380px]"
+          />
         </div>
       </div>
     </footer>
