@@ -15,7 +15,7 @@ const destinations = studyDestinations.map((destination) => {
     slug: destination.slug,
     name: destination.name,
     flag: rich?.flag ?? `/images/flags/${destination.code}.svg`,
-    image: rich?.image,
+    image: rich?.image ?? `/images/landmarks/${destination.slug}.jpg`,
     blurb:
       rich?.blurb ??
       `Courses in ${destination.name}, matched to your marks, budget, and English score, then the visa file in one sequence.`,
@@ -259,27 +259,14 @@ export function Destinations() {
                       }}
                       className="relative block h-full w-full overflow-hidden rounded-[1.25rem] bg-ink text-left shadow-[0_16px_40px_rgba(18,22,28,0.16)] outline-none focus-visible:ring-2 focus-visible:ring-tide focus-visible:ring-offset-2"
                     >
-                      {place.image ? (
-                        <Image
-                          src={place.image}
-                          alt=""
-                          fill
-                          draggable={false}
-                          sizes="280px"
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 bg-[#12343c]">
-                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.18),transparent_58%)]" />
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={place.flag}
-                            alt=""
-                            draggable={false}
-                            className="absolute top-[16%] left-1/2 aspect-[3/2] w-[58%] -translate-x-1/2 rounded-xl object-cover shadow-[0_12px_28px_rgba(0,0,0,0.28)] ring-2 ring-white/25"
-                          />
-                        </div>
-                      )}
+                      <Image
+                        src={place.image}
+                        alt=""
+                        fill
+                        draggable={false}
+                        sizes="280px"
+                        className="object-cover"
+                      />
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-black/80" />
                       <div
                         ref={(node) => {

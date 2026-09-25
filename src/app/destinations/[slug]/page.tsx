@@ -56,7 +56,18 @@ export default async function CountryPage({
     return (
       <PageShell>
         <article className="px-4 py-8 sm:px-6 md:px-8 md:py-12">
-          <div className="mx-auto max-w-3xl rounded-[1.75rem] bg-white px-6 py-10 sm:px-10 sm:py-12">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-[1.75rem] bg-white">
+            <div className="relative aspect-[4/3] bg-ink">
+              <Image
+                src={`/images/landmarks/${destination.slug}.jpg`}
+                alt=""
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+            <div className="px-6 py-10 sm:px-10 sm:py-12">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`/images/flags/${destination.code}.svg`}
@@ -79,6 +90,7 @@ export default async function CountryPage({
             >
               Plan this route
             </Link>
+            </div>
           </div>
         </article>
       </PageShell>
