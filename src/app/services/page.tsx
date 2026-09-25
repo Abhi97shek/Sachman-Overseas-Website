@@ -56,7 +56,8 @@ export default function ServicesPage() {
             return (
               <article
                 key={item.title}
-                className={`rounded-[1.5rem] p-7 md:p-8 ${service?.wash ?? "bg-white"}`}
+                id={item.title.toLowerCase().replace(/\s+/g, "-")}
+                className={`scroll-mt-28 rounded-[1.5rem] p-7 md:p-8 ${service?.wash ?? "bg-white"}`}
               >
                 <div className="flex items-center gap-3">
                   {Icon ? (
