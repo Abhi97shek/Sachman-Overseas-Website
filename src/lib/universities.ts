@@ -54,12 +54,3 @@ export const countryFlags: Record<string, string> = {
   "New Zealand": "/images/flags/nz.svg",
   "United States": "/images/flags/us.svg",
 };
-
-export const countryWash: Record<string, string> = {
-  Canada: "bg-[#d7f3f0] text-[#0b7a7a]",
-  "United Kingdom": "bg-[#ffe7b0] text-[#8a5a08]",
-  Australia: "bg-[#d9e6ff] text-[#2457c5]",
-  Germany: "bg-[#fde8e4] text-[#d4534a]",
-  "New Zealand": "bg-[#e3f5d8] text-[#3d6b32]",
-  "United States": "bg-[#ece7ff] text-[#5b45b0]",
-};
