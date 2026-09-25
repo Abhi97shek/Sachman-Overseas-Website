@@ -151,11 +151,11 @@ export function SiteFooter() {
         </div>
         <div className="mt-3 overflow-hidden rounded-[1.35rem] sm:mt-4 sm:rounded-[1.5rem]">
           <Image
-            src="/images/footer-campus.jpg"
-            alt="Students walking toward a university campus"
+            src="/images/footer-airport.jpg"
+            alt="Parents seeing their daughter off at the airport"
             width={1280}
             height={720}
-            className="h-[220px] w-full object-cover object-[center_62%] sm:h-[300px] md:h-[380px]"
+            className="h-[240px] w-full object-cover object-[center_58%] sm:h-[320px] md:h-[420px]"
           />
         </div>
       </div>
