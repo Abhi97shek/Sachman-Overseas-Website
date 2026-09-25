@@ -4,8 +4,8 @@ Website mockup for **Sachman Overseas** — an IELTS, PTE, Spoken English, and s
 
 ## What's included
 
-- Full-bleed branded landing page
-- Services, study destinations, and process sections
+- Multi-page site: Home, Services, Countries, Process, and Contact
+- Sideways study-country carousel
 - Contact / free consultation form (client-side mock)
 - Responsive layout for mobile and desktop
 

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 
@@ -62,12 +63,12 @@ export function Hero() {
               from first mock test to boarding pass.
             </p>
 
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="animate-fade-up delay-450 mt-6 inline-flex h-12 items-center justify-center rounded-full bg-ink px-7 text-sm font-semibold text-white shadow-[0_12px_40px_rgba(18,22,28,0.25)] transition-transform hover:scale-[1.02] hover:bg-ink-soft sm:mt-7 sm:h-14 sm:px-8"
             >
               Book a free consult
-            </a>
+            </Link>
           </div>
 
           <div className="animate-fade-up delay-600 mx-auto w-full max-w-4xl shrink-0">
@@ -84,13 +85,13 @@ export function Hero() {
                   </div>
                 ))}
               </div>
-              <a
-                href="#services"
+              <Link
+                href="/services"
                 aria-label="Explore services"
                 className="hidden size-11 shrink-0 items-center justify-center self-center rounded-full bg-white text-ink transition-transform hover:scale-105 sm:inline-flex md:size-12"
               >
                 <ArrowUpRight className="size-5" strokeWidth={2} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

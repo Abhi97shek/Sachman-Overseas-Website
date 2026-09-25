@@ -1,3 +1,12 @@
+import Link from "next/link";
+
+const links = [
+  { href: "/services", label: "Services" },
+  { href: "/destinations", label: "Countries" },
+  { href: "/process", label: "Process" },
+  { href: "/contact", label: "Contact" },
+];
+
 export function SiteFooter() {
   return (
     <footer className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-5 md:pb-5">
@@ -12,19 +21,28 @@ export function SiteFooter() {
               Punjab.
             </p>
           </div>
-          <div className="flex flex-col gap-2 text-sm text-white/55 md:items-end">
-            <a href="tel:+919888454140" className="transition-colors hover:text-white">
-              +91 98884 54140
-            </a>
-            <a
-              href="mailto:sachmaninstitute08@gmail.com"
-              className="transition-colors hover:text-white"
-            >
-              sachmaninstitute08@gmail.com
-            </a>
-            <p className="mt-4 text-xs text-white/35">
-              © {new Date().getFullYear()} Sachman Overseas. Website mockup.
-            </p>
+          <div className="flex flex-col gap-6 md:items-end">
+            <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/70">
+              {links.map((link) => (
+                <Link key={link.href} href={link.href} className="hover:text-white">
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="flex flex-col gap-2 text-sm text-white/55 md:items-end">
+              <a href="tel:+919888454140" className="transition-colors hover:text-white">
+                +91 98884 54140
+              </a>
+              <a
+                href="mailto:sachmaninstitute08@gmail.com"
+                className="transition-colors hover:text-white"
+              >
+                sachmaninstitute08@gmail.com
+              </a>
+              <p className="mt-4 text-xs text-white/35">
+                © {new Date().getFullYear()} Sachman Overseas. Website mockup.
+              </p>
+            </div>
           </div>
         </div>
       </div>

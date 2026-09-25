@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -261,8 +262,8 @@ export function Destinations() {
                       opacity,
                     }}
                   >
-                    <a
-                      href="#contact"
+                    <Link
+                      href="/contact"
                       draggable={false}
                       aria-label={
                         index === active
@@ -319,7 +320,7 @@ export function Destinations() {
                           Click to learn more
                         </p>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               );

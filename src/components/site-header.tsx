@@ -1,18 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#services", label: "Services" },
-  { href: "#destinations", label: "Destinations" },
-  { href: "#process", label: "Process" },
-  { href: "#contact", label: "Contact" },
+  { href: "/services", label: "Services" },
+  { href: "/destinations", label: "Countries" },
+  { href: "/process", label: "Process" },
+  { href: "/contact", label: "Contact" },
 ];
 
-export function SiteHeader() {
+export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "solid" }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const solid = variant === "solid";
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -21,31 +25,45 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
     <header
       className={cn(
-        "absolute inset-x-0 top-0 z-50",
-        open && "bg-ink/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none"
+        "z-50",
+        solid
+          ? "sticky top-0 border-b border-ink/8 bg-[#e8eef2]/90 backdrop-blur-md"
+          : "absolute inset-x-0 top-0",
+        !solid && open && "bg-ink/95 backdrop-blur-md md:bg-transparent md:backdrop-blur-none"
       )}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-5 sm:px-8 md:px-10 lg:px-12">
-        <a
-          href="#top"
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8 md:px-10 lg:px-12">
+        <Link
+          href="/"
           className="font-display text-[1.05rem] font-bold tracking-tight text-ink md:text-lg"
         >
           Sachman Overseas
-        </a>
+        </Link>
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-[0.85rem] font-medium tracking-wide text-ink/70 transition-colors hover:text-ink"
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "text-[0.85rem] font-medium tracking-wide transition-colors",
+                  active ? "text-ink" : "text-ink/70 hover:text-ink"
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
@@ -55,12 +73,12 @@ export function SiteHeader() {
           >
             Call us
           </a>
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="inline-flex h-10 items-center justify-center rounded-full bg-ink px-5 text-[0.8rem] font-semibold text-white transition-colors hover:bg-ink-soft"
           >
             Book a consult
-          </a>
+          </Link>
         </div>
 
         <button
@@ -84,29 +102,23 @@ export function SiteHeader() {
         >
           <nav className="flex flex-col gap-5">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="font-display text-2xl font-semibold text-white"
-                onClick={() => setOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="tel:+919888454140"
-              className="mt-2 text-base font-medium text-white/70"
-              onClick={() => setOpen(false)}
-            >
+            <a href="tel:+919888454140" className="mt-2 text-base font-medium text-white/70">
               Call us · +91 98884 54140
             </a>
-            <a
-              href="#contact"
+            <Link
+              href="/contact"
               className="inline-flex h-12 items-center justify-center rounded-full bg-white text-sm font-semibold text-ink"
-              onClick={() => setOpen(false)}
             >
               Book a consult
-            </a>
+            </Link>
           </nav>
         </div>
       ) : null}
