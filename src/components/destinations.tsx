@@ -6,9 +6,26 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import { countries as destinations } from "@/lib/countries";
+import { getCountry } from "@/lib/countries";
+import { studyDestinations } from "@/lib/study-destinations";
 
-const START_INDEX = 2;
+const destinations = studyDestinations.map((destination) => {
+  const rich = getCountry(destination.slug);
+  return {
+    slug: destination.slug,
+    name: destination.name,
+    flag: rich?.flag ?? `/images/flags/${destination.code}.svg`,
+    image: rich?.image,
+    blurb:
+      rich?.blurb ??
+      `Courses in ${destination.name}, matched to your marks, budget, and English score, then the visa file in one sequence.`,
+  };
+});
+
+const START_INDEX = Math.max(
+  0,
+  destinations.findIndex((place) => place.slug === "australia"),
+);
 
 function sample(value: number, stops: Array<[number, number]>) {
   if (value <= stops[0][0]) return stops[0][1];
@@ -108,10 +125,11 @@ export function Destinations() {
     const slot = slotRefs.current[index];
     if (!scroller || !slot) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const distance = Math.abs(index - activeRef.current);
     const left = slot.offsetLeft - scroller.clientWidth / 2 + slot.offsetWidth / 2;
     scroller.scrollTo({
       left,
-      behavior: behavior ?? (reduce ? "auto" : "smooth"),
+      behavior: behavior ?? (reduce || distance > 3 ? "auto" : "smooth"),
     });
   }
 
@@ -241,14 +259,27 @@ export function Destinations() {
                       }}
                       className="relative block h-full w-full overflow-hidden rounded-[1.25rem] bg-ink text-left shadow-[0_16px_40px_rgba(18,22,28,0.16)] outline-none focus-visible:ring-2 focus-visible:ring-tide focus-visible:ring-offset-2"
                     >
-                      <Image
-                        src={place.image}
-                        alt=""
-                        fill
-                        draggable={false}
-                        sizes="280px"
-                        className="object-cover"
-                      />
+                      {place.image ? (
+                        <Image
+                          src={place.image}
+                          alt=""
+                          fill
+                          draggable={false}
+                          sizes="280px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-[#12343c]">
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.18),transparent_58%)]" />
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={place.flag}
+                            alt=""
+                            draggable={false}
+                            className="absolute top-[16%] left-1/2 aspect-[3/2] w-[58%] -translate-x-1/2 rounded-xl object-cover shadow-[0_12px_28px_rgba(0,0,0,0.28)] ring-2 ring-white/25"
+                          />
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% to-black/80" />
                       <div
                         ref={(node) => {
@@ -298,27 +329,35 @@ export function Destinations() {
           >
             {destinations[active].blurb}
           </p>
-          <div className="inline-flex items-center gap-1 rounded-full bg-ink/[0.05] px-2 py-1.5">
-            {destinations.map((place, index) => (
-              <button
-                key={place.name}
-                type="button"
-                aria-label={`Go to ${place.name}`}
-                aria-current={index === active ? "true" : undefined}
-                onClick={() => scrollToIndex(index)}
-                className={cn(
-                  "grid h-4 place-items-center",
-                  index === active ? "w-6" : "w-3.5"
-                )}
-              >
-                <span
+          <div className="inline-flex max-w-full items-center gap-1 rounded-full bg-ink/[0.05] px-2 py-1.5">
+            {destinations.map((place, index) => {
+              const distance = Math.abs(index - active);
+              if (distance > 4 && index !== 0 && index !== destinations.length - 1) return null;
+              return (
+                <button
+                  key={place.slug}
+                  type="button"
+                  aria-label={`Go to ${place.name}`}
+                  aria-current={index === active ? "true" : undefined}
+                  onClick={() => scrollToIndex(index)}
                   className={cn(
-                    "rounded-full transition-all duration-200",
-                    index === active ? "h-1.5 w-4 bg-tide" : "size-1.5 bg-ink/25"
+                    "grid h-4 place-items-center",
+                    index === active ? "w-6" : "w-3.5"
                   )}
-                />
-              </button>
-            ))}
+                >
+                  <span
+                    className={cn(
+                      "rounded-full transition-all duration-200",
+                      index === active ? "h-1.5 w-4 bg-tide" : "size-1.5 bg-ink/25",
+                      distance > 3 && index !== active && "opacity-40"
+                    )}
+                  />
+                </button>
+              );
+            })}
+            <span className="pr-1.5 pl-1 text-[0.7rem] font-medium tracking-wide text-muted-foreground tabular-nums">
+              {active + 1}/{destinations.length}
+            </span>
           </div>
         </div>
       </div>
