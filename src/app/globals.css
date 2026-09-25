@@ -199,14 +199,38 @@
   }
 }
 
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-marquee {
+  animation: logo-marquee 42s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-up,
   .animate-fade-in,
   .animate-slow-pan,
-  .animate-rise-line {
+  .animate-rise-line,
+  .logo-marquee {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .logo-marquee {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .logo-marquee [data-marquee-copy] {
+    display: none;
   }
 }
 
