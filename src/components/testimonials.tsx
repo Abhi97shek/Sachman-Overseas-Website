@@ -1,7 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { Star } from "lucide-react";
 import { useState } from "react";
+
+function Stars() {
+  return (
+    <span className="flex gap-0.5" aria-label="5 out of 5 stars">
+      {Array.from({ length: 5 }, (_, index) => (
+        <Star key={index} className="size-4 fill-[#f0b429] text-[#f0b429]" aria-hidden />
+      ))}
+    </span>
+  );
+}
 
 const reviews = [
   {
@@ -72,7 +83,8 @@ export function Testimonials() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#12161c]/55 via-transparent to-transparent" />
 
           <div className="relative z-10 flex min-h-[44rem] flex-col justify-end p-5 sm:min-h-[40rem] sm:p-8 md:min-h-[42rem] md:p-10">
-            <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-white/80 uppercase">
+            <Stars />
+            <p className="mt-3 text-[0.72rem] font-semibold tracking-[0.16em] text-white/80 uppercase">
               {current.country} study visa approved
             </p>
             <blockquote className="mt-3 max-w-3xl font-display text-[1.65rem] leading-[1.15] font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
@@ -95,7 +107,8 @@ export function Testimonials() {
                         : "bg-white/18 text-white backdrop-blur-md hover:bg-white/28"
                     }`}
                   >
-                    <p className={`line-clamp-3 text-sm leading-relaxed ${selected ? "text-ink" : "text-white/90"}`}>
+                    <Stars />
+                    <p className={`mt-3 line-clamp-3 text-sm leading-relaxed ${selected ? "text-ink" : "text-white/90"}`}>
                       “{review.quote}”
                     </p>
                     <span className="mt-4 flex items-center gap-2">
