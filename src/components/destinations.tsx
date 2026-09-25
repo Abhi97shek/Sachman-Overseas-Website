@@ -27,6 +27,39 @@ const START_INDEX = Math.max(
   destinations.findIndex((place) => place.slug === "australia"),
 );
 
+let tickContext: AudioContext | null = null;
+let lastTickAt = 0;
+
+function unlockCountrySound() {
+  const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!AudioCtx) return;
+  if (!tickContext) tickContext = new AudioCtx();
+  if (tickContext.state === "suspended") void tickContext.resume();
+}
+
+function playCountryTick() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const now = performance.now();
+  if (now - lastTickAt < 80) return;
+  lastTickAt = now;
+  unlockCountrySound();
+  const ctx = tickContext;
+  if (!ctx || ctx.state !== "running") return;
+  const start = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(740, start);
+  osc.frequency.exponentialRampToValueAtTime(420, start + 0.07);
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.exponentialRampToValueAtTime(0.07, start + 0.012);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.09);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(start);
+  osc.stop(start + 0.1);
+}
+
 function sample(value: number, stops: Array<[number, number]>) {
   if (value <= stops[0][0]) return stops[0][1];
   for (let i = 1; i < stops.length; i++) {
@@ -81,6 +114,7 @@ export function Destinations() {
   const activeRef = useRef(START_INDEX);
   const dragged = useRef(false);
   const scrollAtPointerDown = useRef(0);
+  const soundReady = useRef(false);
   const [active, setActive] = useState(START_INDEX);
 
   function paint() {
@@ -117,6 +151,7 @@ export function Destinations() {
     if (nearest !== activeRef.current) {
       activeRef.current = nearest;
       setActive(nearest);
+      if (soundReady.current) playCountryTick();
     }
   }
 
@@ -142,6 +177,7 @@ export function Destinations() {
         slot.offsetLeft - scroller.clientWidth / 2 + slot.offsetWidth / 2;
     }
     paint();
+    soundReady.current = true;
 
     let frame = 0;
     const onScroll = () => {
@@ -200,11 +236,14 @@ export function Destinations() {
             aria-roledescription="carousel"
             aria-label="Study countries"
             onPointerDown={() => {
+              unlockCountrySound();
               const scroller = scrollerRef.current;
               dragged.current = false;
               scrollAtPointerDown.current = scroller?.scrollLeft ?? 0;
             }}
+            onWheel={() => unlockCountrySound()}
             onKeyDown={(event) => {
+              unlockCountrySound();
               if (event.key === "ArrowRight") {
                 event.preventDefault();
                 scrollToIndex(Math.min(destinations.length - 1, activeRef.current + 1));
