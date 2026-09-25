@@ -98,18 +98,9 @@ export function Testimonials() {
   }
 
   return (
-    <section id="stories" className="px-3 py-8 sm:px-4 md:px-5 md:py-10">
+    <section id="stories" className="px-3 pt-6 pb-8 sm:px-4 md:px-5 md:pt-10 md:pb-12">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl px-3 text-center">
-          <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">
-            Visa stories
-          </p>
-          <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
-            Approved, then they flew.
-          </h2>
-        </div>
-
-        <div className="relative mt-10 min-h-[44rem] overflow-hidden rounded-[1.75rem] sm:min-h-[40rem] sm:rounded-[2rem] md:min-h-[42rem]">
+        <div className="relative min-h-[46rem] overflow-hidden rounded-[1.75rem] sm:min-h-[42rem] sm:rounded-[2rem] md:min-h-[44rem]">
           {reviews.map((review, index) => (
             <Image
               key={review.country}
@@ -123,10 +114,20 @@ export function Testimonials() {
               priority={index === 0}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#12161c]/85 via-[#12161c]/25 to-[#12161c]/10" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#12161c]/55 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#12161c]/85 via-[#12161c]/20 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-[#12161c]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#12161c]/45 via-transparent to-transparent" />
 
-          <div className="relative z-10 flex min-h-[44rem] flex-col justify-end p-5 sm:min-h-[40rem] sm:p-8 md:min-h-[42rem] md:p-10">
+          <div className="relative z-10 flex min-h-[46rem] flex-col p-5 sm:min-h-[42rem] sm:p-8 md:min-h-[44rem] md:p-10">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-white/80 uppercase">
+                Visa stories
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl">
+                Approved, then they flew.
+              </h2>
+            </div>
+            <div className="mt-auto">
             <Stars />
             <p className="mt-3 text-[0.72rem] font-semibold tracking-[0.16em] text-white/80 uppercase">
               {current.country} study visa approved
@@ -200,6 +201,7 @@ export function Testimonials() {
                 );
               })}
               </div>
+            </div>
             </div>
           </div>
         </div>
