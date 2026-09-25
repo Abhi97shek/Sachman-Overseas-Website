@@ -117,34 +117,108 @@ export default async function CountryPage({
                 {country.blurb}
               </p>
 
-              {country.visaProcess ? (
-                <div className="mt-12">
-                  <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
-                    Study visa process
-                  </h2>
-                  <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                    Major intakes are February and July. February and July cover all courses at universities and private colleges. October, November, and May are smaller intakes, mainly business, IT, and engineering.
-                  </p>
-                  <div className="mt-6 grid gap-8 lg:grid-cols-2">
-                    {country.visaProcess.map((track) => (
-                      <div key={track.intake}>
-                        <h3 className="font-display text-lg font-bold text-ink">{track.intake}</h3>
-                        <ol className="mt-4 space-y-3">
-                          {track.steps.map((step, index) => (
-                            <li key={step.what} className="flex gap-3">
-                              <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-tide text-[0.7rem] font-semibold text-white">
-                                {index + 1}
-                              </span>
-                              <span>
-                                <span className="block text-sm font-semibold text-ink">{step.what}</span>
-                                <span className="text-xs text-muted-foreground">{step.when}</span>
-                              </span>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    ))}
-                  </div>
+              {country.visaGuide ? (
+                <div className="mt-12 space-y-10">
+                  <section>
+                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+                      Post-study work permit
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                      {country.visaGuide.postStudy.intro}
+                    </p>
+                    <div className="mt-4 overflow-hidden rounded-2xl border border-ink/8">
+                      {country.visaGuide.postStudy.rows.map((row) => (
+                        <div
+                          key={row.qualification}
+                          className="grid gap-1 border-b border-ink/8 px-4 py-3 last:border-b-0 sm:grid-cols-[minmax(0,1fr)_7rem] sm:items-center sm:gap-4"
+                        >
+                          <p className="text-sm font-medium text-ink">{row.qualification}</p>
+                          <p className="text-sm font-semibold text-tide sm:text-right">{row.stay}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <ul className="mt-4 space-y-2">
+                      {country.visaGuide.postStudy.notes.map((note) => (
+                        <li key={note} className="flex gap-2 text-sm leading-relaxed text-muted-foreground">
+                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-tide" />
+                          {note}
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+                      Visa processing time
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                      {country.visaGuide.processing.intro}
+                    </p>
+                    <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                      {country.visaGuide.processing.rows.map((row) => (
+                        <div key={row.label} className="rounded-2xl border border-ink/8 bg-[#f6f7f9] px-4 py-4">
+                          <p className="text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase">
+                            {row.label}
+                          </p>
+                          <p className="mt-1 font-display text-xl font-bold text-ink">{row.value}</p>
+                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{row.detail}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                      {country.visaGuide.processing.note}
+                    </p>
+                  </section>
+
+                  <section>
+                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+                      Documents required
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                      ImmiAccount shows the exact list for your file. These are the papers a typical student visa needs before lodgement.
+                    </p>
+                    <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                      {country.visaGuide.documents.map((doc) => (
+                        <li key={doc.title} className="rounded-2xl border border-ink/8 px-4 py-3">
+                          <p className="text-sm font-semibold text-ink">{doc.title}</p>
+                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{doc.detail}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+
+                  <section>
+                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
+                      How the visa application works
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                      {country.visaGuide.application.intro}
+                    </p>
+                    <ol className="mt-5 space-y-3">
+                      {country.visaGuide.application.steps.map((step, index) => (
+                        <li key={step.title} className="flex gap-3">
+                          <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-tide text-[0.7rem] font-semibold text-white">
+                            {index + 1}
+                          </span>
+                          <span>
+                            <span className="block text-sm font-semibold text-ink">{step.title}</span>
+                            <span className="text-sm leading-relaxed text-muted-foreground">{step.detail}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                    <div className="mt-6 rounded-2xl border border-ink/8 bg-[#f6f7f9] px-4 py-4">
+                      <h3 className="font-display text-lg font-bold text-ink">Genuine Student questions</h3>
+                      <ol className="mt-3 space-y-2">
+                        {country.visaGuide.application.questions.map((question, index) => (
+                          <li key={question} className="flex gap-3 text-sm leading-relaxed text-ink">
+                            <span className="font-semibold text-tide">{index + 1}.</span>
+                            {question}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </section>
                 </div>
               ) : null}
             </div>

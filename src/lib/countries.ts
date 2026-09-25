@@ -10,7 +10,26 @@ export type Country = {
   story: string;
   facts: { label: string; value: string }[];
   included: string[];
-  visaProcess?: { intake: string; steps: { when: string; what: string }[] }[];
+  visaGuide?: VisaGuide;
+};
+
+export type VisaGuide = {
+  postStudy: {
+    intro: string;
+    rows: { qualification: string; stay: string }[];
+    notes: string[];
+  };
+  processing: {
+    intro: string;
+    rows: { label: string; value: string; detail: string }[];
+    note: string;
+  };
+  documents: { title: string; detail: string }[];
+  application: {
+    intro: string;
+    steps: { title: string; detail: string }[];
+    questions: string[];
+  };
 };
 
 export const countries: Country[] = [
@@ -81,47 +100,131 @@ export const countries: Country[] = [
       "We compare VET and degree options against your budget and scores, confirm the Genuine Student story, and keep the offer letter and visa papers in one sequence.",
     facts: [
       { label: "Route", value: "VET & degrees" },
-      { label: "Test", value: "IELTS or PTE" },
+      { label: "Test", value: "IELTS, PTE, TOEFL" },
       { label: "Visa", value: "Subclass 500" },
-      { label: "Focus", value: "Career outcomes" },
+      { label: "After study", value: "2–4 years" },
     ],
     included: [
-      "Course comparison",
-      "Offer-letter review",
-      "Genuine Student notes",
-      "Visa checklist",
+      "Post-study work length",
+      "Genuine Student answers",
+      "Document checklist",
+      "ImmiAccount lodgement",
     ],
-    visaProcess: [
-      {
-        intake: "February intake",
-        steps: [
-          { when: "June", what: "IELTS coaching" },
-          { when: "July", what: "Appear for the IELTS test" },
-          { when: "July / August", what: "IELTS test result" },
-          { when: "July to October", what: "Submit applications to universities" },
-          { when: "July to November", what: "Offer letters" },
-          { when: "August to December", what: "Arrange funds" },
-          { when: "September to January", what: "Financial assessment at the university" },
-          { when: "October to January", what: "Apply for the visa" },
-          { when: "December to February", what: "Visa grant" },
-          { when: "February", what: "Fly to Australia" },
+    visaGuide: {
+      postStudy: {
+        intro:
+          "After you finish a CRICOS course in Australia, the usual work visa is the Temporary Graduate visa (subclass 485), Post-Higher Education Work stream. For an Indian passport, the stay depends on the qualification.",
+        rows: [
+          { qualification: "Bachelor degree, including honours", stay: "2 years" },
+          {
+            qualification: "Bachelor with first-class honours in STEM, including ICT",
+            stay: "3 years",
+          },
+          {
+            qualification: "Masters (coursework, extended, or research)",
+            stay: "3 years",
+          },
+          { qualification: "Doctoral degree (PhD)", stay: "4 years" },
+        ],
+        notes: [
+          "You can work full-time, for any employer, for the length of that visa.",
+          "The course has to be on CRICOS, and you apply after you complete it. Most applicants need to be under 35. Masters by research and PhD applicants can apply up to age 50.",
+          "British National (Overseas) passport holders follow a different stay. We use the Indian arrangement above for files from Pathankot.",
         ],
       },
-      {
-        intake: "July intake",
+      processing: {
+        intro:
+          "The student visa is subclass 500, lodged online. There is usually no visa interview. Home Affairs starts offshore files by priority. These windows are when a case officer begins the file, not the day the visa is granted.",
+        rows: [
+          {
+            label: "Priority 1",
+            value: "1–4 weeks",
+            detail: "Provider is still inside its yearly allocation.",
+          },
+          {
+            label: "Priority 2",
+            value: "5–8 weeks",
+            detail: "Provider has passed its higher-priority share.",
+          },
+          {
+            label: "Priority 3",
+            value: "9–12 weeks",
+            detail: "Provider has reached the threshold for that year.",
+          },
+        ],
+        note: "A complete file moves faster. Biometrics, a health exam, or a request for more papers can push the grant later. Priority follows the education provider on your main Confirmation of Enrolment, for applications lodged from 14 November 2025.",
+      },
+      documents: [
+        {
+          title: "Passport",
+          detail: "Bio page. Add a birth certificate or national ID if you have one.",
+        },
+        {
+          title: "Confirmation of Enrolment",
+          detail: "A CoE for every course in the package, before you lodge.",
+        },
+        {
+          title: "OSHC",
+          detail: "Overseas Student Health Cover from a week before class until the end of your stay.",
+        },
+        {
+          title: "English test",
+          detail: "IELTS, PTE, or TOEFL, unless you fall under an exemption.",
+        },
+        {
+          title: "Academics",
+          detail: "Transcripts and certificates for Class 12, diploma, or degree.",
+        },
+        {
+          title: "Funds",
+          detail: "Travel, 12 months of living costs, tuition, and school fees for any child on the file.",
+        },
+        {
+          title: "Genuine Student evidence",
+          detail: "Employment proof, a CV, and papers that match the answers in the form.",
+        },
+        {
+          title: "Health and biometrics",
+          detail: "Only if Home Affairs asks. Book them as soon as the request arrives.",
+        },
+      ],
+      application: {
+        intro:
+          "The Genuine Student (GS) requirement replaced the old GTE test for applications lodged from 23 March 2024. You answer inside the online form, in English, up to 150 words each.",
         steps: [
-          { when: "January", what: "IELTS coaching and the IELTS test" },
-          { when: "January / February", what: "IELTS result" },
-          { when: "January to April", what: "Submit applications to universities" },
-          { when: "January to May", what: "Offer letters" },
-          { when: "February to May", what: "Arrange funds" },
-          { when: "March to May", what: "Financial assessment at the university" },
-          { when: "April to June", what: "Apply for the visa" },
-          { when: "April to July", what: "Visa grant" },
-          { when: "July", what: "Fly to Australia" },
+          {
+            title: "Offer, then CoE",
+            detail: "The college or university issues the Confirmation of Enrolment after you accept and meet their conditions.",
+          },
+          {
+            title: "Build the file",
+            detail: "Passport, academics, English score, funds, and OSHC sit in one folder before anyone opens ImmiAccount.",
+          },
+          {
+            title: "Lodge subclass 500",
+            detail: "Create an ImmiAccount, complete the form, attach the documents, and pay the visa charge.",
+          },
+          {
+            title: "Answer the GS questions",
+            detail: "Write the four answers in the form. Attach the papers that support them. A loose essay on its own is not enough.",
+          },
+          {
+            title: "Biometrics and health",
+            detail: "Complete these if Home Affairs requests them. A decision can be made while they are still pending, so book early.",
+          },
+          {
+            title: "Grant",
+            detail: "There is usually no interview. You travel once the grant notice and the course start date line up.",
+          },
+        ],
+        questions: [
+          "Your current circumstances: family, community, work, and money.",
+          "Why this course, with this provider, in Australia, and what study and living there will ask of you.",
+          "How finishing the course helps your future.",
+          "Anything else that belongs on the file. A previous student visa, or a visa lodged inside Australia, needs one more question.",
         ],
       },
-    ],
+    },
   },
   {
     slug: "germany",
