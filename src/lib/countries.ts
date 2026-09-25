@@ -10,6 +10,7 @@ export type Country = {
   story: string;
   facts: { label: string; value: string }[];
   included: string[];
+  visaProcess?: { intake: string; steps: { when: string; what: string }[] }[];
 };
 
 export const countries: Country[] = [
@@ -89,6 +90,37 @@ export const countries: Country[] = [
       "Offer-letter review",
       "Genuine Student notes",
       "Visa checklist",
+    ],
+    visaProcess: [
+      {
+        intake: "February intake",
+        steps: [
+          { when: "June", what: "IELTS coaching" },
+          { when: "July", what: "Appear for the IELTS test" },
+          { when: "July / August", what: "IELTS test result" },
+          { when: "July to October", what: "Submit applications to universities" },
+          { when: "July to November", what: "Offer letters" },
+          { when: "August to December", what: "Arrange funds" },
+          { when: "September to January", what: "Financial assessment at the university" },
+          { when: "October to January", what: "Apply for the visa" },
+          { when: "December to February", what: "Visa grant" },
+          { when: "February", what: "Fly to Australia" },
+        ],
+      },
+      {
+        intake: "July intake",
+        steps: [
+          { when: "January", what: "IELTS coaching and the IELTS test" },
+          { when: "January / February", what: "IELTS result" },
+          { when: "January to April", what: "Submit applications to universities" },
+          { when: "January to May", what: "Offer letters" },
+          { when: "February to May", what: "Arrange funds" },
+          { when: "March to May", what: "Financial assessment at the university" },
+          { when: "April to June", what: "Apply for the visa" },
+          { when: "April to July", what: "Visa grant" },
+          { when: "July", what: "Fly to Australia" },
+        ],
+      },
     ],
   },
   {

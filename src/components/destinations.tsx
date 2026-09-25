@@ -144,8 +144,8 @@ export function Destinations() {
   }, []);
 
   return (
-    <section id="destinations" className="px-3 py-6 sm:px-4 md:px-5 md:py-8">
-      <div className="mx-auto overflow-hidden rounded-[1.75rem] border border-white/80 bg-[#f5f6f8] shadow-[0_24px_70px_rgba(18,22,28,0.05)] sm:rounded-[2rem] md:rounded-[2.5rem]">
+    <section id="destinations" className="w-full py-6 md:py-8">
+      <div className="w-full overflow-hidden bg-[#f5f6f8]">
         <div className="px-5 pt-12 pb-2 text-center sm:px-8 sm:pt-16 md:pt-20">
           <h2 className="mx-auto max-w-3xl font-display text-[1.7rem] leading-[1.15] font-bold tracking-[-0.03em] text-ink sm:text-4xl md:text-[2.6rem]">
             Popular study <span className="text-tide">Countries</span> for 2026
