@@ -42,12 +42,20 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
       <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-4 sm:px-8 md:px-10 lg:px-12">
         <Link
           href="/"
-          className="font-display text-[1.05rem] font-bold tracking-tight text-ink md:text-lg"
+          className={cn(
+            "font-display text-[1.05rem] font-bold tracking-tight md:text-lg",
+            solid ? "text-ink" : "text-white drop-shadow-sm"
+          )}
         >
           Sachman Overseas
         </Link>
 
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex">
+        <nav
+          className={cn(
+            "absolute left-1/2 hidden -translate-x-1/2 items-center md:flex",
+            solid ? "gap-8" : "gap-1 rounded-full bg-white/25 px-2 py-1.5 backdrop-blur-md"
+          )}
+        >
           {links.map((link) => {
             const active = pathname === link.href;
             return (
@@ -57,7 +65,13 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "text-[0.85rem] font-medium tracking-wide transition-colors",
-                  active ? "text-ink" : "text-ink/70 hover:text-ink"
+                  solid
+                    ? active
+                      ? "text-ink"
+                      : "text-ink/70 hover:text-ink"
+                    : active
+                      ? "rounded-full bg-white/70 px-3 py-1.5 text-ink"
+                      : "rounded-full px-3 py-1.5 text-white/90 hover:bg-white/30 hover:text-white"
                 )}
               >
                 {link.label}
@@ -69,13 +83,21 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
         <div className="hidden items-center gap-4 md:flex">
           <a
             href="tel:+919888454140"
-            className="text-[0.85rem] font-medium tracking-wide text-ink/75 transition-colors hover:text-ink"
+            className={cn(
+              "text-[0.85rem] font-medium tracking-wide transition-colors",
+              solid ? "text-ink/75 hover:text-ink" : "text-white/85 hover:text-white"
+            )}
           >
             Call us
           </a>
           <Link
             href="/contact"
-            className="inline-flex h-10 items-center justify-center rounded-full bg-ink px-5 text-[0.8rem] font-semibold text-white transition-colors hover:bg-ink-soft"
+            className={cn(
+              "inline-flex h-10 items-center justify-center rounded-full px-5 text-[0.8rem] font-semibold transition-colors",
+              solid
+                ? "bg-ink text-white hover:bg-ink-soft"
+                : "bg-ink text-white hover:bg-black"
+            )}
           >
             Book a consult
           </Link>
@@ -84,7 +106,10 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
         <button
           type="button"
           data-testid="mobile-menu-toggle"
-          className="inline-flex size-10 items-center justify-center rounded-full text-ink md:hidden"
+          className={cn(
+            "inline-flex size-10 items-center justify-center rounded-full md:hidden",
+            solid ? "text-ink" : "bg-white/25 text-white backdrop-blur-md"
+          )}
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
