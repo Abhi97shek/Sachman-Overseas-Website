@@ -35,56 +35,53 @@ const links = [
 ];
 
 const socials = [
-  {
-    href: "https://www.instagram.com/sachmaninstitute/",
-    label: "Instagram",
-    icon: InstagramIcon,
-  },
-  {
-    href: "https://www.facebook.com/sachmanpathankot",
-    label: "Facebook",
-    icon: FacebookIcon,
-  },
-  {
-    href: "https://www.linkedin.com/in/meenakshi-sharma-370830318/",
-    label: "LinkedIn",
-    icon: LinkedInIcon,
-  },
+  { href: "https://www.instagram.com/sachmaninstitute/", label: "Instagram", icon: InstagramIcon },
+  { href: "https://www.facebook.com/sachmanpathankot", label: "Facebook", icon: FacebookIcon },
+  { href: "https://www.linkedin.com/in/meenakshi-sharma-370830318/", label: "LinkedIn", icon: LinkedInIcon },
 ];
 
 export function SiteFooter() {
   return (
     <footer className="px-3 pb-3 sm:px-4 sm:pb-4 md:px-5 md:pb-5">
-      <div className="mx-auto overflow-hidden rounded-[1.75rem] border border-white/80 bg-[linear-gradient(180deg,#e8eef2_0%,#f4f8f8_32%,#ffffff_100%)] sm:rounded-[2rem] md:rounded-[2.5rem]">
-        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6 py-10 md:px-10 md:py-12 lg:px-12">
-          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-            <div>
-              <p className="font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-                Sachman Overseas
-              </p>
-              <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                IELTS, PTE, spoken English, and study-visa guidance from Pathankot.
-              </p>
-            </div>
-            <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-ink/70">
-              {links.map((link) => (
-                <Link key={link.href} href={link.href} className="transition-colors hover:text-tide">
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+      <div className="overflow-hidden rounded-[1.75rem] bg-white shadow-[0_16px_40px_rgba(18,22,28,0.05)] sm:rounded-[2rem]">
+        <div className="h-1.5 bg-gradient-to-r from-tide via-[#7ec8c0] to-[#f0b429]" />
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-10 sm:px-8 md:grid-cols-[minmax(0,1.4fr)_auto_minmax(0,1fr)] md:gap-12 md:px-10 md:py-12">
+          <div>
+            <p className="font-display text-3xl font-extrabold tracking-tight text-ink">Sachman Overseas</p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              IELTS, PTE, spoken English, and study visas from the Pathankot centre.
+            </p>
+            <p className="mt-5 text-sm leading-relaxed text-ink/80">
+              2nd Floor, above Dashmesh Bajaj,
+              <br />
+              Dalhousie Road, near Simbal Chowk
+            </p>
           </div>
 
-          <div className="flex flex-col gap-5 border-t border-ink/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-col gap-1 text-sm text-muted-foreground">
-              <a href="tel:+919888454140" className="transition-colors hover:text-tide">
+          <nav className="flex flex-col gap-3">
+            <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-tide uppercase">Explore</p>
+            {links.map((link) => (
+              <Link key={link.href} href={link.href} className="text-sm font-medium text-ink transition-colors hover:text-tide">
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div>
+            <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-tide uppercase">Visit</p>
+            <div className="mt-3 flex flex-col gap-2 text-sm">
+              <a href="tel:+919888454140" className="font-medium text-ink transition-colors hover:text-tide">
                 +91 98884 54140
               </a>
-              <a href="mailto:sachmaninstitute08@gmail.com" className="transition-colors hover:text-tide">
+              <a
+                href="mailto:sachmaninstitute08@gmail.com"
+                className="text-muted-foreground transition-colors hover:text-tide"
+              >
                 sachmaninstitute08@gmail.com
               </a>
+              <p className="text-muted-foreground">Mon – Sat · 9:00 AM – 6:00 PM</p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="mt-6 flex flex-wrap gap-2">
               {socials.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -94,18 +91,21 @@ export function SiteFooter() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={item.label}
-                    className="flex size-11 items-center justify-center rounded-full bg-[#d7f3f0] text-tide transition-colors hover:bg-tide hover:text-white"
+                    className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-[#f4f8f8] py-1.5 pr-3 pl-1.5 text-sm font-medium text-ink transition-colors hover:border-tide/30 hover:bg-[#d7f3f0]"
                   >
-                    <Icon className="size-4" strokeWidth={1.75} />
+                    <span className="flex size-8 items-center justify-center rounded-full bg-white text-tide">
+                      <Icon />
+                    </span>
+                    {item.label}
                   </a>
                 );
               })}
             </div>
           </div>
-
-          <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Sachman Overseas. Website mockup.
-          </p>
+        </div>
+        <div className="mx-auto flex max-w-6xl flex-col gap-1 border-t border-ink/8 px-6 py-4 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-8 md:px-10">
+          <p>© {new Date().getFullYear()} Sachman Overseas</p>
+          <p>Pathankot, Punjab</p>
         </div>
       </div>
     </footer>
