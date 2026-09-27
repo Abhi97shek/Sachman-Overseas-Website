@@ -62,7 +62,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
 
         <nav
           className={cn(
-            "absolute left-1/2 hidden -translate-x-1/2 items-center md:flex",
+            "absolute left-1/2 hidden -translate-x-1/2 items-center lg:flex",
             solid ? "gap-8" : "gap-1 rounded-full bg-white/75 px-2 py-1.5 shadow-sm backdrop-blur-md"
           )}
         >
@@ -90,11 +90,11 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           })}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <a
             href="tel:+919888454140"
             className={cn(
-              "text-[0.85rem] font-medium tracking-wide transition-colors",
+              "hidden text-[0.85rem] font-medium tracking-wide transition-colors xl:inline",
               "text-ink/80 hover:text-ink"
             )}
           >
@@ -118,7 +118,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
           type="button"
           data-testid="mobile-menu-toggle"
           className={cn(
-            "inline-flex size-10 items-center justify-center rounded-full md:hidden",
+            "inline-flex size-10 items-center justify-center rounded-full lg:hidden",
             solid ? "text-ink" : "bg-white/80 text-ink shadow-sm backdrop-blur-md"
           )}
           aria-expanded={open}
@@ -134,7 +134,7 @@ export function SiteHeader({ variant = "overlay" }: { variant?: "overlay" | "sol
         <div
           id="mobile-nav"
           data-testid="mobile-nav"
-          className="border-t border-white/10 bg-ink px-6 py-8 md:hidden"
+          className="border-t border-white/10 bg-ink px-6 py-8 lg:hidden"
         >
           <nav className="flex flex-col gap-5">
             {links.map((link) => (
