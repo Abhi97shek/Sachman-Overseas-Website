@@ -1,0 +1,40 @@
+/*
+  SHAPE: corner radius and shadows
+
+    rounded-control   buttons and chips
+    rounded-panel     cards and photo tiles
+    rounded-frame     large media frames
+    rounded-nav       header and tags
+*/
+
+:root {
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-3xl: 32px;
+  --radius-3xl-2: 40px;
+
+  --radius-nav: 40px;
+  --radius-tags: 40px;
+  --radius-cards: 12px;
+  --radius-inputs: 32px;
+  --radius-buttons: 32px;
+  --radius-default: 4px;
+
+  --shape-control: var(--radius-buttons);
+  --shape-panel: var(--radius-cards);
+  --shape-frame: var(--radius-3xl);
+
+  --shadow-raised-value: 0 1px 2px rgb(0 0 0 / 0.24), 0 14px 34px -16px rgb(0 0 0 / 0.45);
+  --shadow-floating-value: 0 30px 70px -24px rgb(0 0 0 / 0.55);
+}
+
+@theme inline {
+  --radius-control: var(--shape-control);
+  --radius-panel: var(--shape-panel);
+  --radius-frame: var(--shape-frame);
+  --radius-tag: var(--radius-tags);
+
+  --shadow-raised: var(--shadow-raised-value);
+  --shadow-floating: var(--shadow-floating-value);
+}

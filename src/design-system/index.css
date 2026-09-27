@@ -1,0 +1,21 @@
+/*
+  DESIGN SYSTEM
+
+  Every visual decision lives in one of these folders:
+
+    colors/       palette and colour roles
+    typography/   type styles (and fonts.ts for the typefaces)
+    spacing/      page width, gutters, section spacing
+    shape/        corner radius and shadows
+    motion/       durations and easing (and motion.ts for GSAP)
+    buttons/      button sizes and variants (and button.tsx)
+    forms/        inputs, selects, labels
+*/
+
+@import "./colors/colors.css";
+@import "./typography/typography.css";
+@import "./spacing/spacing.css";
+@import "./shape/shape.css";
+@import "./motion/motion.css";
+@import "./buttons/buttons.css";
+@import "./forms/forms.css";

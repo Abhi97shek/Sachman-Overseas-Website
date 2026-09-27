@@ -1,0 +1,55 @@
+/*
+  SPACING AND LAYOUT
+
+    page-container   centred content column with side gutters
+    section-y        vertical space around a normal section
+    section-y-tight  vertical space for smaller bands
+*/
+
+:root {
+  --spacing-unit: 4px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-56: 56px;
+  --spacing-72: 72px;
+  --spacing-112: 112px;
+  --spacing-128: 128px;
+
+  --page-max-width: 1200px;
+  --section-gap: 72px;
+  --card-padding: 32px;
+  --element-gap: 12px;
+
+  --page-width: var(--page-max-width);
+  --prose-width: 42rem;
+  --gutter: clamp(1.25rem, 0.55rem + 2.8vw, var(--spacing-32));
+  --section-space: var(--section-gap);
+  --section-space-tight: var(--spacing-40);
+  --header-height: 4.5rem;
+}
+
+@theme inline {
+  --container-page: var(--page-width);
+  --container-prose: var(--prose-width);
+}
+
+@utility page-container {
+  width: 100%;
+  max-width: var(--page-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-space);
+}
+
+@utility section-y-tight {
+  padding-block: var(--section-space-tight);
+}

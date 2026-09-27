@@ -1,0 +1,143 @@
+/*
+  BUTTONS
+
+  Sizes:     btn-sm, btn-md (default), btn-lg
+  Variants:  btn-primary   cobalt — the main action on a screen (one per area)
+             btn-dark      obsidian — secondary action
+             btn-outline   bordered — tertiary action on light backgrounds
+             btn-light     white — main action on photos and dark panels
+             btn-ghost     bordered white — secondary action on photos and dark panels
+
+  Use the <Button> component in button.tsx rather than these classes directly.
+*/
+
+:root {
+  --button-height-sm: 2.5rem;
+  --button-height-md: 3rem;
+  --button-height-lg: 3.5rem;
+  --button-padding-sm: 1rem;
+  --button-padding-md: 1.25rem;
+  --button-padding-lg: 1.625rem;
+  --button-radius: var(--radius-buttons);
+  --button-font-size: var(--text-body-sm);
+  --button-font-size-sm: var(--text-caption);
+  --button-font-weight: var(--font-weight-w480);
+  --button-tracking: var(--tracking-body-sm);
+  --button-gap: 0.625rem;
+  --button-press-scale: 0.97;
+}
+
+@layer components {
+  .btn {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: var(--button-gap);
+    height: var(--button-height-md);
+    padding-inline: var(--button-padding-md);
+    border: 1px solid transparent;
+    border-radius: var(--button-radius);
+    font-size: var(--button-font-size);
+    font-weight: var(--button-font-weight);
+    letter-spacing: var(--button-tracking);
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition-property: background-color, border-color, color, transform, box-shadow;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-out);
+  }
+
+  .btn:active {
+    transform: scale(var(--button-press-scale));
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .btn svg {
+    width: 1.05em;
+    height: 1.05em;
+    flex-shrink: 0;
+  }
+
+  .btn [data-arrow] {
+    transition: transform var(--duration-base) var(--ease-out);
+  }
+
+  .btn:hover [data-arrow] {
+    transform: translateX(4px);
+  }
+
+  .btn-sm {
+    height: var(--button-height-sm);
+    padding-inline: var(--button-padding-sm);
+    font-size: var(--button-font-size-sm);
+  }
+
+  .btn-lg {
+    height: var(--button-height-lg);
+    padding-inline: var(--button-padding-lg);
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .btn-primary {
+    background-color: var(--signal);
+    color: var(--on-signal);
+  }
+  .btn-primary:hover {
+    background-color: var(--signal-hover);
+  }
+
+  .btn-dark {
+    background-color: var(--sunken);
+    color: var(--text);
+  }
+  .btn-dark:hover {
+    background-color: var(--line-strong);
+    color: var(--on-signage);
+  }
+
+  .btn-outline {
+    border-color: var(--line-strong);
+    background-color: transparent;
+    color: var(--text);
+  }
+  .btn-outline:hover {
+    border-color: var(--text);
+    background-color: var(--surface);
+  }
+
+  .btn-light {
+    background-color: var(--color-pure-white);
+    color: var(--color-onyx-canvas);
+  }
+  .btn-light:hover {
+    background-color: var(--color-mist-border);
+  }
+
+  .btn-ghost {
+    border-color: rgb(255 255 255 / 0.35);
+    background-color: rgb(255 255 255 / 0.04);
+    color: var(--white);
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost:hover {
+    border-color: rgb(255 255 255 / 0.7);
+    background-color: rgb(255 255 255 / 0.12);
+  }
+}

@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageShell } from "@/components/page-shell";
+import { ArrowLeft, Check } from "lucide-react";
+import { PageShell } from "@/components/layout/page-shell";
+import { DestinationTile } from "@/components/destinations/destination-tile";
+import { Button } from "@/design-system/buttons/button";
 import { countries, getCountry } from "@/lib/countries";
+import { destinationCards } from "@/lib/destinations";
 import { getStudyDestination, studyDestinations } from "@/lib/study-destinations";
 
 type Params = { slug: string };
@@ -16,294 +20,238 @@ export function generateStaticParams() {
   return [...slugs].map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { slug } = await params;
   const country = getCountry(slug);
   const destination = getStudyDestination(slug);
-  if (!country && !destination) return { title: "Country | Sachman Overseas" };
-  if (!country && destination) {
+  if (country) return { title: `${country.name} | Sachman Overseas`, description: country.overview };
+  if (destination) {
     return {
       title: `${destination.name} | Sachman Overseas`,
       description: `Study routes and visa guidance for ${destination.name} from Sachman Overseas in Pathankot.`,
     };
   }
-  return {
-    title: `${country.name} | Sachman Overseas`,
-    description: country.overview,
-  };
+  return { title: "Country | Sachman Overseas" };
 }
 
-const crops = [
-  "object-[center_20%]",
-  "object-center",
-  "object-[center_80%]",
-  "object-[center_35%]",
-];
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return <h2 className="type-h3">{children}</h2>;
+}
 
-export default async function CountryPage({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+export default async function CountryPage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const country = getCountry(slug);
   const destination = getStudyDestination(slug);
-  if (!country && destination) {
-    return (
-      <PageShell>
-        <article className="px-4 py-8 sm:px-6 md:px-8 md:py-12">
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-[1.75rem] bg-white">
-            <div className="relative aspect-[4/3] bg-ink">
-              <Image
-                src={`/images/landmarks/${destination.slug}.jpg`}
-                alt=""
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
-            </div>
-            <div className="px-6 py-10 sm:px-10 sm:py-12">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={`/images/flags/${destination.code}.svg`}
-              alt=""
-              className="size-14 rounded-full object-cover shadow-[0_6px_16px_rgba(18,22,28,0.12)]"
-            />
-            <p className="mt-6 text-[0.72rem] font-semibold tracking-[0.16em] text-tide uppercase">
-              Study route · {destination.region}
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-ink">
-              {destination.name}
-            </h1>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              We shortlist courses in {destination.name} against your marks, budget, and
-              English score, then prepare the offer and the visa file in one sequence.
-            </p>
-            <Link
-              href={`/contact?country=${destination.slug}`}
-              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-ink px-6 text-sm font-semibold text-white"
-            >
-              Plan this route
-            </Link>
-            </div>
-          </div>
-        </article>
-      </PageShell>
-    );
-  }
-  if (!country) notFound();
+  const card = destinationCards.find((item) => item.slug === slug);
+  if (!card || (!country && !destination)) notFound();
+
+  const name = country?.name ?? card.name;
+  const related = destinationCards
+    .filter((item) => item.region === card.region && item.slug !== slug)
+    .slice(0, 4);
 
   return (
     <PageShell>
-      <article className="px-4 py-6 sm:px-6 md:px-8 md:py-8 lg:px-10">
-        <div className="overflow-hidden rounded-[1.75rem] border border-ink/8 bg-white sm:rounded-[2rem]">
-          <div className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-4 sm:p-3 md:gap-3">
-            <div className="relative col-span-2 aspect-[4/3] overflow-hidden rounded-2xl bg-ink sm:col-span-2 sm:row-span-2 sm:aspect-auto sm:min-h-[22rem]">
+      <article>
+        <div className="px-3 sm:px-4">
+          <div className="relative isolate flex min-h-[28rem] flex-col justify-end overflow-hidden rounded-frame bg-signage text-on-signage md:min-h-[36rem]">
+            <div className="absolute inset-0 -z-10 animate-settle">
               <Image
-                src={country.image}
-                alt={country.landmark}
+                src={card.image}
+                alt={country?.landmark ?? ""}
                 fill
                 priority
-                className="object-cover object-[center_30%]"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                sizes="100vw"
+                className="object-cover object-[center_62%]"
               />
             </div>
-            {crops.slice(0, 2).map((crop) => (
-              <div
-                key={crop}
-                className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-ink sm:aspect-auto"
+            <div aria-hidden className="absolute inset-0 -z-10 bg-linear-to-t from-signage via-signage/40 to-signage/10" />
+
+            <div className="page-container pt-24 pb-10 md:pb-14">
+              <Link
+                data-intro
+                href="/destinations"
+                className="inline-flex items-center gap-2 type-label text-on-signage/80 transition-colors speed-fast hover:text-on-signage"
               >
-                <Image
-                  src={country.image}
-                  alt=""
-                  fill
-                  className={`object-cover ${crop}`}
-                  sizes="25vw"
-                />
+                <ArrowLeft className="size-3.5" aria-hidden />
+                All countries
+              </Link>
+              <div data-intro className="mt-6 flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={card.flag} alt="" className="size-8 rounded-full object-cover ring-2 ring-white/30" />
+                <span className="inline-flex h-8 items-center rounded-[0.3rem] bg-signage px-2.5 type-code text-sm text-signal">
+                  IXP → {card.airport}
+                </span>
+                <span className="type-label text-on-signage/80">{card.region}</span>
               </div>
-            ))}
-            <div className="relative col-span-2 aspect-[16/7] overflow-hidden rounded-2xl bg-ink sm:col-span-2 sm:aspect-auto">
-              <Image
-                src={country.image}
-                alt=""
-                fill
-                className="object-cover object-[center_70%]"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
+              <h1 className="mt-5 overflow-hidden type-h1 text-white">
+                <span data-intro="line" className="block">
+                  {name}
+                </span>
+              </h1>
+              {country?.landmark ? (
+                <p data-intro className="mt-3 type-lead text-on-signage/80">
+                  {country.landmark}
+                </p>
+              ) : null}
             </div>
           </div>
+        </div>
 
-          <div className="grid gap-10 px-5 py-8 sm:px-8 md:grid-cols-[minmax(0,1fr)_18rem] md:px-10 md:py-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
-            <div>
-              <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-tide uppercase">
-                Study route · {country.landmark}
-              </p>
-              <h1 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">
-                {country.headline}
-              </h1>
-              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                {country.overview}
-              </p>
+        <div className="page-container section-y-tight grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-20">
+          <div className="min-w-0">
+            <p data-reveal className="max-w-2xl type-lead">
+              {country?.overview ??
+                `We shortlist courses in ${name} against your marks, budget, and English score, then prepare the offer and the visa file in one sequence.`}
+            </p>
 
-              <dl className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {country.facts.map((fact) => (
-                  <div
-                    key={fact.label}
-                    className="rounded-2xl border border-ink/8 bg-[#f6f7f9] px-3 py-3"
-                  >
-                    <dt className="text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase">
-                      {fact.label}
-                    </dt>
-                    <dd className="mt-1 text-sm font-semibold text-ink">{fact.value}</dd>
+            {country ? (
+              <>
+                <dl data-stagger className="mt-10 grid grid-cols-2 border-t border-l border-line sm:grid-cols-4">
+                  {country.facts.map((fact) => (
+                    <div key={fact.label} className="border-r border-b border-line p-4">
+                      <dt className="type-label text-[0.625rem] text-subtle">{fact.label}</dt>
+                      <dd className="mt-2 font-semibold">{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <section data-reveal className="mt-16">
+                  <SectionTitle>Route overview</SectionTitle>
+                  <p className="mt-4 max-w-2xl type-body text-muted">{country.story}</p>
+                  <p className="mt-4 max-w-2xl type-body text-muted">{country.blurb}</p>
+                </section>
+              </>
+            ) : null}
+
+            {country?.visaGuide ? (
+              <div className="mt-16 space-y-16">
+                <section data-reveal>
+                  <SectionTitle>Post-study work permit</SectionTitle>
+                  <p className="mt-3 max-w-2xl type-body text-muted">{country.visaGuide.postStudy.intro}</p>
+                  <div className="mt-6 border-t border-line">
+                    {country.visaGuide.postStudy.rows.map((row) => (
+                      <div
+                        key={row.qualification}
+                        className="grid gap-1 border-b border-line py-4 sm:grid-cols-[minmax(0,1fr)_8rem] sm:items-center"
+                      >
+                        <p className="font-medium">{row.qualification}</p>
+                        <p className="type-code sm:text-right">{row.stay}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </dl>
+                  <ul className="mt-5 space-y-2">
+                    {country.visaGuide.postStudy.notes.map((note) => (
+                      <li key={note} className="flex gap-3 type-small text-muted">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-signal" />
+                        {note}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
 
-              <h2 className="mt-10 font-display text-2xl font-bold tracking-tight text-ink">
-                Route overview
-              </h2>
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                {country.story}
-              </p>
-              <p className="mt-3 max-w-3xl text-base leading-relaxed text-muted-foreground">
-                {country.blurb}
-              </p>
+                <section data-reveal>
+                  <SectionTitle>Visa processing time</SectionTitle>
+                  <p className="mt-3 max-w-2xl type-body text-muted">{country.visaGuide.processing.intro}</p>
+                  <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                    {country.visaGuide.processing.rows.map((row) => (
+                      <div key={row.label} className="rounded-panel bg-signage p-5 text-on-signage">
+                        <p className="type-label text-[0.625rem] text-on-signage-muted">{row.label}</p>
+                        <p className="mt-3 type-code text-2xl text-signal">{row.value}</p>
+                        <p className="mt-3 type-small text-on-signage-muted">{row.detail}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="mt-5 max-w-2xl type-small text-muted">{country.visaGuide.processing.note}</p>
+                </section>
 
-              {country.visaGuide ? (
-                <div className="mt-12 space-y-10">
-                  <section>
-                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
-                      Post-study work permit
-                    </h2>
-                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      {country.visaGuide.postStudy.intro}
-                    </p>
-                    <div className="mt-4 overflow-hidden rounded-2xl border border-ink/8">
-                      {country.visaGuide.postStudy.rows.map((row) => (
-                        <div
-                          key={row.qualification}
-                          className="grid gap-1 border-b border-ink/8 px-4 py-3 last:border-b-0 sm:grid-cols-[minmax(0,1fr)_7rem] sm:items-center sm:gap-4"
-                        >
-                          <p className="text-sm font-medium text-ink">{row.qualification}</p>
-                          <p className="text-sm font-semibold text-tide sm:text-right">{row.stay}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <ul className="mt-4 space-y-2">
-                      {country.visaGuide.postStudy.notes.map((note) => (
-                        <li key={note} className="flex gap-2 text-sm leading-relaxed text-muted-foreground">
-                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-tide" />
-                          {note}
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
+                <section data-reveal>
+                  <SectionTitle>Documents required</SectionTitle>
+                  <p className="mt-3 max-w-2xl type-body text-muted">
+                    ImmiAccount shows the exact list for your file. These are the papers a typical student visa
+                    needs before lodgement.
+                  </p>
+                  <ul className="mt-6 grid gap-x-8 border-t border-line sm:grid-cols-2">
+                    {country.visaGuide.documents.map((doc) => (
+                      <li key={doc.title} className="border-b border-line py-4">
+                        <p className="font-semibold">{doc.title}</p>
+                        <p className="mt-1 type-small text-muted">{doc.detail}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
 
-                  <section>
-                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
-                      Visa processing time
-                    </h2>
-                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      {country.visaGuide.processing.intro}
-                    </p>
-                    <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                      {country.visaGuide.processing.rows.map((row) => (
-                        <div key={row.label} className="rounded-2xl border border-ink/8 bg-[#f6f7f9] px-4 py-4">
-                          <p className="text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase">
-                            {row.label}
-                          </p>
-                          <p className="mt-1 font-display text-xl font-bold text-ink">{row.value}</p>
-                          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{row.detail}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      {country.visaGuide.processing.note}
-                    </p>
-                  </section>
-
-                  <section>
-                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
-                      Documents required
-                    </h2>
-                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      ImmiAccount shows the exact list for your file. These are the papers a typical student visa needs before lodgement.
-                    </p>
-                    <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                      {country.visaGuide.documents.map((doc) => (
-                        <li key={doc.title} className="rounded-2xl border border-ink/8 px-4 py-3">
-                          <p className="text-sm font-semibold text-ink">{doc.title}</p>
-                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{doc.detail}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-
-                  <section>
-                    <h2 className="font-display text-2xl font-bold tracking-tight text-ink">
-                      How the visa application works
-                    </h2>
-                    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-                      {country.visaGuide.application.intro}
-                    </p>
-                    <ol className="mt-5 space-y-3">
-                      {country.visaGuide.application.steps.map((step, index) => (
-                        <li key={step.title} className="flex gap-3">
-                          <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-tide text-[0.7rem] font-semibold text-white">
-                            {index + 1}
-                          </span>
-                          <span>
-                            <span className="block text-sm font-semibold text-ink">{step.title}</span>
-                            <span className="text-sm leading-relaxed text-muted-foreground">{step.detail}</span>
-                          </span>
+                <section data-reveal>
+                  <SectionTitle>How the visa application works</SectionTitle>
+                  <p className="mt-3 max-w-2xl type-body text-muted">{country.visaGuide.application.intro}</p>
+                  <ol className="mt-6 space-y-5">
+                    {country.visaGuide.application.steps.map((step, index) => (
+                      <li key={step.title} className="flex gap-4">
+                        <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-control bg-signal type-code text-sm text-on-signal">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span>
+                          <span className="block font-semibold">{step.title}</span>
+                          <span className="mt-1 block type-small text-muted">{step.detail}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                  <div className="mt-8 rounded-panel border border-line bg-surface p-6">
+                    <p className="type-label text-muted">Genuine Student questions</p>
+                    <ol className="mt-4 space-y-3">
+                      {country.visaGuide.application.questions.map((question, index) => (
+                        <li key={question} className="flex gap-3 type-body">
+                          <span className="type-code text-subtle">{index + 1}.</span>
+                          {question}
                         </li>
                       ))}
                     </ol>
-                    <div className="mt-6 rounded-2xl border border-ink/8 bg-[#f6f7f9] px-4 py-4">
-                      <h3 className="font-display text-lg font-bold text-ink">Genuine Student questions</h3>
-                      <ol className="mt-3 space-y-2">
-                        {country.visaGuide.application.questions.map((question, index) => (
-                          <li key={question} className="flex gap-3 text-sm leading-relaxed text-ink">
-                            <span className="font-semibold text-tide">{index + 1}.</span>
-                            {question}
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  </section>
-                </div>
-              ) : null}
-            </div>
-
-            <aside className="h-fit rounded-[1.5rem] border border-ink/8 bg-[#f6f7f9] p-5 md:sticky md:top-24">
-              <div className="flex items-center gap-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={country.flag} alt="" className="size-6 rounded-full object-cover" />
-                <p className="font-display text-lg font-bold text-ink">{country.name}</p>
+                  </div>
+                </section>
               </div>
-              <p className="mt-2 text-sm text-muted-foreground">{country.landmark}</p>
-              <ul className="mt-5 space-y-2 border-t border-ink/10 pt-5 text-sm text-ink">
-                {country.included.map((item) => (
-                  <li key={item} className="flex gap-2">
-                    <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-tide" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href={`/contact?country=${country.slug}`}
-                className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-ink text-sm font-semibold text-white transition-colors hover:bg-ink-soft"
-              >
-                Plan this route
-              </Link>
-            </aside>
+            ) : null}
           </div>
+
+          <aside className="lg:sticky lg:top-[calc(var(--header-height)+2rem)] lg:self-start">
+            <div data-reveal className="overflow-hidden rounded-panel bg-surface shadow-raised">
+              <div className="flex items-center justify-between bg-signage px-5 py-4 text-on-signage">
+                <p className="type-label">Your route</p>
+                <p className="type-code text-sm text-signal">IXP → {card.airport}</p>
+              </div>
+              <div className="p-5">
+                <p className="type-h3">{name}</p>
+                <ul className="mt-5 space-y-3 border-t border-line pt-5">
+                  {(country?.included ?? [
+                    "Course and university shortlist",
+                    "English test plan",
+                    "Visa document checklist",
+                    "Interview preparation",
+                  ]).map((item) => (
+                    <li key={item} className="flex gap-3 type-small">
+                      <Check className="mt-0.5 size-4 shrink-0 text-success" strokeWidth={2.25} aria-hidden />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <Button href={`/contact?country=${slug}`} block arrow className="mt-6">
+                  Plan this route
+                </Button>
+              </div>
+            </div>
+          </aside>
         </div>
+
+        {related.length ? (
+          <section className="page-container section-y-tight border-t border-line">
+            <p className="type-label text-muted">More in {card.region}</p>
+            <div data-stagger className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {related.map((place) => (
+                <DestinationTile key={place.slug} place={place} />
+              ))}
+            </div>
+          </section>
+        ) : null}
       </article>
     </PageShell>
   );

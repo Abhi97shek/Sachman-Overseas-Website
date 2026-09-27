@@ -1,0 +1,156 @@
+/*
+  MOTION (CSS side)
+
+  Hover, press, and colour changes use these. Scroll and page-load
+  animations use the matching values in motion.ts.
+
+    speed-fast / speed-base / speed-slow   transition durations
+    ease-smooth                            the site's standard easing
+*/
+
+:root {
+  --duration-fast: 160ms;
+  --duration-base: 260ms;
+  --duration-slow: 520ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --marquee-duration: 48s;
+}
+
+@theme inline {
+  --ease-smooth: var(--ease-out);
+  --ease-swing: var(--ease-in-out);
+}
+
+@utility speed-fast {
+  --tw-duration: var(--duration-fast);
+  --tw-ease: var(--ease-out);
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+@utility speed-base {
+  --tw-duration: var(--duration-base);
+  --tw-ease: var(--ease-out);
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-out);
+}
+
+@utility speed-slow {
+  --tw-duration: var(--duration-slow);
+  --tw-ease: var(--ease-out);
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-out);
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee var(--marquee-duration) linear infinite;
+}
+
+/* Large media eases in from a slight zoom on page load. */
+@keyframes settle {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@utility animate-settle {
+  .motion-ok & {
+    animation: settle 2.2s var(--ease-out) both;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: fade-up var(--duration-slow) var(--ease-out) both;
+}
+
+@keyframes story-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes status-blink {
+  0%,
+  60%,
+  100% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.35;
+  }
+}
+
+@utility animate-status {
+  animation: status-blink 2.4s var(--ease-in-out) infinite;
+}
+
+/* Hidden before the load animation runs. The inline script in layout.tsx adds
+   .motion-ok only when motion is allowed, and a fallback reveals everything. */
+.motion-ok [data-intro] {
+  opacity: 0;
+}
+.motion-ok.motion-fallback [data-intro] {
+  opacity: 1;
+}
+
+/* Accordions (<details>) open smoothly in browsers that support it. */
+:root {
+  interpolate-size: allow-keywords;
+}
+
+details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size var(--duration-base) var(--ease-out),
+    content-visibility var(--duration-base) allow-discrete;
+}
+
+details[open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-slow: 1ms;
+  }
+
+  .animate-marquee,
+  .animate-status,
+  .animate-fade-up {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

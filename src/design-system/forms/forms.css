@@ -1,0 +1,69 @@
+/*
+  FORMS
+
+    field-label   the label above an input
+    field         text inputs, selects, and textareas
+*/
+
+:root {
+  --field-height: 3.25rem;
+  --field-padding: 1rem;
+  --field-radius: var(--radius-inputs);
+  --field-border: var(--line-strong);
+  --field-border-focus: var(--text);
+  --field-background: var(--surface);
+}
+
+@layer components {
+  .field-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-arcadia);
+    font-size: var(--type-label-size);
+    font-weight: var(--type-label-weight);
+    letter-spacing: var(--type-label-tracking);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .field {
+    display: block;
+    width: 100%;
+    height: var(--field-height);
+    padding-inline: var(--field-padding);
+    border: 1px solid var(--field-border);
+    border-radius: var(--field-radius);
+    background-color: var(--field-background);
+    color: var(--text);
+    font-size: var(--type-body-size);
+    outline: none;
+    appearance: none;
+    transition-property: border-color, box-shadow;
+    transition-duration: var(--duration-fast);
+    transition-timing-function: var(--ease-out);
+  }
+
+  .field::placeholder {
+    color: var(--text-subtle);
+  }
+
+  .field:hover {
+    border-color: var(--text-subtle);
+  }
+
+  .field:focus-visible {
+    border-color: var(--field-border-focus);
+    box-shadow: 0 0 0 3px var(--signal-tint);
+  }
+
+  textarea.field {
+    height: auto;
+    min-height: 7rem;
+    padding-block: 0.875rem;
+    resize: vertical;
+  }
+
+  select.field {
+    padding-right: 2.75rem;
+  }
+}

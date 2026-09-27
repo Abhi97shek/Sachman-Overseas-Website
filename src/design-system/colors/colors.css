@@ -1,0 +1,136 @@
+/*
+  COLORS
+
+  1. Palette  — the raw colours from the locked theme.
+  2. Roles    — what each colour is for. Components only ever use roles.
+
+  Dark onyx canvas, graphite cards, cobalt for actions and markers.
+*/
+
+:root {
+  /* 1. Palette */
+  --color-onyx-canvas: #171721;
+  --color-graphite-card: #1e1e2a;
+  --color-obsidian-button: #272735;
+  --color-slate-border: #70707d;
+  --color-mist-border: #e2e3ed;
+  --color-ash-text: #c3c3cc;
+  --color-ivory-text: #ededf3;
+  --color-cobalt: #5266eb;
+  --color-cobalt-hover: #6b7cf0;
+  --color-cobalt-tint: rgb(82 102 235 / 0.18);
+  --color-pure-white: #ffffff;
+
+  --surface-onyx-canvas: #171721;
+  --surface-graphite-card: #1e1e2a;
+  --surface-obsidian-button: #272735;
+
+  --white: var(--color-pure-white);
+  --green-600: #3dba7a;
+  --red-600: #e2554f;
+
+  /* Light theme — previous white / academic palette */
+  --color-navy-950: #0a1a3a;
+  --color-navy-900: #123a82;
+  --color-navy-800: #1b4a9c;
+  --color-navy-700: #3464b4;
+  --color-blue-600: #45567a;
+  --color-blue-500: #66769a;
+  --color-blue-400: #b3c6ec;
+  --color-blue-300: #c3d2ec;
+  --color-blue-200: #dbe5f5;
+  --color-blue-100: #e8effb;
+  --color-blue-50: #f4f7fd;
+  --color-yellow-100: #fdf0cc;
+  --color-yellow-500: #f0b429;
+  --color-yellow-600: #dc9f14;
+
+  /* 2. Roles — page */
+  --canvas: var(--color-onyx-canvas);
+  --surface: var(--color-graphite-card);
+  --sunken: var(--color-obsidian-button);
+  --line: rgb(112 112 125 / 0.35);
+  --line-strong: var(--color-slate-border);
+  --text: var(--color-ivory-text);
+  --text-muted: var(--color-ash-text);
+  --text-subtle: var(--color-slate-border);
+
+  /* 2. Roles — raised panels */
+  --signage: var(--color-graphite-card);
+  --signage-raised: var(--color-obsidian-button);
+  --signage-line: rgb(112 112 125 / 0.4);
+  --on-signage: var(--color-ivory-text);
+  --on-signage-muted: var(--color-ash-text);
+
+  /* 2. Roles — accent */
+  --signal: var(--color-cobalt);
+  --signal-hover: var(--color-cobalt-hover);
+  --signal-tint: var(--color-cobalt-tint);
+  --on-signal: var(--color-pure-white);
+
+  /* 2. Roles — feedback */
+  --success: var(--green-600);
+  --danger: var(--red-600);
+
+  color-scheme: dark;
+}
+
+html[data-theme="light"] {
+  --canvas: var(--color-blue-50);
+  --surface: var(--color-pure-white);
+  --sunken: var(--color-blue-100);
+  --line: var(--color-blue-200);
+  --line-strong: var(--color-blue-300);
+  --text: var(--color-navy-950);
+  --text-muted: var(--color-blue-600);
+  --text-subtle: var(--color-blue-500);
+
+  --signage: var(--color-navy-900);
+  --signage-raised: var(--color-navy-800);
+  --signage-line: var(--color-navy-700);
+  --on-signage: var(--color-pure-white);
+  --on-signage-muted: var(--color-blue-400);
+
+  --signal: var(--color-yellow-500);
+  --signal-hover: var(--color-yellow-600);
+  --signal-tint: var(--color-yellow-100);
+  --on-signal: var(--color-navy-950);
+
+  --success: #1f8a4c;
+  --danger: #c8372d;
+
+  color-scheme: light;
+}
+
+@theme {
+  --color-*: initial;
+}
+
+@theme inline {
+  --color-white: var(--color-pure-white);
+  --color-black: var(--color-onyx-canvas);
+  --color-cobalt: var(--color-cobalt);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+
+  --color-signage: var(--signage);
+  --color-signage-raised: var(--signage-raised);
+  --color-signage-line: var(--signage-line);
+  --color-on-signage: var(--on-signage);
+  --color-on-signage-muted: var(--on-signage-muted);
+
+  --color-signal: var(--signal);
+  --color-signal-hover: var(--signal-hover);
+  --color-signal-tint: var(--signal-tint);
+  --color-on-signal: var(--on-signal);
+
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+}
