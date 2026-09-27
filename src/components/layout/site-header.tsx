@@ -82,10 +82,10 @@ export function SiteHeader() {
           hidden && !open ? "-translate-y-full" : "translate-y-0",
         )}
       >
-        <div className="page-container flex h-(--header-height) items-center justify-between gap-6">
+        <div className="flex h-(--header-height) min-w-0 items-center justify-between gap-3 px-3 sm:px-4 md:px-5 xl:gap-6">
           <Logo />
 
-          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Main" className="hidden min-w-0 items-center lg:flex">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -94,7 +94,7 @@ export function SiteHeader() {
                   href={link.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "group relative px-3.5 py-2 type-small font-medium transition-colors speed-fast",
+                    "group relative px-2 py-2 type-small font-medium transition-colors speed-fast xl:px-3.5",
                     active ? "text-text" : "text-muted hover:text-text",
                   )}
                 >
@@ -102,7 +102,7 @@ export function SiteHeader() {
                   <span
                     aria-hidden
                     className={cn(
-                      "absolute inset-x-3.5 -bottom-px h-0.5 origin-left bg-signal transition-transform speed-base",
+                      "absolute inset-x-2 -bottom-px h-0.5 origin-left bg-signal transition-transform speed-base xl:inset-x-3.5",
                       active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                     )}
                   />
@@ -111,16 +111,16 @@ export function SiteHeader() {
             })}
           </nav>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden items-center gap-2 lg:flex xl:gap-3">
             <a
               href={phone.href}
-              className="inline-flex items-center gap-2 type-code text-sm text-muted transition-colors speed-fast hover:text-text"
+              className="hidden items-center gap-2 type-code text-sm text-muted transition-colors speed-fast hover:text-text xl:inline-flex"
             >
               <Phone className="size-4" aria-hidden />
               {phone.display}
             </a>
             <ThemeToggle />
-            <Button href="/contact" size="sm">
+            <Button href="/contact" size="sm" className="hidden xl:inline-flex">
               Book free counselling
             </Button>
           </div>

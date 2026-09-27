@@ -38,14 +38,9 @@ export default function ProcessPage() {
         title="From the first visit to the boarding gate."
         lead="The same order for every student, so the test, the offer, and the visa never wait on each other."
         actions={
-          <>
-            <Button href="/eligibility" variant="outline" arrow>
-              Check eligibility first
-            </Button>
-            <Button href="/contact" arrow>
-              Book the first counselling
-            </Button>
-          </>
+          <Button href="/contact" arrow>
+            Book the first counselling
+          </Button>
         }
       />
       <JourneySteps />

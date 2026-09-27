@@ -20,8 +20,8 @@ export default function DestinationsPage() {
         title="Pick a destination. We plan the route."
         lead="Each country has its own tests, intakes, and visa papers. Open one to see how the route works from Pathankot."
         actions={
-          <Button href="/eligibility" variant="outline" arrow>
-            Check which countries fit
+          <Button href="/contact" variant="outline" arrow>
+            Book free counselling
           </Button>
         }
       />

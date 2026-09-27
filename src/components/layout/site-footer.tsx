@@ -15,7 +15,7 @@ const socialLinks = [
 const explore = [
   { href: "/services", label: "Services" },
   { href: "/destinations", label: "Countries" },
-  { href: "/eligibility", label: "Eligibility" },
+  // { href: "/eligibility", label: "Eligibility" },
   { href: "/process", label: "Process" },
   { href: "/contact", label: "Contact" },
 ];

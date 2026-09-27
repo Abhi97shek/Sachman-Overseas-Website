@@ -17,7 +17,7 @@ export function applyTheme(theme: Theme) {
 
 export function readTheme(): Theme {
   const stored = window.localStorage.getItem(THEME_KEY);
-  return isTheme(stored) ? stored : "dark";
+  return isTheme(stored) ? stored : "light";
 }
 
 export function subscribeTheme(onStoreChange: () => void) {

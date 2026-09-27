@@ -25,7 +25,7 @@ export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
     <Link
       href="/"
       className={cn(
-        "group inline-flex items-center gap-3",
+        "group inline-flex min-w-0 shrink-0 items-center gap-3",
         tone === "light" ? "text-on-signage" : "text-text",
       )}
     >
@@ -43,7 +43,7 @@ export function Logo({ tone = "dark" }: { tone?: "dark" | "light" }) {
             tone === "light" ? "text-on-signage-muted" : "text-subtle",
           )}
         >
-          Pathankot · IXP
+          WE RISE BY LIFTING OTHERS
         </span>
       </span>
     </Link>

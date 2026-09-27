@@ -36,7 +36,7 @@ export const faqs = [
   },
   {
     q: "Can I check which countries I am eligible for?",
-    a: "Yes. Open the Eligibility page, enter 10th, 12th, IELTS or PTE, any study gap, and graduation marks if you want a master's. It is a first-pass check — a counsellor still matches the course and visa.",
+    a: "Yes. Bring your 10th, 12th, and any IELTS or PTE score to a free counselling session. A counsellor matches the course and visa — it is a first-pass check, not a visa decision.",
   },
 ];
 

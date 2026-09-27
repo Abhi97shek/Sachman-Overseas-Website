@@ -86,8 +86,8 @@ export function StudentStories() {
         <p className="mt-4 type-small text-subtle">Pathankot · 2026</p>
       </div>
 
-      <div data-reveal className="mt-6 flex items-center justify-between gap-6">
-        <p className="whitespace-nowrap type-body text-muted">
+      <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+        <p className="min-w-0 type-body text-muted lg:whitespace-nowrap">
           {googleRating.score} from {googleRating.count} Google reviews. These are their words, not ours.
         </p>
         <Button href={googleReviewsUrl} target="_blank" rel="noreferrer" variant="outline" arrow className="w-fit shrink-0">

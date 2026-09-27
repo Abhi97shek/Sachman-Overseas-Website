@@ -5,7 +5,7 @@ import { studyDestinations } from "@/lib/study-destinations";
 const stats = [
   { value: 100, suffix: "+", label: "Visas approved" },
   { value: studyDestinations.length, label: "Study countries we advise on" },
-  { value: partnerUniversities.length, label: "Partner universities and colleges" },
+  { value: 700, suffix: "+", label: "Partner universities and colleges" },
   { value: programmes.length, label: "Programmes under one roof" },
 ];
 

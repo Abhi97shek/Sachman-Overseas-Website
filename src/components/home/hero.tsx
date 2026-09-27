@@ -1,85 +1,68 @@
 import Image from "next/image";
-import Link from "next/link";
-import { phone } from "@/lib/institute";
+import { Inter } from "next/font/google";
+import { Button } from "@/design-system/buttons/button";
+
+const interItalic = Inter({
+  subsets: ["latin"],
+  style: "italic",
+  weight: ["600", "700"],
+});
 
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden text-white">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero-journey.jpg"
-          alt=""
-          fill
-          priority
-          quality={90}
-          sizes="100vw"
-          className="object-cover object-[center_45%]"
-        />
-        <div aria-hidden className="absolute inset-0 bg-[#0d1014]/35" />
+    <section className="px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
+      <div className="relative isolate flex min-h-[calc(100svh-var(--header-height)-1.25rem)] flex-col overflow-hidden rounded-frame">
+        <div data-parallax="0.08" className="absolute inset-0">
+          <Image
+            src="/images/hero-campus-walk.png"
+            alt="Students with backpacks walking toward a university campus under a bright blue sky"
+            fill
+            priority
+            quality={90}
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
         <div
           aria-hidden
-          className="absolute inset-0 bg-linear-to-t from-[#0d1014]/80 via-transparent to-[#0d1014]/25"
+          className="pointer-events-none absolute inset-0 z-[5] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.78)_0%,rgba(232,244,255,0.42)_38%,transparent_68%)]"
         />
-      </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[5] h-28 bg-linear-to-b from-transparent to-canvas"
+        />
 
-      <div className="relative z-10 mx-auto flex min-h-[32rem] max-w-4xl flex-col items-center justify-center px-6 py-20 text-center md:min-h-[40rem] md:py-28">
-        <h1 className="type-display text-balance">
-          <span className="block overflow-hidden pb-[0.08em]">
-            <span data-intro="line" className="block">
-              Study visas,
-            </span>
-          </span>
-          <span className="block overflow-hidden pb-[0.08em]">
-            <span data-intro="line" className="block">
-              from this centre.
-            </span>
-          </span>
-        </h1>
-
-        <p data-intro className="mt-6 max-w-xl type-lead text-white/80 text-pretty">
-          Walk in for free counselling in 10 minutes — coaching, the offer letter, and the visa file
-          from one classroom.
-        </p>
-
-        <form
-          data-intro
-          action="/contact"
-          method="get"
-          className="mt-10 flex w-full max-w-2xl flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center"
-        >
-          <label className="sr-only" htmlFor="hero-phone">
-            Phone number
-          </label>
-          <input
-            id="hero-phone"
-            name="phone"
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel"
-            placeholder="Your phone"
-            className="h-12 rounded-control border-0 bg-white/92 px-5 type-body text-[#0d1014] outline-none placeholder:text-[#66717d] focus-visible:ring-2 focus-visible:ring-signal"
-          />
-          <button
-            type="submit"
-            className="h-12 shrink-0 rounded-control bg-signal px-6 type-small font-medium text-on-signal transition-colors speed-fast hover:bg-signal-hover"
+        <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 py-16 text-center sm:px-8 sm:py-24">
+          <h1
+            className={`${interItalic.className} max-w-4xl text-[clamp(2rem,6.4vw,4.35rem)] leading-[1.05] font-bold tracking-[-0.03em] text-[#0b2744] italic [text-shadow:0_1px_0_rgb(255_255_255_/_0.7),0_0_32px_rgb(255_255_255_/_0.95)]`}
           >
-            Book counselling
-          </button>
-          <Link
-            href={phone.href}
-            className="inline-flex h-12 shrink-0 items-center justify-center rounded-control border border-white/35 bg-white/10 px-6 type-small font-medium text-white backdrop-blur-sm transition-colors speed-fast hover:border-white/70"
+            <span className="block overflow-hidden pb-[0.08em]">
+              <span data-intro="line" className="block">
+                IELTS, PTE, and study visas
+              </span>
+            </span>
+            <span className="mt-2 block overflow-hidden text-[0.55em] font-semibold tracking-[-0.02em]">
+              <span data-intro="line" className="block">
+                from Pathankot.
+              </span>
+            </span>
+          </h1>
+          <p
+            data-intro
+            className="mt-5 max-w-lg type-lead font-medium text-[#16324f] [text-shadow:0_1px_12px_rgb(255_255_255_/_0.9)]"
           >
-            Call the centre
-          </Link>
-        </form>
+            Spoken English, weekly mocks, and the visa file, from the centre on Dalhousie Road.
+          </p>
+          <div data-intro className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+            <Button href="/contact" arrow>
+              Book a free consult
+            </Button>
+            <Button href="/services" variant="light">
+              Explore services
+            </Button>
+          </div>
+        </div>
       </div>
-
-      <p className="relative z-10 border-t border-white/10 bg-[#0d1014]/80 px-6 py-3 text-center type-small text-white/70">
-        Dalhousie Road, Pathankot · A call is 5 seconds from anywhere ·{" "}
-        <a href={phone.href} className="text-white underline-offset-4 hover:underline">
-          {phone.display}
-        </a>
-      </p>
     </section>
   );
 }

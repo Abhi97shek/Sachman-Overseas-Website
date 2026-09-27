@@ -27,11 +27,11 @@ export function ConsultSection({ heading = true }: { heading?: boolean }) {
         </Suspense>
       </div>
 
-      <ul data-stagger className="mt-10 grid gap-8 border-t border-line pt-10 sm:grid-cols-3">
+      <ul data-stagger className="mt-10 grid gap-8 border-t border-line pt-10 md:grid-cols-3">
         {details.map((item) => {
           const Icon = item.icon;
           const body = (
-            <span className={`mt-1 block type-body ${item.nowrap ? "whitespace-nowrap" : "break-words"}`}>
+            <span className={`mt-1 block type-body ${item.nowrap ? "md:whitespace-nowrap" : "break-words"}`}>
               {item.value}
             </span>
           );
