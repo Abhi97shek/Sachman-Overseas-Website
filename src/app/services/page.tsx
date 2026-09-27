@@ -140,18 +140,26 @@ const faqs = [
   },
 ];
 
+const shell = "mx-auto w-full max-w-[1200px] px-4 sm:px-6";
+const section = "py-18";
+const eyebrow = "text-xs font-medium tracking-[0.14em] text-ink/55 uppercase";
+const heading = "font-display font-medium tracking-[0.01em] text-ink";
+const card = "rounded-[12px] bg-white";
+const ghostButton =
+  "inline-flex h-11 items-center justify-center gap-2 rounded-full border border-ink/25 px-5 text-base text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white";
+
 export default function ServicesPage() {
   return (
     <PageShell>
-      <section className="px-4 pt-10 pb-12 sm:px-6 md:px-8 md:pt-16 md:pb-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-end">
+      <section className={section}>
+        <div className={shell}>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end">
             <div>
-              <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">Services</p>
-              <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-6xl">
+              <p className={eyebrow}>Services</p>
+              <h1 className={`${heading} mt-4 max-w-3xl text-[clamp(2.5rem,5vw,4.0625rem)] leading-[1.1]`}>
                 Four programmes. One centre in Pathankot.
               </h1>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="mt-5 max-w-xl text-lg leading-[1.5] text-ink/70">
                 English test preparation and study-visa guidance under one roof, so your score and your
                 application move together.
               </p>
@@ -159,45 +167,29 @@ export default function ServicesPage() {
             <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
               <Link
                 href="/contact"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#f0b429] pr-2 pl-5 text-sm font-semibold text-ink"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#f0b429] px-6 text-base text-ink transition-colors hover:bg-[#e6a817]"
               >
                 Book a free consult
-                <span className="inline-flex size-8 items-center justify-center rounded-full bg-ink text-white">
-                  <ArrowRight className="size-4" aria-hidden />
-                </span>
+                <ArrowRight className="size-4" aria-hidden />
               </Link>
-              <a
-                href="tel:+919888454140"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-ink ring-1 ring-ink/10 hover:bg-white/80"
-              >
+              <a href="tel:+919888454140" className={`${ghostButton} h-12`}>
                 <Phone className="size-4" aria-hidden />
                 +91 98884 54140
               </a>
             </div>
           </div>
 
-          <nav aria-label="Programmes" className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <nav aria-label="Programmes" className="mt-12 flex flex-wrap gap-3">
             {programmes.map((item) => {
-              const service = services.find((entry) => entry.title === item.title);
-              const Icon = service?.icon;
+              const Icon = services.find((entry) => entry.title === item.title)?.icon;
               return (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="group flex items-center gap-3 rounded-2xl bg-white p-4 ring-1 ring-ink/8 transition-shadow hover:shadow-[0_12px_32px_rgba(18,22,28,0.08)]"
+                  className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-5 text-base text-ink transition-colors hover:bg-ink hover:text-white"
                 >
-                  {Icon ? (
-                    <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${service?.chip}`}>
-                      <Icon className="size-5" aria-hidden />
-                    </span>
-                  ) : null}
-                  <span className="flex-1">
-                    <span className="block text-[0.7rem] font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-                      {service?.num}
-                    </span>
-                    <span className="block text-sm font-semibold text-ink">{item.title}</span>
-                  </span>
-                  <ChevronDown className="size-4 text-ink/40 transition-transform group-hover:translate-y-0.5" aria-hidden />
+                  {Icon ? <Icon className="size-4" strokeWidth={1.6} aria-hidden /> : null}
+                  {item.title}
                 </a>
               );
             })}
@@ -205,81 +197,59 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-6 md:px-8 md:pb-24">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5">
+      <section className={`${section} pt-0`}>
+        <div className={`${shell} flex flex-col gap-3`}>
           {programmes.map((item) => {
             const service = services.find((entry) => entry.title === item.title);
             const Icon = service?.icon;
             return (
-              <article
-                key={item.id}
-                id={item.id}
-                className="scroll-mt-28 overflow-hidden rounded-[1.75rem] bg-white ring-1 ring-ink/8"
-              >
-                <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-                  <div className={`relative flex flex-col p-7 sm:p-9 md:p-10 ${service?.wash ?? "bg-white"}`}>
-                    {Icon ? (
-                      <Icon
-                        aria-hidden
-                        className={`pointer-events-none absolute -right-4 -bottom-6 size-40 ${service?.ghost} opacity-15`}
-                      />
-                    ) : null}
-                    <div className="relative flex items-center justify-between">
+              <article key={item.id} id={item.id} className={`${card} scroll-mt-28 p-8`}>
+                <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+                  <div className="flex flex-col">
+                    <div className="flex items-center justify-between">
                       {Icon ? (
-                        <span className={`flex size-12 items-center justify-center rounded-2xl ${service?.chip}`}>
-                          <Icon className="size-6" aria-hidden />
+                        <span className="flex size-11 items-center justify-center rounded-full bg-[#eef2f5] text-ink">
+                          <Icon className="size-5" strokeWidth={1.6} aria-hidden />
                         </span>
                       ) : null}
-                      <span className={`font-display text-sm font-semibold tracking-[0.16em] ${service?.ghost}`}>
-                        {service?.num}
-                      </span>
+                      <span className="text-sm tracking-[0.14em] text-ink/45">{service?.num}</span>
                     </div>
-                    <h2 className="relative mt-8 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-                      {item.title}
-                    </h2>
-                    <p className={`relative mt-4 max-w-md text-base leading-relaxed ${service?.muted}`}>{item.summary}</p>
-                    <dl className="relative mt-8 grid grid-cols-3 gap-3 border-t border-ink/10 pt-6">
+                    <h2 className={`${heading} mt-8 text-[2rem] leading-[1.15]`}>{item.title}</h2>
+                    <p className="mt-4 max-w-md text-base leading-[1.5] text-ink/70">{item.summary}</p>
+                    <dl className="mt-8 grid grid-cols-3 gap-3 border-t border-ink/10 pt-6">
                       {item.facts.map((fact) => (
                         <div key={fact.label}>
-                          <dt className="text-[0.68rem] font-semibold tracking-[0.12em] text-ink/55 uppercase">
-                            {fact.label}
-                          </dt>
-                          <dd className="mt-1 text-sm font-semibold text-ink">{fact.value}</dd>
+                          <dt className="text-xs tracking-[0.1em] text-ink/50 uppercase">{fact.label}</dt>
+                          <dd className="mt-1.5 text-sm font-medium text-ink">{fact.value}</dd>
                         </div>
                       ))}
                     </dl>
                   </div>
 
-                  <div className="flex flex-col p-7 sm:p-9 md:p-10">
-                    <p className="text-[0.72rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-                      Who it is for
-                    </p>
-                    <p className="mt-2 text-base leading-relaxed text-ink">{item.forWho}</p>
+                  <div className="flex flex-col">
+                    <p className={eyebrow}>Who it is for</p>
+                    <p className="mt-3 text-base leading-[1.5] text-ink">{item.forWho}</p>
 
-                    <p className="mt-8 text-[0.72rem] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
-                      What is included
-                    </p>
+                    <p className={`${eyebrow} mt-8`}>What is included</p>
                     <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                       {item.includes.map((point) => (
-                        <li key={point} className="flex gap-3 rounded-2xl bg-[#f3f6f8] p-4 text-sm leading-relaxed text-ink">
-                          <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-tide text-white">
-                            <Check className="size-3" aria-hidden />
-                          </span>
+                        <li
+                          key={point}
+                          className="flex gap-3 rounded-[12px] bg-[#f3f6f8] p-4 text-base leading-[1.5] text-ink"
+                        >
+                          <Check className="mt-1 size-4 shrink-0 text-ink/60" strokeWidth={2} aria-hidden />
                           {point}
                         </li>
                       ))}
                     </ul>
 
-                    <div className="mt-auto flex flex-wrap items-center gap-4 pt-8">
-                      <Link
-                        href="/contact"
-                        className="inline-flex h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-white hover:bg-ink-soft"
-                      >
+                    <div className="mt-auto flex flex-wrap items-center gap-3 pt-8">
+                      <Link href="/contact" className={ghostButton}>
                         Ask about {item.title}
                         <ArrowRight className="size-4" aria-hidden />
                       </Link>
                       {item.id === "study-visa-guidance" ? (
-                        <Link href="/destinations" className="text-sm font-semibold text-tide hover:text-tide-deep">
+                        <Link href="/destinations" className={ghostButton}>
                           See study countries
                         </Link>
                       ) : null}
@@ -292,49 +262,49 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-6 md:px-8 md:pb-24">
-        <div className="mx-auto max-w-7xl rounded-[1.75rem] bg-[#07182e] px-6 py-10 text-white sm:px-10 md:px-12 md:py-14">
-          <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-[#8ecff3] uppercase">How a course runs</p>
-          <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold tracking-tight md:text-4xl">
-            From the first visit to the visa file.
-          </h2>
-          <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            {steps.map((step, index) => (
-              <li key={step.title} className="relative border-t border-white/15 pt-5">
-                <span className="font-display text-sm font-semibold tracking-[0.16em] text-[#f0b429]">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 text-lg font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">{step.body}</p>
-              </li>
-            ))}
-          </ol>
+      <section className={`${section} pt-0`}>
+        <div className={shell}>
+          <div className="rounded-[12px] bg-[#1c2733] p-8 text-[#ededf3] md:p-12">
+            <p className="text-xs font-medium tracking-[0.14em] text-[#c3c3cc] uppercase">How a course runs</p>
+            <h2 className="mt-4 max-w-2xl font-display text-[2rem] leading-[1.15] font-medium tracking-[0.01em]">
+              From the first visit to the visa file.
+            </h2>
+            <ol className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {steps.map((step, index) => (
+                <li key={step.title} className="rounded-[12px] bg-[#243240] p-8">
+                  <span className="text-sm tracking-[0.14em] text-[#c3c3cc]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-4 text-lg font-medium">{step.title}</h3>
+                  <p className="mt-2 text-base leading-[1.5] text-[#c3c3cc]">{step.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-6 md:px-8 md:pb-24">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center">
+      <section className={`${section} pt-0`}>
+        <div className={`${shell} grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center`}>
           <div>
-            <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">Recent results</p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-              Scores and visas from this centre.
-            </h2>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+            <p className={eyebrow}>Recent results</p>
+            <h2 className={`${heading} mt-4 text-[2rem] leading-[1.15]`}>Scores and visas from this centre.</h2>
+            <p className="mt-4 max-w-md text-base leading-[1.5] text-ink/70">
               Posted by the Pathankot team after each result. More are on the centre&apos;s Instagram.
             </p>
             <a
               href="https://www.instagram.com/sachmaninstitute/"
               target="_blank"
               rel="noreferrer"
-              className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-tide hover:text-tide-deep"
+              className={`${ghostButton} mt-6`}
             >
               View on Instagram
               <ArrowUpRight className="size-4" aria-hidden />
             </a>
           </div>
-          <ul className="grid grid-cols-3 gap-3 sm:gap-4">
+          <ul className="grid grid-cols-3 gap-3">
             {results.map((item) => (
-              <li key={item.name} className="overflow-hidden rounded-2xl bg-white ring-1 ring-ink/8">
+              <li key={item.name} className={`${card} overflow-hidden`}>
                 <Image
                   src={item.image}
                   alt={`${item.name}: ${item.result}`}
@@ -343,9 +313,9 @@ export default function ServicesPage() {
                   className="aspect-[4/5] h-auto w-full object-cover object-top"
                   sizes="(min-width: 1024px) 20vw, 33vw"
                 />
-                <p className="px-3 py-3">
-                  <span className="block text-sm font-semibold text-ink">{item.name}</span>
-                  <span className="block text-xs text-tide">{item.result}</span>
+                <p className="px-4 py-3">
+                  <span className="block text-sm font-medium text-ink">{item.name}</span>
+                  <span className="block text-xs text-ink/55">{item.result}</span>
                 </p>
               </li>
             ))}
@@ -353,54 +323,52 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-6 md:px-8 md:pb-24">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+      <section className={`${section} pt-0`}>
+        <div className={`${shell} grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]`}>
           <div>
-            <p className="text-[0.72rem] font-semibold tracking-[0.2em] text-tide uppercase">Questions</p>
-            <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-              Before you enrol.
-            </h2>
+            <p className={eyebrow}>Questions</p>
+            <h2 className={`${heading} mt-4 text-[2rem] leading-[1.15]`}>Before you enrol.</h2>
           </div>
-          <div className="divide-y divide-ink/10 rounded-[1.5rem] bg-white px-6 ring-1 ring-ink/8 sm:px-8">
+          <div className={`${card} divide-y divide-ink/10 px-8`}>
             {faqs.map((item) => (
-              <details key={item.q} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+              <details key={item.q} className="group py-6">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-ink [&::-webkit-details-marker]:hidden">
                   {item.q}
-                  <ChevronDown className="size-5 shrink-0 text-ink/50 transition-transform group-open:rotate-180" aria-hidden />
+                  <ChevronDown
+                    className="size-5 shrink-0 text-ink/50 transition-transform group-open:rotate-180"
+                    strokeWidth={1.6}
+                    aria-hidden
+                  />
                 </summary>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+                <p className="mt-3 max-w-2xl text-base leading-[1.5] text-ink/70">{item.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-4 pb-16 sm:px-6 md:px-8 md:pb-20">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 rounded-[1.75rem] bg-[linear-gradient(135deg,#d7f1ff_0%,#eef7fb_55%,#fff7e0_100%)] p-8 sm:p-10 md:flex-row md:items-center md:justify-between md:p-12">
-          <div>
-            <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-              Not sure which course fits?
-            </h2>
-            <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="size-4 shrink-0 text-tide" aria-hidden />
-              Dalhousie Road, near Simbal Chowk, Pathankot · Mon–Sat, 9:00–18:00
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-ink px-6 text-sm font-semibold text-white hover:bg-ink-soft"
-            >
-              Book a free consult
-            </Link>
-            <a
-              href={directionsUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-ink ring-1 ring-ink/10 hover:bg-white/80"
-            >
-              Get directions
-            </a>
+      <section className={`${section} pt-0`}>
+        <div className={shell}>
+          <div className={`${card} flex flex-col gap-8 p-8 md:flex-row md:items-center md:justify-between md:p-12`}>
+            <div>
+              <h2 className={`${heading} text-[2rem] leading-[1.15]`}>Not sure which course fits?</h2>
+              <p className="mt-3 flex items-center gap-2 text-base text-ink/70">
+                <MapPin className="size-4 shrink-0" strokeWidth={1.6} aria-hidden />
+                Dalhousie Road, near Simbal Chowk, Pathankot · Mon–Sat, 9:00–18:00
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#f0b429] px-6 text-base text-ink transition-colors hover:bg-[#e6a817]"
+              >
+                Book a free consult
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+              <a href={directionsUrl} target="_blank" rel="noreferrer" className={`${ghostButton} h-12`}>
+                Get directions
+              </a>
+            </div>
           </div>
         </div>
       </section>
