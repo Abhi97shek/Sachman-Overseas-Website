@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/layout/page-shell";
 import { LegalArticle } from "@/components/layout/legal-article";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions | Sachman Overseas",
+export const metadata: Metadata = pageMetadata({
+  title: "Terms & Conditions",
   description: "Terms for using the Sachman Overseas website and counselling services in Pathankot.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (
@@ -15,9 +17,10 @@ export default function TermsPage() {
         <section>
           <h2>Who we are</h2>
           <p>
-            Sachman Overseas is a coaching and study-visa consultancy at 2nd Floor, above Dashmesh Bajaj,
-            Dalhousie Road, near Simbal Chowk, Pathankot, Punjab 145001. These terms cover this website and
-            the counselling, IELTS, PTE, spoken English, and visa-file support we provide from that centre.
+            Sachman Overseas, also known as Sachman Institute, is a coaching and study-visa consultancy at
+            2nd Floor, above Dashmesh Bajaj, Dalhousie Road, near Simbal Chowk, Pathankot, Punjab 145001.
+            These terms cover this website and the counselling, IELTS, PTE, spoken English, and visa-file
+            support we provide from that centre.
           </p>
         </section>
         <section>

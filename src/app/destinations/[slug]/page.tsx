@@ -9,6 +9,8 @@ import { Button } from "@/design-system/buttons/button";
 import { countries, getCountry } from "@/lib/countries";
 import { destinationCards } from "@/lib/destinations";
 import { getStudyDestination, studyDestinations } from "@/lib/study-destinations";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 type Params = { slug: string };
 
@@ -24,14 +26,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const country = getCountry(slug);
   const destination = getStudyDestination(slug);
-  if (country) return { title: `${country.name} | Sachman Overseas`, description: country.overview };
-  if (destination) {
-    return {
-      title: `${destination.name} | Sachman Overseas`,
-      description: `Study routes and visa guidance for ${destination.name} from Sachman Overseas in Pathankot.`,
-    };
-  }
-  return { title: "Country | Sachman Overseas" };
+  const card = destinationCards.find((item) => item.slug === slug);
+  const path = `/destinations/${slug}`;
+  const name = country?.name ?? destination?.name;
+  if (!name) return { title: "Country" };
+
+  return pageMetadata({
+    title: `Study in ${name} from Pathankot`,
+    description:
+      country?.overview ??
+      `Study routes and visa guidance for ${name} from Sachman Overseas in Pathankot. Course shortlist, English test plan, and the visa file in one sequence.`,
+    path,
+    image: card?.image ?? country?.image,
+  });
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
@@ -58,7 +65,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
             <div className="absolute inset-0 -z-10 animate-settle">
               <Image
                 src={card.image}
-                alt={country?.landmark ?? ""}
+                alt={country?.landmark ? `${name} — ${country.landmark}` : `Study in ${name}`}
                 fill
                 priority
                 sizes="100vw"
@@ -74,7 +81,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
                 className="inline-flex items-center gap-2 type-label text-on-signage/80 transition-colors speed-fast hover:text-on-signage"
               >
                 <ArrowLeft className="size-3.5" aria-hidden />
-                All countries
+                All study countries
               </Link>
               <div data-intro className="mt-6 flex items-center gap-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -235,7 +242,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
                   ))}
                 </ul>
                 <Button href={`/contact?country=${slug}`} block arrow className="mt-6">
-                  Plan this route
+                  Plan a {name} study visa
                 </Button>
               </div>
             </div>
@@ -245,6 +252,17 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
         {related.length ? (
           <section className="page-container section-y-tight border-t border-line">
             <p className="type-label text-muted">More in {card.region}</p>
+            <p className="mt-3 max-w-2xl type-small text-muted">
+              Compare nearby routes, or see{" "}
+              <Link href="/services" className="font-medium text-text underline underline-offset-4">
+                IELTS and PTE coaching in Pathankot
+              </Link>{" "}
+              and{" "}
+              <Link href="/contact" className="font-medium text-text underline underline-offset-4">
+                book a free counselling session
+              </Link>
+              .
+            </p>
             <div data-stagger className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((place) => (
                 <DestinationTile key={place.slug} place={place} />
@@ -253,6 +271,13 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
           </section>
         ) : null}
       </article>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Study countries", path: "/destinations" },
+          { name, path: `/destinations/${slug}` },
+        ])}
+      />
     </PageShell>
   );
 }

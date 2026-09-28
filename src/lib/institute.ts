@@ -1,4 +1,6 @@
 export const instituteName = "Sachman Overseas";
+export const instituteAlsoKnownAs = "Sachman Institute";
+export const instituteNames = [instituteName, instituteAlsoKnownAs] as const;
 
 export const instituteAddress =
   "2nd Floor, above Dashmesh Bajaj, Dalhousie Road, near Simbal Chowk, Pathankot, Punjab 145001";

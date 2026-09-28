@@ -265,7 +265,7 @@ export function CountryCarousel() {
                   >
                     <Image
                       src={place.image}
-                      alt=""
+                      alt={place.landmark ?? `${place.name} study destination`}
                       fill
                       draggable={false}
                       sizes="280px"

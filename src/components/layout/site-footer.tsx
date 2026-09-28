@@ -65,7 +65,8 @@ export function SiteFooter() {
             <div>
               <Logo tone="light" />
               <p className="mt-5 max-w-xs type-small text-on-signage-muted">
-                IELTS, PTE, spoken English, and study visas from one centre on Dalhousie Road, Pathankot.
+                Sachman Overseas, also known as Sachman Institute. IELTS, PTE, spoken English, and study
+                visas from one centre on Dalhousie Road, Pathankot.
               </p>
               <div className="mt-6 flex items-center gap-2">
                 {socialLinks.map((item) => {
@@ -121,7 +122,7 @@ export function SiteFooter() {
 
           <div className="mt-14 flex flex-col gap-4 border-t border-signage-line pt-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="type-small text-on-signage-muted">
-              © {new Date().getFullYear()} Sachman Overseas. All rights reserved.
+              © {new Date().getFullYear()} Sachman Overseas (Sachman Institute). All rights reserved.
             </p>
             <div className="flex gap-6">
               <Link href="/terms" className={linkClass}>

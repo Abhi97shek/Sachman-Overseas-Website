@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 /*
@@ -5,6 +6,11 @@ import { notFound } from "next/navigation";
   EligibilityChecker from @/components/eligibility/eligibility-checker
   and uncommenting the /eligibility links in institute.ts and the footer.
 */
+
+export const metadata: Metadata = {
+  title: "Eligibility",
+  robots: { index: false, follow: false },
+};
 
 export default function EligibilityPage() {
   notFound();

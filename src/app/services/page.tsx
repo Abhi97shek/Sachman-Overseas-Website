@@ -8,12 +8,15 @@ import { Faq } from "@/components/sections/faq";
 import { Button } from "@/design-system/buttons/button";
 import { phone } from "@/lib/institute";
 import { programmes } from "@/lib/programmes";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services | Sachman Overseas",
+export const metadata: Metadata = pageMetadata({
+  title: "IELTS, PTE & Spoken English Coaching in Pathankot",
   description:
-    "IELTS, PTE, spoken English, and study-visa guidance from Sachman Overseas in Pathankot.",
-};
+    "Classroom IELTS coaching, PTE Academic practice, spoken English groups, and study-visa guidance under one roof at Sachman Overseas, Pathankot.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
@@ -125,6 +128,15 @@ export default function ServicesPage() {
       <div className="section-y-tight" />
       <ResultPosts />
       <Faq />
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+          faqJsonLd(),
+        ]}
+      />
     </PageShell>
   );
 }

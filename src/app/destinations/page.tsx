@@ -4,12 +4,15 @@ import { PageIntro } from "@/components/layout/page-intro";
 import { DestinationDirectory } from "@/components/destinations/destination-directory";
 import { Button } from "@/design-system/buttons/button";
 import { destinationCards } from "@/lib/destinations";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Countries | Sachman Overseas",
+export const metadata: Metadata = pageMetadata({
+  title: "Study Visa Countries from Pathankot",
   description:
-    "Study destinations Sachman Overseas prepares visas for, across North America, Europe, Asia, the Middle East, and Africa.",
-};
+    "Study destinations Sachman Overseas advises from Pathankot, including Canada, the UK, Australia, Germany, the USA, and 25 more countries.",
+  path: "/destinations",
+});
 
 export default function DestinationsPage() {
   return (
@@ -26,6 +29,12 @@ export default function DestinationsPage() {
         }
       />
       <DestinationDirectory />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Study countries", path: "/destinations" },
+        ])}
+      />
     </PageShell>
   );
 }

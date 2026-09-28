@@ -5,11 +5,15 @@ import { ConsultSection } from "@/components/sections/consult-section";
 import { Proximity } from "@/components/sections/proximity";
 import { Button } from "@/design-system/buttons/button";
 import { directionsUrl, instituteAddress, mapEmbedUrl, phone } from "@/lib/institute";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact | Sachman Overseas",
-  description: "Visit Sachman Overseas in Pathankot or request a free study-visa consultation.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Sachman Overseas in Pathankot",
+  description:
+    "Visit Sachman Overseas on Dalhousie Road, Pathankot, call +91 98884 54140, or request a free IELTS, PTE, or study-visa counselling session.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
@@ -52,6 +56,12 @@ export default function ContactPage() {
           />
         </div>
       </section>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
     </PageShell>
   );
 }

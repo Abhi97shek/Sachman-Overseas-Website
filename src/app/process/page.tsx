@@ -4,12 +4,15 @@ import { PageIntro } from "@/components/layout/page-intro";
 import { JourneySteps } from "@/components/sections/journey-steps";
 import { Faq } from "@/components/sections/faq";
 import { Button } from "@/design-system/buttons/button";
+import { JsonLd } from "@/components/seo/json-ld";
+import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Process | Sachman Overseas",
+export const metadata: Metadata = pageMetadata({
+  title: "From Counselling to Study Visa in Pathankot",
   description:
-    "How Sachman Overseas takes you from counselling to exam preparation and your study visa.",
-};
+    "How Sachman Overseas takes Pathankot students from a free counselling session to IELTS or PTE classes, an offer letter, and the study-visa file.",
+  path: "/process",
+});
 
 const details = [
   {
@@ -58,6 +61,15 @@ export default function ProcessPage() {
       </section>
 
       <Faq />
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Process", path: "/process" },
+          ]),
+          faqJsonLd(),
+        ]}
+      />
     </PageShell>
   );
 }

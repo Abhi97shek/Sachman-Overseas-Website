@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell } from "@/components/layout/page-shell";
 import { LegalArticle } from "@/components/layout/legal-article";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | Sachman Overseas",
-  description: "How Sachman Overseas handles personal details shared by students and visitors.",
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
+  description: "How Sachman Overseas in Pathankot handles personal details shared by students and visitors.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

@@ -19,7 +19,7 @@ export function PopularRoutes() {
               Book free counselling
             </Button>
             <Button href="/destinations" variant="outline" arrow className="w-fit">
-              All {destinationCards.length} countries
+              All {destinationCards.length} study countries
             </Button>
           </div>
         }

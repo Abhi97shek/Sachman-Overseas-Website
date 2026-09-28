@@ -26,7 +26,7 @@ export function DestinationTile({
     >
       <Image
         src={place.image}
-        alt=""
+        alt={place.landmark ?? `Study in ${place.name}`}
         fill
         sizes={sizes}
         className="-z-20 object-cover transition-transform duration-[1200ms] ease-smooth group-hover:scale-[1.06]"

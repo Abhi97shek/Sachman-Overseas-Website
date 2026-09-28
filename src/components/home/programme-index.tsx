@@ -13,7 +13,7 @@ export function ProgrammeIndex() {
         lead="Most students prepare for the test while we shortlist courses, so the offer and the visa can start as soon as the score is in."
         aside={
           <Button href="/services" variant="outline" arrow className="w-fit">
-            See all programme details
+            IELTS, PTE and visa programmes
           </Button>
         }
       />
