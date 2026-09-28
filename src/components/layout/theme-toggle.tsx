@@ -9,7 +9,7 @@ export function ThemeToggle({ className }: { className?: string }) {
     <button
       type="button"
       className={cn(
-        "inline-flex size-11 items-center justify-center rounded-control border border-line-strong text-text transition-colors speed-fast hover:border-text",
+        "inline-flex size-11 items-center justify-center rounded-full text-text transition-colors speed-fast hover:bg-sunken",
         className,
       )}
       aria-label="Toggle light and dark mode"

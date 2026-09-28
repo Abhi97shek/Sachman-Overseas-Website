@@ -83,13 +83,13 @@ html[data-theme="light"] {
   --line-strong: var(--color-blue-300);
   --text: var(--color-navy-950);
   --text-muted: var(--color-blue-600);
-  --text-subtle: var(--color-blue-500);
+  --text-subtle: #3e4d6c;
 
   --signage: var(--color-navy-900);
   --signage-raised: var(--color-navy-800);
   --signage-line: var(--color-navy-700);
   --on-signage: var(--color-pure-white);
-  --on-signage-muted: var(--color-blue-400);
+  --on-signage-muted: #d7e2f6;
 
   --signal: var(--color-yellow-500);
   --signal-hover: var(--color-yellow-600);

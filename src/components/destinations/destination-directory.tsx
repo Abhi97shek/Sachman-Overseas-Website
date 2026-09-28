@@ -45,7 +45,7 @@ export function DestinationDirectory() {
         data-intro
         className="sticky top-(--header-height) z-20 -mx-(--gutter) flex flex-col gap-3 border-b border-line bg-canvas/90 px-(--gutter) py-4 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between"
       >
-        <div role="tablist" aria-label="Region" className="no-scrollbar flex gap-1.5 overflow-x-auto">
+        <div role="group" aria-label="Region" className="no-scrollbar flex gap-1.5 overflow-x-auto">
           {filters.map((item) => {
             const count =
               item === "All"
@@ -56,8 +56,7 @@ export function DestinationDirectory() {
               <button
                 key={item}
                 type="button"
-                role="tab"
-                aria-selected={selected}
+                aria-pressed={selected}
                 onClick={() => setFilter(item)}
                 className={cn(
                   "inline-flex h-10 shrink-0 items-center gap-2 rounded-control border px-4 type-small font-semibold transition-colors speed-fast",

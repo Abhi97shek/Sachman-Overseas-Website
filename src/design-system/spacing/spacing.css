@@ -31,7 +31,7 @@
   --gutter: clamp(1.25rem, 0.55rem + 2.8vw, var(--spacing-32));
   --section-space: var(--section-gap);
   --section-space-tight: var(--spacing-40);
-  --header-height: 4.5rem;
+  --header-height: 4.75rem;
 }
 
 @theme inline {

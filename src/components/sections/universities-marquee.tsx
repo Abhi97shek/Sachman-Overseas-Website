@@ -10,7 +10,7 @@ export function UniversitiesMarquee() {
         </h2>
       </div>
       <div className="group mt-8 overflow-hidden mask-x-from-85% mask-x-to-100%">
-        <div className="flex w-max animate-marquee items-center group-hover:[animation-play-state:paused]">
+        <div className="flex w-max animate-marquee items-center will-change-transform group-hover:[animation-play-state:paused]">
           {[0, 1].map((copy) => (
             <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex items-center">
               {partnerUniversities.map((campus) => (
@@ -19,7 +19,11 @@ export function UniversitiesMarquee() {
                   <img
                     src={campus.logo}
                     alt={copy === 0 ? campus.name : ""}
-                    className="h-9 w-auto opacity-70 grayscale transition-[filter,opacity] speed-base hover:opacity-100 hover:grayscale-0 sm:h-10"
+                    width={160}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-9 w-auto opacity-100 sm:h-10"
                     draggable={false}
                   />
                 </li>

@@ -31,8 +31,7 @@ export function SiteFooter() {
             src="/images/footer-airport.jpg"
             alt="A family waving off their daughter at the airport"
             fill
-            quality={92}
-            unoptimized
+            quality={70}
             sizes="100vw"
             className="object-cover object-[12%_center] md:object-center"
           />

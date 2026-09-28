@@ -250,7 +250,6 @@ export function CountryCarousel() {
                     href={`/destinations/${place.slug}`}
                     draggable={false}
                     aria-label={index === active ? `${place.name}, learn more` : `Show ${place.name}`}
-                    aria-current={index === active ? "true" : undefined}
                     onClick={(event) => {
                       if (dragged.current) {
                         event.preventDefault();
@@ -328,7 +327,7 @@ export function CountryCarousel() {
                 key={place.slug}
                 type="button"
                 aria-label={`Go to ${place.name}`}
-                aria-current={index === active ? "true" : undefined}
+                aria-pressed={index === active}
                 onClick={() => scrollToIndex(index)}
                 className={cn("grid h-4 place-items-center", index === active ? "w-6" : "w-3.5")}
               >

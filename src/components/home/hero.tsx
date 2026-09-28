@@ -6,21 +6,24 @@ const interItalic = Inter({
   subsets: ["latin"],
   style: "italic",
   weight: ["600", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export function Hero() {
   return (
-    <section className="px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
-      <div className="relative isolate flex min-h-[calc(100svh-var(--header-height)-1.25rem)] flex-col overflow-hidden rounded-frame">
+    <section className="relative z-0 -mt-(--header-height) px-3 pt-3 sm:px-4 sm:pt-4 md:px-5 md:pt-5">
+      <div className="relative isolate flex min-h-[calc(100svh-1.5rem)] flex-col overflow-hidden rounded-frame">
         <div data-parallax="0.08" className="absolute inset-0">
           <Image
-            src="/images/hero-campus-walk.png"
+            src="/images/hero-campus-walk.webp"
             alt="Students with backpacks walking toward a university campus under a bright blue sky"
-            fill
+            width={1556}
+            height={1011}
             priority
-            quality={90}
-            sizes="100vw"
-            className="object-cover object-center"
+            quality={72}
+            sizes="(max-width: 768px) 100vw, 1600px"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
         </div>
         <div
@@ -36,16 +39,8 @@ export function Hero() {
           <h1
             className={`${interItalic.className} max-w-4xl text-[clamp(2rem,6.4vw,4.35rem)] leading-[1.05] font-bold tracking-[-0.03em] text-[#0b2744] italic [text-shadow:0_1px_0_rgb(255_255_255_/_0.7),0_0_32px_rgb(255_255_255_/_0.95)]`}
           >
-            <span className="block overflow-hidden pb-[0.08em]">
-              <span data-intro="line" className="block">
-                IELTS, PTE, and study visas
-              </span>
-            </span>
-            <span className="mt-2 block overflow-hidden text-[0.55em] font-semibold tracking-[-0.02em]">
-              <span data-intro="line" className="block">
-                from Pathankot.
-              </span>
-            </span>
+            <span className="block pb-[0.08em]">IELTS, PTE, and study visas</span>
+            <span className="mt-2 block text-[0.55em] font-semibold tracking-[-0.02em]">from Pathankot.</span>
           </h1>
           <p
             data-intro

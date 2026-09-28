@@ -14,7 +14,7 @@
   --radius-3xl: 32px;
   --radius-3xl-2: 40px;
 
-  --radius-nav: 40px;
+  --radius-nav: 999px;
   --radius-tags: 40px;
   --radius-cards: 12px;
   --radius-inputs: 32px;
@@ -27,6 +27,18 @@
 
   --shadow-raised-value: 0 1px 2px rgb(0 0 0 / 0.24), 0 14px 34px -16px rgb(0 0 0 / 0.45);
   --shadow-floating-value: 0 30px 70px -24px rgb(0 0 0 / 0.55);
+  --shadow-nav-value: 0 0 0 1px rgb(0 0 0 / 0.04), 0 1px 1px rgb(0 0 0 / 0.04), 0 6px 16px -4px rgb(0 0 0 / 0.1), 0 18px 36px -16px rgb(0 0 0 / 0.08);
+  --glass-nav-fill: color-mix(in srgb, var(--surface) 46%, transparent);
+  --glass-nav-fill-compact: color-mix(in srgb, var(--surface) 78%, transparent);
+  --glass-nav-line: color-mix(in srgb, var(--text) 10%, transparent);
+  --glass-nav-sheen: rgb(255 255 255 / 0.55);
+}
+
+html[data-theme="dark"] {
+  --glass-nav-fill: color-mix(in srgb, var(--surface) 42%, transparent);
+  --glass-nav-fill-compact: color-mix(in srgb, var(--surface) 72%, transparent);
+  --glass-nav-line: rgb(255 255 255 / 0.14);
+  --glass-nav-sheen: rgb(255 255 255 / 0.12);
 }
 
 @theme inline {
@@ -37,4 +49,33 @@
 
   --shadow-raised: var(--shadow-raised-value);
   --shadow-floating: var(--shadow-floating-value);
+  --shadow-nav: var(--shadow-nav-value);
+}
+
+@layer components {
+  .nav-glass {
+    background: var(--glass-nav-fill);
+    border: 1px solid var(--glass-nav-line);
+    box-shadow: inset 0 1px 0 var(--glass-nav-sheen), var(--shadow-nav);
+    transition-property: padding, gap, background-color, box-shadow;
+    transition-duration: var(--duration-base);
+    transition-timing-function: var(--ease-out);
+  }
+
+  .nav-glass-compact {
+    background: var(--glass-nav-fill-compact);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav-glass,
+  .nav-glass-compact {
+    background: var(--surface);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-glass {
+    transition-duration: 0.01ms;
+  }
 }

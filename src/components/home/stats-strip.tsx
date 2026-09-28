@@ -1,9 +1,8 @@
-import { partnerUniversities } from "@/lib/universities";
 import { programmes } from "@/lib/programmes";
 import { studyDestinations } from "@/lib/study-destinations";
 
 const stats = [
-  { value: 100, suffix: "+", label: "Visas approved" },
+  { value: 100, suffix: "%", label: "Visa success rate" },
   { value: studyDestinations.length, label: "Study countries we advise on" },
   { value: 700, suffix: "+", label: "Partner universities and colleges" },
   { value: programmes.length, label: "Programmes under one roof" },

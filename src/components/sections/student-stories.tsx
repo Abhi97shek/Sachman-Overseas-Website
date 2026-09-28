@@ -16,7 +16,7 @@ function initials(name: string) {
 
 function Stars({ tone }: { tone: "dark" | "paper" }) {
   return (
-    <span className="flex gap-0.5" aria-label="5 out of 5 stars">
+    <span className="flex gap-0.5" role="img" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }, (_, index) => (
         <Star
           key={index}
@@ -83,7 +83,7 @@ export function StudentStories() {
 
       <div data-reveal className="mt-5">
         <h2 className="type-display tracking-[-0.04em]">Reviews</h2>
-        <p className="mt-4 type-small text-subtle">Pathankot · 2026</p>
+       
       </div>
 
       <div data-reveal className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
