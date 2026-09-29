@@ -42,3 +42,9 @@
     display: none;
   }
 }
+
+@layer components {
+  [data-fan] {
+    transform: translate(-50%, -50%) translate(var(--fan-x, 0px), var(--fan-y, 0px)) rotate(var(--fan-r, 0deg));
+  }
+}

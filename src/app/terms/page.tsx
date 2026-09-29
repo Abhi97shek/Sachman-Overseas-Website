@@ -19,7 +19,7 @@ export default function TermsPage() {
           <p>
             Sachman Overseas, also known as Sachman Institute, is a coaching and study-visa consultancy at
             2nd Floor, above Dashmesh Bajaj, Dalhousie Road, near Simbal Chowk, Pathankot, Punjab 145001.
-            These terms cover this website and the counselling, IELTS, PTE, spoken English, and visa-file
+            These terms cover this website and the counselling, IELTS, PTE, Spoken English, and visa-file
             support we provide from that centre.
           </p>
         </section>

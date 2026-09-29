@@ -70,7 +70,7 @@ export function localBusinessJsonLd(): JsonLd {
     image: `${getSiteUrl()}/images/logo.png`,
     logo: `${getSiteUrl()}/images/logo.png`,
     description:
-      "Sachman Overseas, also known as Sachman Institute, offers IELTS, PTE, spoken English, and study-visa guidance from Dalhousie Road, Pathankot.",
+      "Sachman Overseas, also known as Sachman Institute, offers IELTS, PTE, Spoken English, and study-visa guidance from Dalhousie Road, Pathankot.",
     address: {
       "@type": "PostalAddress",
       streetAddress: "2nd Floor, above Dashmesh Bajaj, Dalhousie Road, near Simbal Chowk",

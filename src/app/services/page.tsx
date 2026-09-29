@@ -14,7 +14,7 @@ import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "IELTS, PTE & Spoken English Coaching in Pathankot",
   description:
-    "Classroom IELTS coaching, PTE Academic practice, spoken English groups, and study-visa guidance under one roof at Sachman Overseas, Pathankot.",
+    "Classroom IELTS coaching, PTE Academic practice, Spoken English groups, and study-visa guidance under one roof at Sachman Overseas, Pathankot.",
   path: "/services",
 });
 
