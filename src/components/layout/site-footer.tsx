@@ -65,7 +65,7 @@ export function SiteFooter() {
             <div>
               <Logo tone="light" />
               <p className="mt-5 max-w-xs type-small text-on-signage-muted">
-                Sachman Overseas, also known as Sachman Institute. IELTS, PTE, spoken English, and study
+                Sachman Overseas, also known as Sachman Institute. IELTS, PTE, Spoken English, and study
                 visas from one centre on Dalhousie Road, Pathankot.
               </p>
               <div className="mt-6 flex items-center gap-2">

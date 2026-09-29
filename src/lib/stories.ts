@@ -30,7 +30,7 @@ export const reviews = [
     name: "Sahil Khan",
     topic: "Spoken English",
     quote:
-      "Excellent spoken English classes. The teaching method is simple and effective. I have gained confidence in speaking English and improved my communication skills significantly.",
+      "Excellent Spoken English classes. The teaching method is simple and effective. I have gained confidence in speaking English and improved my communication skills significantly.",
   },
   {
     name: "Simranjeet Kaur",
