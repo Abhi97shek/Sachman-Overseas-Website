@@ -4,7 +4,7 @@ import { Button } from "@/design-system/buttons/button";
 import { Logo } from "@/components/layout/logo";
 import { FacebookIcon, InstagramIcon, LinkedInIcon } from "@/components/layout/social-icons";
 import { directionsUrl, email, instituteAddress, openingHours, phone, socials } from "@/lib/institute";
-import { programmes } from "@/lib/programmes";
+import { programmePath, programmes } from "@/lib/programmes";
 
 const socialLinks = [
   { href: socials.instagram, label: "Instagram", icon: InstagramIcon },
@@ -91,7 +91,7 @@ export function SiteFooter() {
               <nav aria-label="Coaching" className="flex flex-col gap-3">
                 <p className="mb-1 type-label text-on-signage">Coaching</p>
                 {programmes.map((item) => (
-                  <Link key={item.id} href={`/services#${item.id}`} className={linkClass}>
+                  <Link key={item.id} href={programmePath(item)} className={linkClass}>
                     {item.title}
                   </Link>
                 ))}

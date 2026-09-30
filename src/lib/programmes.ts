@@ -3,6 +3,7 @@ import type { LucideIcon } from "lucide-react";
 
 export type Programme = {
   id: string;
+  slug: string;
   num: string;
   title: string;
   icon: LucideIcon;
@@ -13,9 +14,18 @@ export type Programme = {
   facts: { label: string; value: string }[];
 };
 
+export function programmePath(programme: Pick<Programme, "slug">) {
+  return `/services/${programme.slug}`;
+}
+
+export function getProgrammeBySlug(slug: string) {
+  return programmes.find((item) => item.slug === slug);
+}
+
 export const programmes: Programme[] = [
   {
     id: "ielts-coaching",
+    slug: "ielts",
     num: "01",
     title: "IELTS Coaching",
     icon: Headphones,
@@ -38,6 +48,7 @@ export const programmes: Programme[] = [
   },
   {
     id: "pte-academic",
+    slug: "pte",
     num: "02",
     title: "PTE Academic",
     icon: Laptop,
@@ -59,6 +70,7 @@ export const programmes: Programme[] = [
   },
   {
     id: "spoken-english",
+    slug: "spoken-english",
     num: "03",
     title: "Spoken English",
     icon: Mic,
@@ -80,6 +92,7 @@ export const programmes: Programme[] = [
   },
   {
     id: "study-visa-guidance",
+    slug: "study-visa",
     num: "04",
     title: "Study Visa Guidance",
     icon: GraduationCap,

@@ -13,13 +13,13 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "IELTS, PTE & Study Visa in Pathankot",
+    title: "IELTS Institute in Pathankot",
     description:
-      "Sachman Overseas, also known as Sachman Institute, prepares Pathankot students for IELTS and PTE, spoken English, and study visas for Canada, the UK, Australia, Germany, and more.",
+      "Sachman Institute (Sachman Overseas) on Dalhousie Road, Pathankot: IELTS coaching with weekly mocks, PTE, spoken English, and study-visa files. Free first counselling.",
     path: "/",
   }),
   title: {
-    absolute: "Sachman Overseas (Sachman Institute) | IELTS, PTE & Study Visa Pathankot",
+    absolute: "IELTS Institute in Pathankot | Sachman Overseas (Sachman Institute)",
   },
 };
 

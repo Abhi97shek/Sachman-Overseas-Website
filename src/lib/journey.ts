@@ -1,3 +1,5 @@
+import { googleRating } from "@/lib/stories";
+
 export const journeySteps = [
   {
     title: "Free counselling",
@@ -33,6 +35,10 @@ export const faqs = [
   {
     q: "Where are classes held?",
     a: "At the centre on the 2nd Floor, above Dashmesh Bajaj, Dalhousie Road, near Simbal Chowk, Pathankot. We are open Monday to Saturday, 9:00 to 18:00.",
+  },
+  {
+    q: "Which is the best IELTS institute in Pathankot?",
+    a: `There is no official ranking. Students usually compare weekly mocks, Writing and Speaking feedback, Google reviews, and how easy the centre is to reach. Sachman Overseas, also known as Sachman Institute, teaches IELTS on Dalhousie Road, Pathankot, with weekly mocks and a free first counselling session. Google lists the centre at ${googleRating.score} from ${googleRating.count} reviews; one published review calls it the best IELTS institute in Pathankot. Visit, sit a diagnostic mock, and judge the teaching yourself.`,
   },
   {
     q: "Can I check which countries I am eligible for?",

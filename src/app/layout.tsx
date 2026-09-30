@@ -9,11 +9,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "Sachman Overseas (Sachman Institute) | IELTS, PTE & Study Visa Pathankot",
+    default: "IELTS Institute in Pathankot | Sachman Overseas (Sachman Institute)",
     template: "%s | Sachman Overseas",
   },
   description:
-    "Sachman Overseas, also known as Sachman Institute, offers IELTS, PTE, spoken English, and study-visa guidance on Dalhousie Road, Pathankot. Free first counselling.",
+    "Sachman Institute on Dalhousie Road, Pathankot: IELTS coaching with weekly mocks, PTE, spoken English, and study-visa guidance. Free first counselling.",
   applicationName: "Sachman Overseas",
   authors: [{ name: "Sachman Overseas" }],
   creator: "Sachman Overseas",
@@ -23,15 +23,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "Sachman Overseas",
-    title: "Sachman Overseas (Sachman Institute) | IELTS, PTE & Study Visa Pathankot",
+    title: "IELTS Institute in Pathankot | Sachman Overseas (Sachman Institute)",
     description:
-      "Sachman Overseas, also known as Sachman Institute, in Pathankot: IELTS, PTE, spoken English, and study-visa guidance.",
+      "Sachman Institute on Dalhousie Road, Pathankot: IELTS coaching with weekly mocks, PTE, spoken English, and study-visa guidance.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sachman Overseas (Sachman Institute) | IELTS, PTE & Study Visa Pathankot",
+    title: "IELTS Institute in Pathankot | Sachman Overseas (Sachman Institute)",
     description:
-      "Sachman Overseas, also known as Sachman Institute, in Pathankot: IELTS, PTE, spoken English, and study-visa guidance.",
+      "Sachman Institute on Dalhousie Road, Pathankot: IELTS coaching with weekly mocks, PTE, spoken English, and study-visa guidance.",
   },
   robots: {
     index: true,

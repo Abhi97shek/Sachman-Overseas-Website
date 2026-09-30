@@ -254,7 +254,7 @@ export default async function CountryPage({ params }: { params: Promise<Params> 
             <p className="type-label text-muted">More in {card.region}</p>
             <p className="mt-3 max-w-2xl type-small text-muted">
               Compare nearby routes, or see{" "}
-              <Link href="/services" className="font-medium text-text underline underline-offset-4">
+              <Link href="/services/ielts" className="font-medium text-text underline underline-offset-4">
                 IELTS and PTE coaching in Pathankot
               </Link>{" "}
               and{" "}

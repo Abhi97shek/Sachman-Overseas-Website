@@ -6,7 +6,7 @@ import { Proximity } from "@/components/sections/proximity";
 import { Button } from "@/design-system/buttons/button";
 import { directionsUrl, instituteAddress, mapEmbedUrl, phone } from "@/lib/institute";
 import { JsonLd } from "@/components/seo/json-ld";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, contactPageJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Sachman Overseas in Pathankot",
@@ -57,10 +57,13 @@ export default function ContactPage() {
         </div>
       </section>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Contact", path: "/contact" },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+          contactPageJsonLd(),
+        ]}
       />
     </PageShell>
   );

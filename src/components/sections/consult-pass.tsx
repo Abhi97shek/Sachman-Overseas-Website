@@ -72,12 +72,15 @@ function FieldError({ id, message }: { id: string; message?: string }) {
   );
 }
 
-export function ConsultPass() {
+export function ConsultPass({ presetInterest: interestFromPage }: { presetInterest?: string } = {}) {
   const params = useSearchParams();
   const preset = params.get("country") ?? "";
+  const queryInterest = params.get("interest") ?? interestFromPage ?? "";
   const [name, setName] = useState("");
   const [phone, setPhone] = useState(params.get("phone") ?? "");
-  const [interest, setInterest] = useState("");
+  const [interest, setInterest] = useState(
+    interests.some((item) => item.value === queryInterest) ? queryInterest : "",
+  );
   const [country, setCountry] = useState(
     studyDestinations.some((item) => item.slug === preset) ? preset : "",
   );

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/layout/page-intro";
 import { Button } from "@/design-system/buttons/button";
-import { programmes } from "@/lib/programmes";
+import { programmePath, programmes } from "@/lib/programmes";
 
 export function ProgrammeIndex() {
   return (
@@ -24,7 +24,7 @@ export function ProgrammeIndex() {
           return (
             <li key={item.id} className="border-b border-line">
               <Link
-                href={`/services#${item.id}`}
+                href={programmePath(item)}
                 className="group relative isolate grid grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-2 px-1 py-7 sm:gap-x-8 md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] md:py-9 lg:px-4"
               >
                 <span

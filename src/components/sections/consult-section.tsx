@@ -10,7 +10,13 @@ const details = [
   { icon: Clock, label: "Open", value: openingHours, nowrap: true },
 ];
 
-export function ConsultSection({ heading = true }: { heading?: boolean }) {
+export function ConsultSection({
+  heading = true,
+  interest,
+}: {
+  heading?: boolean;
+  interest?: string;
+}) {
   return (
     <section id="contact" className="page-container section-y">
       {heading ? (
@@ -23,7 +29,7 @@ export function ConsultSection({ heading = true }: { heading?: boolean }) {
 
       <div data-reveal className={heading ? "mt-14 md:mt-20" : undefined}>
         <Suspense>
-          <ConsultPass />
+          <ConsultPass presetInterest={interest} />
         </Suspense>
       </div>
 

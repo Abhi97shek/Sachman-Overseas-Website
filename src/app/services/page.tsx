@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageShell } from "@/components/layout/page-shell";
 import { PageIntro } from "@/components/layout/page-intro";
 import { JourneySteps } from "@/components/sections/journey-steps";
@@ -7,7 +8,7 @@ import { ResultPosts } from "@/components/sections/result-posts";
 import { Faq } from "@/components/sections/faq";
 import { Button } from "@/design-system/buttons/button";
 import { phone } from "@/lib/institute";
-import { programmes } from "@/lib/programmes";
+import { programmePath, programmes } from "@/lib/programmes";
 import { JsonLd } from "@/components/seo/json-ld";
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -38,91 +39,43 @@ export default function ServicesPage() {
         }
       />
 
-      <nav aria-label="Programmes" className="page-container">
-        <ul data-intro className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+      <nav aria-label="Programmes" className="page-container pb-(--section-space)">
+        <ul data-stagger className="border-t border-line">
           {programmes.map((item) => {
             const Icon = item.icon;
             return (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  className="group flex h-full items-center gap-3 rounded-control border border-line bg-surface p-3 type-small font-semibold transition-colors speed-fast hover:border-text sm:p-4"
+              <li key={item.id} className="border-b border-line">
+                <Link
+                  href={programmePath(item)}
+                  className="group relative isolate grid grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-2 px-1 py-7 sm:gap-x-8 md:grid-cols-[4rem_minmax(0,1fr)_minmax(0,1.1fr)_auto] md:py-9"
                 >
-                  <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-control bg-sunken transition-colors speed-fast group-hover:bg-signal">
-                    <Icon className="size-4" strokeWidth={1.75} aria-hidden />
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 -z-10 origin-bottom scale-y-0 rounded-panel bg-signage transition-transform speed-slow group-hover:scale-y-100 group-focus-visible:scale-y-100"
+                  />
+                  <span className="type-code text-sm text-subtle transition-colors speed-base group-hover:text-signal">
+                    {item.num}
                   </span>
-                  <span className="min-w-0">
-                    <span className="block type-code text-xs font-normal text-subtle">{item.num}</span>
+                  <span className="type-h2 text-[clamp(1.5rem,1.1rem+1.6vw,2.25rem)] transition-colors speed-base group-hover:text-on-signage">
                     {item.title}
                   </span>
-                </a>
+                  <span className="col-span-3 col-start-1 max-w-md type-body text-muted transition-colors speed-base group-hover:text-on-signage-muted md:col-span-1 md:col-start-auto">
+                    {item.short}
+                  </span>
+                  <span className="col-start-3 row-start-1 flex items-center justify-end gap-3 md:col-start-auto md:row-start-auto">
+                    <span className="hidden size-12 items-center justify-center rounded-control border border-line text-muted transition-colors speed-base group-hover:border-signage-line group-hover:text-on-signage sm:inline-flex">
+                      <Icon className="size-5" strokeWidth={1.6} aria-hidden />
+                    </span>
+                    <span className="inline-flex size-12 items-center justify-center rounded-control bg-sunken text-text transition-[background-color,transform] speed-base group-hover:translate-x-1 group-hover:bg-signal">
+                      <ArrowRight className="size-5" aria-hidden />
+                    </span>
+                  </span>
+                </Link>
               </li>
             );
           })}
         </ul>
       </nav>
-
-      <div className="page-container section-y">
-        {programmes.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <article
-              key={item.id}
-              id={item.id}
-              className={`grid gap-10 border-t border-line py-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20 lg:py-20 ${
-                index === programmes.length - 1 ? "border-b" : ""
-              }`}
-            >
-              <div data-reveal className="lg:sticky lg:top-[calc(var(--header-height)+2rem)] lg:self-start">
-                <div className="flex items-center gap-4">
-                  <span className="inline-flex size-12 items-center justify-center rounded-control bg-signage text-signal">
-                    <Icon className="size-5" strokeWidth={1.6} aria-hidden />
-                  </span>
-                  <span className="type-code text-sm text-subtle">{item.num} / 04</span>
-                </div>
-                <h2 className="mt-8 type-h2">{item.title}</h2>
-                <p className="mt-5 max-w-md type-lead text-muted">{item.summary}</p>
-                <dl className="mt-10 grid grid-cols-3 gap-4 border-t border-line pt-6">
-                  {item.facts.map((fact) => (
-                    <div key={fact.label}>
-                      <dt className="type-label text-[0.625rem] text-subtle">{fact.label}</dt>
-                      <dd className="mt-2 type-small font-semibold">{fact.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-
-              <div data-reveal>
-                <p className="type-label text-muted">Who it is for</p>
-                <p className="mt-3 max-w-xl type-lead">{item.forWho}</p>
-
-                <p className="mt-12 type-label text-muted">What is included</p>
-                <ul data-stagger className="mt-5 border-t border-line">
-                  {item.includes.map((point) => (
-                    <li key={point} className="flex gap-4 border-b border-line py-4 type-body">
-                      <span className="mt-0.5 inline-flex size-6 shrink-0 items-center justify-center rounded-[0.3rem] bg-signal-tint text-text">
-                        <Check className="size-3.5" strokeWidth={2.5} aria-hidden />
-                      </span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-10 flex flex-wrap gap-3">
-                  <Button href="/contact" variant="dark" arrow>
-                    Ask about {item.title}
-                  </Button>
-                  {item.id === "study-visa-guidance" ? (
-                    <Button href="/destinations" variant="outline">
-                      See study countries
-                    </Button>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          );
-        })}
-      </div>
 
       <JourneySteps title="How a course runs." />
       <div className="section-y-tight" />
