@@ -1,0 +1,96 @@
+/*
+  IELTS study inks — scoped to the guide only.
+
+  Locked to Sachman: canvas, navy text, yellow --signal for open/CTA.
+  Extra hues are teaching labels, not a second brand:
+  listen = teal, read = navy, write = gold, speak = terracotta, score = green.
+
+  Hero red is official IELTS crimson, header-only — not a site token,
+  not --danger, not a replacement for yellow --signal.
+*/
+
+.ielts-hero {
+  --ielts-red: #e31837;
+  --ielts-red-deep: #6b1020;
+}
+
+.ielts-study {
+  --ink-listen: #0b7a6f;
+  --tint-listen: #d9f4ef;
+  --ink-read: #123a82;
+  --tint-read: #e8effb;
+  --ink-write: #b8860b;
+  --tint-write: #fdf0cc;
+  --ink-speak: #b44b1c;
+  --tint-speak: #f8e4d6;
+  --ink-test: #123a82;
+  --tint-test: #e8effb;
+  --ink-score: #1f8a4c;
+  --tint-score: #e5f6ec;
+  --ink-prepare: #a67b12;
+  --tint-prepare: #fdf0cc;
+  --ink: var(--ink-test);
+  --tint: var(--tint-test);
+}
+
+html:not([data-theme="light"]) .ielts-study {
+  --ink-listen: #3dcfbe;
+  --tint-listen: rgb(61 207 190 / 0.16);
+  --ink-read: #8eb4f0;
+  --tint-read: rgb(142 180 240 / 0.14);
+  --ink-write: #f0b429;
+  --tint-write: rgb(240 180 41 / 0.16);
+  --ink-speak: #f0a078;
+  --tint-speak: rgb(240 160 120 / 0.16);
+  --ink-test: #8eb4f0;
+  --tint-test: rgb(142 180 240 / 0.14);
+  --ink-score: #4eca7e;
+  --tint-score: rgb(78 202 126 / 0.16);
+  --ink-prepare: #f0b429;
+  --tint-prepare: rgb(240 180 41 / 0.16);
+}
+
+.ielts-study [data-tone="listen"] {
+  --ink: var(--ink-listen);
+  --tint: var(--tint-listen);
+}
+.ielts-study [data-tone="read"] {
+  --ink: var(--ink-read);
+  --tint: var(--tint-read);
+}
+.ielts-study [data-tone="write"] {
+  --ink: var(--ink-write);
+  --tint: var(--tint-write);
+}
+.ielts-study [data-tone="speak"] {
+  --ink: var(--ink-speak);
+  --tint: var(--tint-speak);
+}
+.ielts-study [data-tone="test"] {
+  --ink: var(--ink-test);
+  --tint: var(--tint-test);
+}
+.ielts-study [data-tone="score"] {
+  --ink: var(--ink-score);
+  --tint: var(--tint-score);
+}
+.ielts-study [data-tone="prepare"] {
+  --ink: var(--ink-prepare);
+  --tint: var(--tint-prepare);
+}
+
+.ielts-ink {
+  color: var(--ink);
+}
+.ielts-tint {
+  background-color: var(--tint);
+}
+.ielts-bar {
+  background-color: var(--ink);
+}
+.ielts-rule {
+  border-color: var(--ink);
+}
+.ielts-swatch {
+  background-color: var(--ink);
+}

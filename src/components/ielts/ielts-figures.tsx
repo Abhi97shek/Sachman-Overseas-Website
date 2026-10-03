@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { IeltsFigureId } from "@/lib/ielts/types";
+import { skillTone } from "@/lib/ielts/tones";
 
 export function IeltsFigure({ id }: { id: IeltsFigureId }) {
   switch (id) {
@@ -36,7 +37,7 @@ export function IeltsFigure({ id }: { id: IeltsFigureId }) {
 
 function Figure({ caption, children }: { caption: string; children: ReactNode }) {
   return (
-    <figure className="mt-8">
+    <figure className="ielts-study mt-8">
       {children}
       <figcaption className="mt-3 max-w-2xl type-small text-muted">{caption}</figcaption>
     </figure>
@@ -54,8 +55,8 @@ function FourSkills() {
     <Figure caption="Each skill is a quarter of the overall band. A 7.5 in Listening does not cover a 5.5 in Writing.">
       <dl className="grid grid-cols-2 border-t border-l border-line sm:grid-cols-4">
         {skills.map((skill) => (
-          <div key={skill.code} className="border-r border-b border-line p-4 sm:p-5">
-            <dt className="type-label text-[0.625rem] text-subtle">{skill.name}</dt>
+          <div key={skill.code} data-tone={skillTone(skill.name)} className="border-r border-b border-line p-4 sm:p-5">
+            <dt className="type-label text-[0.625rem] ielts-ink">{skill.name}</dt>
             <dd className="mt-3 type-h2 type-code tracking-[-0.04em]">25%</dd>
           </div>
         ))}
@@ -104,8 +105,8 @@ function AcademicGt() {
 
 function MobileSame({ paper }: { paper: string }) {
   return (
-    <div className="border-t border-line pt-3">
-      <p className="font-semibold">{paper}</p>
+    <div data-tone={skillTone(paper)} className="border-t border-line pt-3">
+      <p className="font-semibold ielts-ink">{paper}</p>
       <p className="mt-2 bg-sunken px-3 py-2 type-small text-muted">Same section in both tests</p>
     </div>
   );
@@ -125,8 +126,8 @@ function MobileSplit({
   right: string;
 }) {
   return (
-    <div className="border-t border-line pt-3">
-      <p className="font-semibold">{paper}</p>
+    <div data-tone={skillTone(paper)} className="border-t border-line pt-3">
+      <p className="font-semibold ielts-ink">{paper}</p>
       <div className="mt-2 grid grid-cols-2 gap-px bg-line">
         <div className="bg-canvas p-3">
           <p className="type-label text-[0.625rem] text-subtle">{leftLabel}</p>
@@ -144,7 +145,9 @@ function MobileSplit({
 function SameRow({ paper }: { paper: string }) {
   return (
     <div className="grid grid-cols-[7.5rem_minmax(0,1fr)] type-small">
-      <p className="border-r border-b border-line p-3 font-semibold">{paper}</p>
+      <p data-tone={skillTone(paper)} className="border-r border-b border-line p-3 font-semibold ielts-ink">
+        {paper}
+      </p>
       <p className="border-r border-b border-line bg-sunken p-3 text-muted">Same section in both tests</p>
     </div>
   );
@@ -153,7 +156,9 @@ function SameRow({ paper }: { paper: string }) {
 function SplitRow({ paper, left, right }: { paper: string; left: string; right: string }) {
   return (
     <div className="grid grid-cols-[7.5rem_1fr_1fr] type-small">
-      <p className="border-r border-b border-line p-3 font-semibold">{paper}</p>
+      <p data-tone={skillTone(paper)} className="border-r border-b border-line p-3 font-semibold ielts-ink">
+        {paper}
+      </p>
       <p className="border-r border-b border-line p-3 text-muted">{left}</p>
       <p className="border-r border-b border-line p-3 text-muted">{right}</p>
     </div>
@@ -182,9 +187,15 @@ function ExamStructure() {
         {papers.map((paper) => (
           <div key={paper.name} className="flex min-w-0 flex-col items-stretch">
             <div className="flex h-32 items-end bg-sunken sm:h-44">
-              <div className="w-full bg-text" style={{ height: `${paper.height}%` }} />
+              <div
+                data-tone={skillTone(paper.name)}
+                className="ielts-bar w-full"
+                style={{ height: `${paper.height}%` }}
+              />
             </div>
-            <p className="mt-3 font-semibold">{paper.name}</p>
+            <p data-tone={skillTone(paper.name)} className="mt-3 font-semibold ielts-ink">
+              {paper.name}
+            </p>
             <p className="mt-1 type-h2 type-code tracking-[-0.04em]">{paper.time}</p>
             <p className="type-label text-[0.625rem] text-subtle">min</p>
           </div>
@@ -215,7 +226,9 @@ function ExamStructure() {
           </div>
           {papers.map((paper) => (
             <div key={paper.name} className="grid grid-cols-[7.5rem_1fr_8.5rem] type-small">
-              <p className="border-r border-b border-line p-3 font-semibold">{paper.name}</p>
+              <p data-tone={skillTone(paper.name)} className="border-r border-b border-line p-3 font-semibold ielts-ink">
+                {paper.name}
+              </p>
               <p className="border-r border-b border-line p-3 text-muted">{paper.detail}</p>
               <p className="border-r border-b border-line p-3 text-muted">{paper.skill}</p>
             </div>
@@ -262,9 +275,9 @@ function BarRow({
 
 function SittingClock() {
   const blocks = [
-    { name: "Listening", min: 30, tone: "bg-text" },
-    { name: "Reading", min: 60, tone: "bg-text/70" },
-    { name: "Writing", min: 60, tone: "bg-text/45" },
+    { name: "Listening", min: 30 },
+    { name: "Reading", min: 60 },
+    { name: "Writing", min: 60 },
   ];
   const total = 150;
   return (
@@ -279,7 +292,8 @@ function SittingClock() {
           {blocks.map((block) => (
             <div
               key={block.name}
-              className={block.tone}
+              data-tone={skillTone(block.name)}
+              className="ielts-bar h-full"
               style={{ width: `${(block.min / total) * 100}%` }}
             />
           ))}
@@ -287,7 +301,9 @@ function SittingClock() {
         <ul className="mt-3 grid grid-cols-3 gap-3 type-small">
           {blocks.map((block) => (
             <li key={block.name}>
-              <span className="font-medium text-text">{block.name}</span>
+              <span data-tone={skillTone(block.name)} className="font-medium ielts-ink">
+                {block.name}
+              </span>
               <span className="mt-0.5 block type-code text-xs text-muted">{block.min} min</span>
             </li>
           ))}
@@ -295,7 +311,7 @@ function SittingClock() {
         <div className="mt-5 border-t border-dashed border-line pt-4">
           <p className="type-label text-[0.625rem] text-subtle">Speaking · often a separate appointment</p>
           <div className="mt-3 flex items-center gap-3">
-            <div className="h-2.5 w-[18%] border border-dashed border-line-strong bg-transparent" aria-hidden />
+            <div data-tone="speak" className="h-2.5 w-[18%] ielts-bar opacity-70" aria-hidden />
             <p className="type-code text-sm text-muted">11–14 min</p>
           </div>
         </div>
@@ -316,7 +332,9 @@ function IndiaDelivery() {
       <div className="space-y-3 sm:hidden">
         {rows.map((row) => (
           <div key={row.paper} className={`border-t border-line pt-3 ${row.same ? "" : "bg-signal-tint px-3 pb-3"}`}>
-            <p className="font-semibold">{row.paper}</p>
+            <p data-tone={skillTone(row.paper)} className="font-semibold ielts-ink">
+              {row.paper}
+            </p>
             {row.same ? (
               <p className="mt-2 type-small text-muted">{row.computer}</p>
             ) : (
@@ -346,7 +364,9 @@ function IndiaDelivery() {
               key={row.paper}
               className={`grid grid-cols-[7rem_1fr_1fr] type-small ${row.same ? "" : "bg-signal-tint"}`}
             >
-              <p className="border-r border-b border-line p-3 font-semibold">{row.paper}</p>
+              <p data-tone={skillTone(row.paper)} className="border-r border-b border-line p-3 font-semibold ielts-ink">
+                {row.paper}
+              </p>
               <p className="border-r border-b border-line p-3 text-muted">{row.computer}</p>
               <p className="border-r border-b border-line p-3 text-muted">{row.paperMode}</p>
             </div>
@@ -374,7 +394,7 @@ function ListeningParts() {
         {parts.map((part) => (
           <div key={part.n} className="flex flex-col items-stretch">
             <div className="flex h-32 items-end bg-sunken sm:h-48">
-              <div className="w-full bg-text" style={{ height: `${part.height}%` }} />
+              <div data-tone="listen" className="ielts-bar w-full" style={{ height: `${part.height}%` }} />
             </div>
             <p className="mt-3 type-code text-xs text-subtle">{part.n}</p>
             <p className="mt-1 font-semibold">{part.title}</p>
@@ -426,15 +446,16 @@ function SpeakingParts() {
           {parts.map((part, index) => (
             <div
               key={part.name}
-              className={index === 1 ? "bg-signal" : index === 0 ? "bg-text" : "bg-text/70"}
+              data-tone="speak"
+              className={index === 1 ? "bg-signal" : "ielts-bar"}
               style={{ width: `${(part.min / total) * 100}%` }}
             />
           ))}
         </div>
         <ul className="mt-4 grid gap-3 sm:grid-cols-3">
           {parts.map((part) => (
-            <li key={part.name} className="border-t border-line pt-3">
-              <p className="font-semibold">{part.name}</p>
+            <li key={part.name} data-tone="speak" className="border-t border-line pt-3">
+              <p className="font-semibold ielts-ink">{part.name}</p>
               <p className="mt-1 type-code text-xs text-muted">{part.display}</p>
               <p className="mt-1 type-small text-muted">{part.hint}</p>
             </li>
@@ -556,7 +577,8 @@ function ConversionChart({ kind }: { kind: "listening" | "reading" }) {
             <p className="type-code text-sm">{row.band}</p>
             <div className="h-2 bg-sunken" aria-hidden>
               <div
-                className={`h-full ${row.band === "6.5" || row.band === "7.0" ? "bg-signal" : "bg-text"}`}
+                data-tone={kind === "listening" ? "listen" : "read"}
+                className={`h-full ${row.band === "6.5" || row.band === "7.0" ? "bg-signal" : "ielts-bar"}`}
                 style={{ width: `${(row.min / 40) * 100}%` }}
               />
             </div>

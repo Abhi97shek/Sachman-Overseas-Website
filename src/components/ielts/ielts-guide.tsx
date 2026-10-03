@@ -3,6 +3,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { prefersReducedMotion } from "@/design-system/motion/motion";
 import { ieltsChapters } from "@/lib/ielts/chapters";
+import { chapterTone } from "@/lib/ielts/tones";
+import "./ielts-study.css";
 
 const chapters = ieltsChapters.map(({ id, num, title }) => ({ id, num, title }));
 
@@ -75,7 +77,7 @@ export function IeltsGuide({ children }: { children: ReactNode }) {
           <div className="page-container py-3">
             <div className="flex items-center gap-3">
               <div className="h-1 flex-1 bg-sunken" aria-hidden>
-                <div className="h-full bg-text" style={{ width: `${percent}%` }} />
+                <div className="h-full bg-signal" style={{ width: `${percent}%` }} />
               </div>
               <p className="type-code text-sm tabular-nums">{percent}%</p>
             </div>
@@ -86,12 +88,12 @@ export function IeltsGuide({ children }: { children: ReactNode }) {
         </div>
       ) : null}
 
-      <div className="page-container grid gap-12 pb-(--section-space) lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
-        <article id="ielts-guide">
+      <div className="page-container grid gap-12 pt-10 pb-(--section-space) md:pt-14 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16">
+        <article id="ielts-guide" className="ielts-study">
           {children}
         </article>
 
-        <aside className="hidden lg:block" aria-label="Reading progress">
+        <aside className="ielts-study hidden lg:block" aria-label="Reading progress">
           <div className="sticky top-[calc(var(--header-height)+1.5rem)]">
             <p className="type-label text-muted">Through this guide</p>
             <p className="mt-3 type-h1 type-code tracking-[-0.04em] tabular-nums">{percent}%</p>
@@ -111,7 +113,7 @@ export function IeltsGuide({ children }: { children: ReactNode }) {
               aria-valuenow={percent}
               aria-label="Percent of the IELTS guide read"
             >
-              <div className="absolute top-0 left-0 w-px bg-text" style={{ height: `${percent}%` }} />
+              <div className="absolute top-0 left-0 w-px bg-signal" style={{ height: `${percent}%` }} />
               {chapters.map((chapter) => (
                 <span
                   key={chapter.id}
@@ -131,7 +133,9 @@ export function IeltsGuide({ children }: { children: ReactNode }) {
                       onClick={() => jumpTo(chapter.id)}
                       className={`block w-full text-left transition-colors speed-fast ${current ? "text-text" : "text-muted hover:text-text"}`}
                     >
-                      <span className="type-code text-xs text-subtle">{chapter.num}</span>
+                      <span data-tone={chapterTone(chapter.id)} className="type-code text-xs ielts-ink">
+                        {chapter.num}
+                      </span>
                       <span className="mt-1 block font-medium">{chapter.title}</span>
                     </button>
                   </li>

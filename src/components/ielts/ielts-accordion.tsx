@@ -14,12 +14,14 @@ export function IeltsAccordion({
   children,
   defaultOpen = false,
   variant = "item",
+  tone,
 }: {
   title: string;
   eyebrow?: string;
   children: ReactNode;
   defaultOpen?: boolean;
   variant?: "topic" | "item";
+  tone?: "listen" | "read" | "write" | "speak" | "test" | "score" | "prepare";
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -82,7 +84,7 @@ export function IeltsAccordion({
       aria-expanded={open}
       aria-controls={panelId}
       onClick={() => setOpen((current) => !current)}
-      className={`flex w-full items-center justify-between gap-6 text-left ${topic ? "py-5 md:py-6" : "py-5"}`}
+      className={`group flex w-full cursor-pointer items-center justify-between gap-6 text-left ${topic ? "py-5 md:py-6" : "py-5"}`}
     >
       <span className="min-w-0">
         {eyebrow ? <span className="block type-code text-xs text-subtle">{eyebrow}</span> : null}
@@ -98,7 +100,9 @@ export function IeltsAccordion({
       </span>
       <span
         className={`relative inline-flex size-9 shrink-0 items-center justify-center rounded-control border transition-[background-color,border-color,color] speed-base ${
-          open ? "border-signal bg-signal text-on-signal" : "border-line bg-transparent text-text"
+          open
+            ? "border-signal bg-signal text-on-signal"
+            : "border-line bg-transparent text-text group-hover:border-signal group-hover:bg-signal group-hover:text-on-signal"
         }`}
         aria-hidden
       >
@@ -119,7 +123,10 @@ export function IeltsAccordion({
   );
 
   return (
-    <div className="border-b border-line">
+    <div
+      className={`border-b border-line transition-colors speed-fast hover:bg-sunken ${tone ? "border-l-[3px] ielts-rule pl-4" : ""}`}
+      data-tone={tone}
+    >
       {topic ? <h3 className="m-0">{trigger}</h3> : trigger}
       <div
         id={panelId}

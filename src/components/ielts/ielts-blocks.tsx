@@ -3,10 +3,11 @@ import { IeltsAccordion } from "@/components/ielts/ielts-accordion";
 import { IeltsFigure } from "@/components/ielts/ielts-figures";
 import { Button } from "@/design-system/buttons/button";
 import type { GuideBlock } from "@/lib/ielts/types";
+import "./ielts-study.css";
 
 export function IeltsBlocks({ blocks }: { blocks: GuideBlock[] }) {
   return (
-    <div className="max-w-4xl">
+    <div className="ielts-study max-w-4xl">
       {blocks.map((block, index) => (
         <Block key={index} block={block} />
       ))}
@@ -23,7 +24,7 @@ function tableColumns(count: number) {
 function Block({ block }: { block: GuideBlock }) {
   switch (block.type) {
     case "answer":
-      return <p className="ielts-direct-answer mt-4 type-lead">{block.text}</p>;
+      return <p className="ielts-direct-answer mt-4 border-l-2 border-signal pl-4 type-lead">{block.text}</p>;
     case "p":
       return <p className="mt-4 type-body text-muted">{block.text}</p>;
     case "h3":
@@ -58,7 +59,7 @@ function Block({ block }: { block: GuideBlock }) {
         <div className="mt-8 overflow-x-auto">
           {block.caption ? <p className="mb-3 type-small text-muted">{block.caption}</p> : null}
           <div className="min-w-[28rem] border-t border-l border-line">
-            <div className={`${columns} type-label text-[0.625rem] text-subtle`}>
+            <div className={`${columns} bg-sunken type-label text-[0.625rem] text-subtle`}>
               {block.headers.map((header) => (
                 <div key={header} className="border-r border-b border-line p-3">
                   {header}
@@ -103,7 +104,7 @@ function Block({ block }: { block: GuideBlock }) {
               <IeltsAccordion key={item.title} title={item.title}>
                 <p className="max-w-2xl type-body text-muted">{item.body}</p>
                 {item.example ? (
-                  <div className="mt-4 max-w-2xl border-l-2 border-signal bg-sunken px-4 py-3">
+                  <div className="mt-4 max-w-2xl border-l-2 border-signal bg-signal-tint px-4 py-3">
                     <p className="type-label text-subtle">Example</p>
                     <p className="mt-2 whitespace-pre-line type-small text-text">{item.example}</p>
                   </div>
@@ -118,7 +119,7 @@ function Block({ block }: { block: GuideBlock }) {
       return <p className="mt-5 max-w-2xl border-l-2 border-signal pl-4 type-small text-muted">{block.text}</p>;
     case "example":
       return (
-        <div className="mt-5 border border-line bg-sunken px-4 py-4">
+        <div className="mt-5 border-l-2 border-signal bg-signal-tint px-4 py-4">
           {block.label ? <p className="type-label text-subtle">{block.label}</p> : null}
           <p className={`type-body text-text ${block.label ? "mt-2" : ""}`}>{block.text}</p>
         </div>
